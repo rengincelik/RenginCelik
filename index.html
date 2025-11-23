@@ -1,4 +1,44 @@
-nav a {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rengin Çelik - Unity Developer & Technical Artist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+        
+        nav {
+            margin-top: 30px;
+        }
+        
+        nav a {
             color: #00d4ff;
             margin: 0 15px;
             text-decoration: none;
@@ -20,10 +60,365 @@ nav a {
             border-bottom: 2px solid #00d4ff;
         }
         
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
         section {
             display: none;
+            margin-bottom: 60px;
+            background: #151515;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #252525;
+            transition: all 0.3s;
         }
         
         section.active {
             display: block;
         }
+        
+        section:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+        }
+        
+        h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #00d4ff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, transparent);
+        }
+        
+        .experience-item, .project-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+        }
+        
+        .experience-item h3, .project-item h3 {
+            color: #fff;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .experience-item .role, .project-item .tech {
+            color: #00d4ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+        
+        .experience-item ul, .project-item ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .experience-item li, .project-item li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #b0b0b0;
+        }
+        
+        .experience-item li::before, .project-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-size: 1.2em;
+        }
+        
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .skill-category {
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid #252525;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .skill-category:hover {
+            border-color: #00d4ff;
+        }
+        
+        .skill-category h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            padding: 20px;
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .skill-category h3:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        .skill-category h3::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+        
+        .skill-category.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+        
+        .skill-category ul {
+            list-style: none;
+            padding: 0 20px 20px 20px;
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .skill-category.collapsed ul {
+            max-height: 0;
+            padding: 0 20px;
+        }
+        
+        .skill-category li {
+            color: #b0b0b0;
+            padding: 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            transform: translateX(5px);
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            border: 1px solid #252525;
+            transition: all 0.3s;
+        }
+        
+        .contact-links a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #252525;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            header p { font-size: 1.1em; }
+            section { padding: 25px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Rengin Çelik</h1>
+    <p>Unity Developer & Technical Artist</p>
+    <nav>
+        <a class="tab-link active" data-tab="about">About</a>
+        <a class="tab-link" data-tab="experience">Experience</a>
+        <a class="tab-link" data-tab="skills">Skills</a>
+        <a class="tab-link" data-tab="projects">Projects</a>
+        <a class="tab-link" data-tab="contact">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+    <section id="about" class="active">
+        <h2>About Me</h2>
+        <p>Unity Developer and Technical Artist with a strong engineering background, specializing in shader development, performance optimization, and tool creation. I combine analytical problem-solving with technical artistry to create efficient, visually compelling game systems.</p>
+        <p style="margin-top: 15px;">Focused on GPU optimization, custom tooling, and bridging the gap between art and engineering in game development.</p>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        
+        <div class="experience-item">
+            <h3>iBright</h3>
+            <div class="role">Unity Developer & Technical Artist</div>
+            <ul>
+                <li>Developed custom 2D tools for the team (Depth Ordering System, Sprite Animation Tools)</li>
+                <li>Worked on Livber project: bug fixes, feature implementation, and shader development</li>
+                <li>Implemented performance optimizations for mobile and PC platforms</li>
+                <li>Created reusable pipeline tools to streamline development workflow</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category collapsed">
+                <h3>Game Development</h3>
+                <ul>
+                    <li>Unity Engine</li>
+                    <li>Physics Systems (2D/3D)</li>
+                    <li>Particle Systems</li>
+                    <li>Performance Profiling</li>
+                    <li>Mobile & PC Development</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category collapsed">
+                <h3>Graphics Programming</h3>
+                <ul>
+                    <li>HLSL Shader Programming</li>
+                    <li>GPU Instancing</li>
+                    <li>Render Pipeline Optimization</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category collapsed">
+                <h3>Programming & Tools</h3>
+                <ul>
+                    <li>C# (Intermediate)</li>
+                    <li>OOP & Design Patterns</li>
+                    <li>Asynchronous Programming</li>
+                    <li>Git Version Control</li>
+                    <li>Debugging & Optimization</li>
+                    <li>Custom Inspectors</li>
+                    <li>Property Drawers</li>
+                    <li>Editor Windows</li>
+                    <li>Scriptable Object Architecture</li>
+                    <li>Asset Post-Processing</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category collapsed">
+                <h3>Technical Art & Pipeline</h3>
+                <ul>
+                    <li>Performance Optimization</li>
+                    <li>Tool Development</li>
+                    <li>Workflow Automation</li>
+                    <li>Pipeline Integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        
+        <div class="project-item">
+            <h3>GPU Instancing</h3>
+            <div class="tech">GPU Instancing Methods</div>
+            <p>GPU instancing approaches for rendering massive object counts efficiently.</p>
+            <a href="https://rengincelik.github.io/GPU_Rendering/" class="project-link">View Project →</a>
+        </div>
+        
+        <div class="project-item">
+            <h3>Mini Dev Kit</h3>
+            <div class="tech">Reusable Development Tools</div>
+            <p>A collection of reusable tools and systems designed to accelerate game development, featuring modular components for common gameplay mechanics and editor utilities.</p>
+            <a href="https://rengincelik.github.io/Mini-Dev-Kit/" class="project-link">View Project →</a>
+        </div>
+        
+        <div class="project-item">
+            <h3>Cofu</h3>
+            <div class="tech">Mobile Puzzle Game | Unity / C#</div>
+            <p>
+                A mobile puzzle game featuring engaging mechanics and polished gameplay. 
+                Implemented grid-based logic, swipe controls, and level progression system.
+            </p>
+            <a href="https://rengincelik.github.io/CoFu/" class="project-link" target="_blank">View Project →</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>📞 +90 538 968 69 77</p>
+        <p>✉️ <a href="mailto:rengin.celik97@gmail.com" style="color: #00d4ff; text-decoration: none;">rengin.celik97@gmail.com</a></p>
+        <p>🌍 Istanbul, Turkey</p>
+        
+        <div class="contact-links">
+            <a href="https://linkedin.com/in/rengincelik" target="_blank">LinkedIn</a>
+            <a href="https://github.com/rengincelik" target="_blank">GitHub</a>
+            <a href="https://rengincelik.itch.io" target="_blank">itch.io</a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>© 2025 Rengin Çelik | Built with passion for game development</p>
+</footer>
+
+<script>
+    // Tab functionality
+    document.querySelectorAll('.tab-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all tabs and sections
+            document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding section
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+            
+            // Scroll to top of container
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+    
+    // Accordion functionality for skills
+    document.querySelectorAll('.skill-category h3').forEach(header => {
+        header.addEventListener('click', function() {
+            this.parentElement.classList.toggle('collapsed');
+        });
+    });
+</script>
+</body>
+</html>
