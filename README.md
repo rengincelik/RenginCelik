@@ -2,7 +2,7 @@
 <h3 align="center">Unity Game Developer</h3>
 <h3 align="left">Portfolio</h3>
 <p align="left">
-  <a href="https://rengincelik.github.io/RenginCelik/" target="_blank">
+  <a href="https://rengincelik.github.io/portfolio/" target="_blank">
     Visit my GitHub Pages site
   </a>
 </p>
