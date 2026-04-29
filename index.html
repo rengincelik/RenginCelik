@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rengin Çelik - Unity Developer & Technical Artist</title>
+    <title>Rengin Çelik - Simulation & Digital Twin Developer</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -28,9 +28,15 @@
             text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
         
-        header p {
+        header .title {
             font-size: 1.3em;
-            color: #b0b0b0;
+            color: #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        header .subtitle {
+            font-size: 1em;
+            color: #888;
             margin-bottom: 30px;
         }
         
@@ -102,6 +108,58 @@
             height: 3px;
             background: linear-gradient(90deg, #00d4ff, transparent);
         }
+
+        .about-highlight {
+            background: #1a1a1a;
+            border-left: 3px solid #00d4ff;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            color: #ccc;
+            font-size: 1.05em;
+            line-height: 1.75;
+        }
+
+        .about-highlight strong {
+            color: #00d4ff;
+        }
+
+        .about-body {
+            color: #b0b0b0;
+            margin-bottom: 16px;
+            line-height: 1.75;
+        }
+
+        .edu-item {
+            margin-top: 28px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .edu-item h3 {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+        }
+
+        .edu-item .degree {
+            color: #00d4ff;
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+
+        .edu-item .years {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .edu-item p {
+            color: #b0b0b0;
+            font-size: 0.95em;
+        }
         
         .experience-item, .project-item {
             margin-bottom: 30px;
@@ -110,11 +168,30 @@
             border-radius: 8px;
             border-left: 3px solid #00d4ff;
         }
+
+        .project-item.featured {
+            border-left: 3px solid #ff7c2a;
+            background: #1c1812;
+        }
+
+        .project-item.featured h3 {
+            color: #ff7c2a;
+        }
+
+        .project-item.featured .tech {
+            color: #ff7c2a;
+        }
         
         .experience-item h3, .project-item h3 {
             color: #fff;
             font-size: 1.4em;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
+        }
+
+        .experience-item .period {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 6px;
         }
         
         .experience-item .role, .project-item .tech {
@@ -141,6 +218,10 @@
             left: 0;
             color: #00d4ff;
             font-size: 1.2em;
+        }
+
+        .project-item.featured li::before {
+            color: #ff7c2a;
         }
         
         .skills-grid {
@@ -208,16 +289,39 @@
             font-size: 0.95em;
         }
         
+        .project-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
         .project-link {
             display: inline-block;
             color: #00d4ff;
             text-decoration: none;
-            margin-top: 10px;
             transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .project-link.demo {
+            color: #ff7c2a;
         }
         
         .project-link:hover {
-            transform: translateX(5px);
+            transform: translateX(4px);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            background: rgba(255, 124, 42, 0.15);
+            color: #ff7c2a;
+            border: 1px solid rgba(255, 124, 42, 0.3);
+            vertical-align: middle;
         }
         
         .contact-links {
@@ -253,16 +357,16 @@
         
         @media (max-width: 768px) {
             header h1 { font-size: 2em; }
-            header p { font-size: 1.1em; }
+            header .title { font-size: 1.1em; }
             section { padding: 25px; }
-            .skills-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 <header>
     <h1>Rengin Çelik</h1>
-    <p>Unity Developer & Technical Artist</p>
+    <p class="title">Simulation & Digital Twin Developer</p>
+    <p class="subtitle">Engineering background · Real-time systems · EU citizen</p>
     <nav>
         <a class="tab-link active" data-tab="about">About</a>
         <a class="tab-link" data-tab="experience">Experience</a>
@@ -273,115 +377,196 @@
 </header>
 
 <div class="container">
+
+    <!-- ABOUT -->
     <section id="about" class="active">
         <h2>About Me</h2>
-        <p>Unity Developer and Technical Artist with a strong engineering background, specializing in shader development, performance optimization, and tool creation. I combine analytical problem-solving with technical artistry to create efficient, visually compelling game systems.</p>
-        <p style="margin-top: 15px;">Focused on GPU optimization, custom tooling, and bridging the gap between art and engineering in game development.</p>
+        <div class="about-highlight">
+            Most developers don't have engineering fundamentals.<br>
+            Most engineers don't write production code.<br>
+            <strong>I do both.</strong>
+        </div>
+        <p class="about-body">
+            I'm a simulation and real-time systems developer with a B.Eng. from Istanbul Technical University — 
+            fluid mechanics, thermodynamics, heat & mass transfer, process systems design. 
+            That foundation is what separates my work: I don't implement physics equations by copying formulas, 
+            I understand what they model.
+        </p>
+        <p class="about-body">
+            My main project, PipeFlow, is a browser-based real-time pipeline flow simulator built entirely from scratch — 
+            zero dependencies, no framework, no build step. It implements Darcy-Weisbach friction losses, 
+            Colebrook-White via Newton-Raphson iteration, pump H-Q curve fitting, and live operating point calculation. 
+            Everything renders in real time with SVG animation and live charts.
+        </p>
+        <p class="about-body">
+            Before simulation, I spent three years in Unity — HLSL shaders, GPU instancing, URP pipelines, 
+            Editor tooling. Real-time systems and rendering are the common thread.
+        </p>
+        <p class="about-body">
+            EU citizen (Bulgarian). Available for remote or relocation across Europe. No sponsorship required.
+        </p>
+
+        <div class="edu-item">
+            <h3>Istanbul Technical University (ITU)</h3>
+            <div class="degree">B.Eng. — Engineering: Fluid Mechanics, Thermodynamics, Process Systems</div>
+            <div class="years">2016 – 2022</div>
+            <p>Coursework: fluid mechanics, heat & mass transfer, thermodynamics, process control, numerical methods, experimental design.</p>
+        </div>
     </section>
 
+    <!-- EXPERIENCE -->
     <section id="experience">
         <h2>Experience</h2>
         
         <div class="experience-item">
             <h3>iBright</h3>
             <div class="role">Unity Developer & Technical Artist</div>
+            <div class="period">August 2025 – November 2025 · Istanbul</div>
             <ul>
-                <li>Developed custom 2D tools for the team (Depth Ordering System, Sprite Animation Tools)</li>
-                <li>Worked on Livber project: bug fixes, feature implementation, and shader development</li>
-                <li>Implemented performance optimizations for mobile and PC platforms</li>
-                <li>Created reusable pipeline tools to streamline development workflow</li>
+                <li>Built 2D pipeline tools using Unity Editor Scripting — Depth Ordering System, Sprite Animation Tools</li>
+                <li>Wrote custom HLSL shaders for the Livber project; resolved mobile and PC rendering issues</li>
+                <li>Profiled and optimized performance with Unity Profiler and Frame Debugger — reduced draw calls, improved FPS</li>
+                <li>Created reusable systems and pipeline tools that accelerated the team's development workflow</li>
             </ul>
         </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
         <h2>Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-category collapsed">
-                <h3>Game Development</h3>
+
+            <div class="skill-category">
+                <h3>Simulation & Physics</h3>
                 <ul>
-                    <li>Unity Engine</li>
-                    <li>Physics Systems (2D/3D)</li>
-                    <li>Particle Systems</li>
-                    <li>Performance Profiling</li>
-                    <li>Mobile & PC Development</li>
+                    <li>Darcy-Weisbach friction loss equations</li>
+                    <li>Colebrook-White — Newton-Raphson iteration</li>
+                    <li>Borda-Carnot expansion losses</li>
+                    <li>Pump H-Q curve fitting (polynomial)</li>
+                    <li>Bisection method — operating point calculation</li>
+                    <li>Bernoulli equation, fluid flow modelling</li>
+                    <li>State machines, numerical methods</li>
                 </ul>
             </div>
-            
+
             <div class="skill-category collapsed">
-                <h3>Graphics Programming</h3>
+                <h3>Real-Time Systems</h3>
+                <ul>
+                    <li>Vanilla JavaScript (ES Modules)</li>
+                    <li>SVG Rendering & Animation</li>
+                    <li>Canvas 2D</li>
+                    <li>Event-Driven Architecture (EventEmitter)</li>
+                    <li>requestAnimationFrame loops</li>
+                    <li>Zero-dependency system design</li>
+                </ul>
+            </div>
+
+            <div class="skill-category collapsed">
+                <h3>Graphics & Rendering</h3>
                 <ul>
                     <li>HLSL Shader Programming</li>
                     <li>GPU Instancing</li>
-                    <li>Render Pipeline Optimization</li>
+                    <li>Unity URP (Universal Render Pipeline)</li>
+                    <li>Shader development & visual effects</li>
+                    <li>GPU Profiling</li>
+                    <li>Unity Profiler & Frame Debugger</li>
+                    <li>Draw call optimization</li>
+                </ul>
+            </div>
+
+            <div class="skill-category collapsed">
+                <h3>Engineering Domain</h3>
+                <ul>
+                    <li>Fluid mechanics & pipeline systems</li>
+                    <li>Thermodynamics & heat transfer</li>
+                    <li>Process systems design</li>
+                    <li>B.Eng. — Istanbul Technical University (ITU)</li>
                 </ul>
             </div>
             
             <div class="skill-category collapsed">
-                <h3>Programming & Tools</h3>
+                <h3>Tools & Languages</h3>
                 <ul>
-                    <li>C# (Intermediate)</li>
-                    <li>OOP & Design Patterns</li>
-                    <li>Asynchronous Programming</li>
-                    <li>Git Version Control</li>
-                    <li>Debugging & Optimization</li>
-                    <li>Custom Inspectors</li>
-                    <li>Property Drawers</li>
-                    <li>Editor Windows</li>
+                    <li>C# (Unity, Editor Scripting)</li>
+                    <li>JavaScript (Vanilla, ES Modules)</li>
+                    <li>Git & version control</li>
+                    <li>Unity Editor Scripting (Custom Inspectors, Property Drawers, Editor Windows)</li>
                     <li>Scriptable Object Architecture</li>
-                    <li>Asset Post-Processing</li>
                 </ul>
             </div>
-            
-            <div class="skill-category collapsed">
-                <h3>Technical Art & Pipeline</h3>
-                <ul>
-                    <li>Performance Optimization</li>
-                    <li>Tool Development</li>
-                    <li>Workflow Automation</li>
-                    <li>Pipeline Integration</li>
-                </ul>
-            </div>
+
         </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
         <h2>Projects</h2>
-        
-        <div class="project-item">
-            <h3>GPU Instancing</h3>
-            <div class="tech">GPU Instancing Methods</div>
-            <p>GPU instancing approaches for rendering massive object counts efficiently.</p>
-            <a href="https://rengincelik.github.io/GPU_Rendering/" class="project-link">View Project →</a>
+
+        <div class="project-item featured">
+            <h3>PipeFlow Simulator <span class="badge">Featured</span></h3>
+            <div class="tech">Vanilla JS · SVG · Zero Dependencies</div>
+            <p style="color:#b0b0b0; margin-bottom: 10px;">
+                Browser-based real-time pipeline flow simulator. Drag-and-drop pumps, pipes, valves, elbows and reducers — 
+                the physics engine recalculates pressure, velocity, flow rate and energy losses every 100ms. 
+                Results shown live via SVG animation, charts, and tooltips.
+            </p>
+            <ul>
+                <li>Darcy-Weisbach friction losses, Colebrook-White via Newton-Raphson (50 iter, tol 1×10⁻⁸)</li>
+                <li>Pump H-Q curve — 3-point quadratic fit; operating point via bisection each tick</li>
+                <li>Empirical fluid model — water and 50% ethylene glycol</li>
+                <li>Architecture: SimulationEngine · SVGRenderer · ChartRenderer · FlowAnimator — decoupled via EventEmitter</li>
+                <li>Zero dependencies. No framework. No build step.</li>
+            </ul>
+            <div class="project-links">
+                <a href="https://github.com/rengincelik/pipeflow" class="project-link" target="_blank">GitHub →</a>
+                <a href="https://rengincelik.github.io/pipeflow/" class="project-link demo" target="_blank">Live Demo →</a>
+            </div>
         </div>
+
         <div class="project-item">
-            <h3>Shader Library</h3>
-            <div class="tech">URP Shader Library</div>
-            <p>Advanced material shaders & visual effects for URP.</p>
-            <a href="https://rengincelik.github.io/Shaders/" class="project-link">View Project →</a>
+            <h3>GPU Instancing Study</h3>
+            <div class="tech">Unity · HLSL · URP</div>
+            <p style="color:#b0b0b0;">Multiple GPU instancing approaches for rendering thousands of objects in a single draw call. Covers 3D/sprite instancing, grass rendering, random spawn, and scaling systems.</p>
+            <div class="project-links">
+                <a href="https://rengincelik.github.io/GPU_Rendering/" class="project-link" target="_blank">View Project →</a>
+            </div>
         </div>
+
+        <div class="project-item">
+            <h3>URP Shader Library</h3>
+            <div class="tech">HLSL · ShaderLab · Unity URP</div>
+            <p style="color:#b0b0b0;">Production-ready custom shader collection — silk, velvet, advanced surface, water surface effects. Built for URP with performance in mind.</p>
+            <div class="project-links">
+                <a href="https://rengincelik.github.io/Shaders/" class="project-link" target="_blank">View Project →</a>
+            </div>
+        </div>
+
         <div class="project-item">
             <h3>Mini Dev Kit</h3>
-            <div class="tech">Reusable Development Tools</div>
-            <p>A collection of reusable tools and systems designed to accelerate game development, featuring modular components for common gameplay mechanics and editor utilities.</p>
-            <a href="https://rengincelik.github.io/Mini-Dev-Kit/" class="project-link">View Project →</a>
+            <div class="tech">Unity · C# · Editor Scripting</div>
+            <p style="color:#b0b0b0;">Modular reusable toolset for Unity — 2D/3D player movement, object movement, sprite animator, and editor utilities designed to accelerate development workflows.</p>
+            <div class="project-links">
+                <a href="https://rengincelik.github.io/Mini-Dev-Kit/" class="project-link" target="_blank">View Project →</a>
+            </div>
         </div>
         
         <div class="project-item">
             <h3>Cofu</h3>
-            <div class="tech">Mobile Puzzle Game | Unity / C#</div>
-            <p>
-                A mobile puzzle game featuring engaging mechanics and polished gameplay. 
-                Implemented grid-based logic, swipe controls, and level progression system.
-            </p>
-            <a href="https://rengincelik.github.io/CoFu/" class="project-link" target="_blank">View Project →</a>
+            <div class="tech">Unity · C# · Mobile</div>
+            <p style="color:#b0b0b0;">Grid-based mobile puzzle game. Core systems written from scratch — grid logic, swipe controls, level progression. Published on itch.io.</p>
+            <div class="project-links">
+                <a href="https://rengincelik.github.io/CoFu/" class="project-link" target="_blank">View Project →</a>
+            </div>
         </div>
+
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
         <h2>Contact</h2>
-        <p>📞 +90 538 968 69 77</p>
-        <p>✉️ <a href="mailto:rengin.celik97@gmail.com" style="color: #00d4ff; text-decoration: none;">rengin.celik97@gmail.com</a></p>
+        <p style="color:#b0b0b0; margin-bottom: 20px;">Open to simulation, digital twin, and real-time systems roles — remote or relocation within Europe. EU citizen, no sponsorship required.</p>
+        <p style="margin-bottom: 8px;">📞 +90 538 968 69 77</p>
+        <p style="margin-bottom: 8px;">✉️ <a href="mailto:rengin.celik97@gmail.com" style="color: #00d4ff; text-decoration: none;">rengin.celik97@gmail.com</a></p>
         <p>🌍 Istanbul, Turkey</p>
         
         <div class="contact-links">
@@ -390,35 +575,26 @@
             <a href="https://rengincelik.itch.io" target="_blank">itch.io</a>
         </div>
     </section>
+
 </div>
 
 <footer>
-    <p>© 2025 Rengin Çelik | Built with passion for game development</p>
+    <p>© 2025 Rengin Çelik · Simulation & Digital Twin Developer</p>
 </footer>
 
 <script>
-    // Tab functionality
     document.querySelectorAll('.tab-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Remove active class from all tabs and sections
             document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            
-            // Add active class to clicked tab
             this.classList.add('active');
-            
-            // Show corresponding section
             const tabId = this.getAttribute('data-tab');
             document.getElementById(tabId).classList.add('active');
-            
-            // Scroll to top of container
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
     
-    // Accordion functionality for skills
     document.querySelectorAll('.skill-category h3').forEach(header => {
         header.addEventListener('click', function() {
             this.parentElement.classList.toggle('collapsed');
