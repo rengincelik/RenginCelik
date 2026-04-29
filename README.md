@@ -47,8 +47,8 @@ I do both.
 | Project | Stack | Description |
 |---|---|---|
 | [PipeFlow Simulator](https://github.com/rengincelik/pipeFlow) · [Live Demo →](https://rengincelik.github.io/pipeFlow/) | Vanilla JS · SVG | Real-time pipeline physics simulator |
-| [GPU Instancing Study](https://github.com/rengincelik) | Unity · HLSL · URP | Thousands of objects, single draw call |
-| [URP Shader Library](https://github.com/rengincelik) | HLSL · ShaderLab | Production-ready custom shaders |
+| [GPU Instancing Study](https://github.com/rengincelik/GPU_Rendering) | Unity · HLSL · URP | Thousands of objects, single draw call |
+| [URP Shader Library](https://github.com/rengincelik/Shaders) | HLSL · ShaderLab | Production-ready custom shaders |
 
 ---
 
