@@ -1,595 +1,614 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rengin Çelik - Simulation & Digital Twin Developer</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 2px solid #00d4ff;
-        }
-        
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-        
-        header .title {
-            font-size: 1.3em;
-            color: #e0e0e0;
-            margin-bottom: 8px;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rengin �elik ? Simulation & Digital Twin Developer</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg:        #F7F5F0;
+			--bg-alt:    #EFECE5;
+			--bg-dark:   #181714;
+			--ink:       #1C1B18;
+			--ink-mid:   #4A4844;
+			--ink-soft:  #7A7770;
+			--ink-dim:   #ABA9A4;
+			--accent:    #1A5C8A;
+			--accent-lt: #D0E4F0;
+			--warm:      #C47A3A;
+			--line:      #DEDAD3;
+			--card:      #FFFFFF;
+			--serif: 'Playfair Display', Georgia, serif;
+			--mono:  'IBM Plex Mono', monospace;
+			--sans:  'IBM Plex Sans', sans-serif;
+		}
+		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+		html { scroll-behavior: smooth; }
 
-        header .subtitle {
-            font-size: 1em;
-            color: #888;
-            margin-bottom: 30px;
-        }
-        
-        nav {
-            margin-top: 30px;
-        }
-        
-        nav a {
-            color: #00d4ff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        
-        nav a:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        nav a.active {
-            background: rgba(0, 212, 255, 0.2);
-            border-bottom: 2px solid #00d4ff;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        
-        section {
-            display: none;
-            margin-bottom: 60px;
-            background: #151515;
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #252525;
-            transition: all 0.3s;
-        }
-        
-        section.active {
-            display: block;
-        }
-        
-        section:hover {
-            border-color: #00d4ff;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
-        }
-        
-        h2 {
-            font-size: 2em;
-            margin-bottom: 25px;
-            color: #00d4ff;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #00d4ff, transparent);
-        }
+		body {
+			background: var(--bg);
+			color: var(--ink);
+			font-family: var(--sans);
+			font-size: 15px;
+			line-height: 1.6;
+			-webkit-font-smoothing: antialiased;
+		}
 
-        .about-highlight {
-            background: #1a1a1a;
-            border-left: 3px solid #00d4ff;
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin-bottom: 24px;
-            color: #ccc;
-            font-size: 1.05em;
-            line-height: 1.75;
-        }
+		/* ??? NAV ??????????????????????????????????????????? */
+		nav {
+			position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+			display: flex; justify-content: space-between; align-items: center;
+			padding: 18px 52px;
+			background: rgba(247,245,240,0.92);
+			backdrop-filter: blur(14px);
+			border-bottom: 1px solid var(--line);
+		}
+		.nav-mark {
+			font-family: var(--mono); font-size: 13px; font-weight: 500;
+			color: var(--ink); text-decoration: none; letter-spacing: 0.04em;
+		}
+		.nav-mark span { color: var(--accent); }
+		.nav-links { display: flex; gap: 36px; list-style: none; }
+		.nav-links a {
+			font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+			text-transform: uppercase; color: var(--ink-soft);
+			text-decoration: none; transition: color 0.2s;
+		}
+		.nav-links a:hover { color: var(--accent); }
+		.nav-badge {
+			font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+			background: var(--accent); color: white; padding: 4px 12px;
+		}
 
-        .about-highlight strong {
-            color: #00d4ff;
-        }
+		/* ??? HERO ?????????????????????????????????????????? */
+		.hero {
+			min-height: 100vh;
+			padding-top: 57px;
+			display: grid;
+			grid-template-rows: 1fr auto;
+			border-bottom: 1px solid var(--line);
+		}
+		.hero-main {
+			display: grid;
+			grid-template-columns: 1fr 340px;
+			border-bottom: 1px solid var(--line);
+		}
+		.hero-content {
+			padding: 80px 52px;
+			display: flex; flex-direction: column; justify-content: center;
+			border-right: 1px solid var(--line);
+		}
+		.hero-eyebrow {
+			font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+			text-transform: uppercase; color: var(--accent);
+			margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+		}
+		.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+		h1 {
+			font-family: var(--serif);
+			font-size: clamp(48px, 5.5vw, 76px);
+			line-height: 1.06; letter-spacing: -0.025em;
+			color: var(--ink); margin-bottom: 6px;
+		}
+		h1 em { font-style: italic; color: var(--accent); }
+		.hero-role {
+			font-family: var(--serif); font-size: clamp(16px, 1.8vw, 22px);
+			font-style: italic; color: var(--ink-soft); margin-bottom: 36px;
+		}
+		.hero-bio {
+			font-size: 15px; line-height: 1.85; color: var(--ink-mid);
+			max-width: 520px; margin-bottom: 48px;
+		}
+		.hero-bio strong { color: var(--ink); font-weight: 500; }
+		.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+		.btn {
+			display: inline-flex; align-items: center; gap: 8px;
+			font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+			text-decoration: none; padding: 12px 24px; transition: all 0.2s;
+		}
+		.btn-fill { background: var(--ink); color: var(--bg); }
+		.btn-fill:hover { background: var(--accent); transform: translateY(-2px); }
+		.btn-outline { border: 1px solid var(--line); color: var(--ink-mid); }
+		.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-        .about-body {
-            color: #b0b0b0;
-            margin-bottom: 16px;
-            line-height: 1.75;
-        }
+		/* Hero sidebar */
+		.hero-sidebar { padding: 48px 32px; display: flex; flex-direction: column; }
+		.eu-box {
+			background: var(--accent); color: white;
+			padding: 22px 20px; margin-bottom: 24px;
+		}
+		.eu-box-label {
+			font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+			text-transform: uppercase; opacity: 0.7; margin-bottom: 8px;
+		}
+		.eu-box-value { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 5px; }
+		.eu-box-note { font-family: var(--mono); font-size: 10px; opacity: 0.65; }
+		.fact-row {
+			display: flex; justify-content: space-between; align-items: baseline;
+			padding: 13px 0; border-bottom: 1px solid var(--line);
+		}
+		.fact-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+		.fact-value { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); }
+		.fact-value.hi { color: var(--accent); }
 
-        .edu-item {
-            margin-top: 28px;
-            padding: 20px;
-            background: #1a1a1a;
-            border-radius: 8px;
-            border-left: 3px solid #00d4ff;
-        }
+		/* Hero ticker */
+		.hero-ticker { display: flex; }
+		.t-cell { flex: 1; padding: 20px 28px; border-right: 1px solid var(--line); }
+		.t-cell:last-child { border-right: none; }
+		.t-num { font-family: var(--serif); font-size: 28px; line-height: 1; color: var(--ink); margin-bottom: 5px; }
+		.t-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
 
-        .edu-item h3 {
-            color: #fff;
-            font-size: 1.2em;
-            margin-bottom: 4px;
-        }
+		/* ??? SECTION INTRO ????????????????????????????????? */
+		.s-intro { display: flex; align-items: baseline; gap: 16px; margin-bottom: 52px; }
+		.s-num { font-family: var(--mono); font-size: 11px; color: var(--warm); letter-spacing: 0.1em; flex-shrink: 0; }
+		.s-title { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.02em; color: var(--ink); }
+		.s-rule { flex: 1; height: 1px; background: var(--line); margin-bottom: 4px; }
 
-        .edu-item .degree {
-            color: #00d4ff;
-            font-size: 0.95em;
-            margin-bottom: 4px;
-        }
+		/* ??? ABOUT ????????????????????????????????????????? */
+		#about {
+			padding: 96px 52px;
+			display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px;
+			border-top: 1px solid var(--line);
+		}
+		.about-body p { font-size: 15px; line-height: 1.85; color: var(--ink-mid); margin-bottom: 18px; }
+		.about-body p strong { color: var(--ink); font-weight: 500; }
+		.about-body p:last-child { margin-bottom: 0; }
+		.callout {
+			border-left: 2px solid var(--accent); padding: 16px 20px;
+			background: var(--accent-lt); margin-top: 28px;
+		}
+		.callout p { font-size: 14px; line-height: 1.7; color: var(--accent) !important; margin-bottom: 0 !important; }
 
-        .edu-item .years {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
+		/* Skills column */
+		.skill-block { padding: 18px 0; border-top: 1px solid var(--line); }
+		.skill-block:first-child { border-top: none; padding-top: 0; }
+		.skill-cat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 10px; }
+		.pills { display: flex; flex-wrap: wrap; gap: 7px; }
+		.pill {
+			font-family: var(--mono); font-size: 11px; padding: 4px 11px;
+			border: 1px solid var(--line); color: var(--ink-mid); background: var(--bg);
+		}
+		.pill.hi { background: var(--accent-lt); border-color: transparent; color: var(--accent); font-weight: 500; }
 
-        .edu-item p {
-            color: #b0b0b0;
-            font-size: 0.95em;
-        }
-        
-        .experience-item, .project-item {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #1a1a1a;
-            border-radius: 8px;
-            border-left: 3px solid #00d4ff;
-        }
+		/* ??? FEATURED ?????????????????????????????????????? */
+		#featured {
+			background: var(--bg-dark); padding: 96px 52px;
+			border-top: 1px solid var(--line);
+		}
+		#featured .s-num { color: var(--warm); }
+		#featured .s-title { color: #F7F5F0; }
+		#featured .s-rule { background: rgba(247,245,240,0.12); }
 
-        .project-item.featured {
-            border-left: 3px solid #ff7c2a;
-            background: #1c1812;
-        }
+		.pf-grid {
+			display: grid; grid-template-columns: 1fr 1fr;
+			border: 1px solid rgba(247,245,240,0.08);
+		}
+		.pf-left { padding: 48px 44px; }
+		.pf-right {
+			padding: 48px 44px;
+			border-left: 1px solid rgba(247,245,240,0.08);
+			background: rgba(255,255,255,0.02);
+		}
+		.pf-tag {
+			font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+			text-transform: uppercase; color: var(--warm); margin-bottom: 20px;
+		}
+		.pf-name {
+			font-family: var(--serif); font-size: 44px; line-height: 1.05;
+			color: #F7F5F0; margin-bottom: 20px;
+		}
+		.pf-name em { font-style: italic; color: var(--warm); }
+		.pf-desc { font-size: 14px; line-height: 1.8; color: rgba(247,245,240,0.6); margin-bottom: 32px; }
+		.pf-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+		.pf-tech span {
+			font-family: var(--mono); font-size: 11px; padding: 4px 11px;
+			border: 1px solid rgba(247,245,240,0.15); color: rgba(247,245,240,0.5);
+		}
+		.pf-links { display: flex; gap: 24px; }
+		.pf-link {
+			font-family: var(--mono); font-size: 12px; text-decoration: none;
+			letter-spacing: 0.06em; display: inline-flex; align-items: center;
+			gap: 8px; transition: gap 0.2s;
+		}
+		.pf-link:hover { gap: 14px; }
+		.pf-link-gh { color: var(--warm); }
+		.pf-link-live { color: rgba(247,245,240,0.5); border: 1px solid rgba(247,245,240,0.15); padding: 8px 16px; }
+		.pf-link-live:hover { color: white; border-color: rgba(247,245,240,0.4); }
 
-        .project-item.featured h3 {
-            color: #ff7c2a;
-        }
+		.spec-label {
+			font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+			text-transform: uppercase; color: rgba(247,245,240,0.3); margin-bottom: 20px;
+		}
+		.spec { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(247,245,240,0.07); }
+		.spec-icon { font-family: var(--mono); font-size: 13px; color: var(--warm); min-width: 18px; margin-top: 1px; }
+		.spec-text { font-size: 13px; line-height: 1.65; color: rgba(247,245,240,0.55); }
+		.spec-text strong { color: rgba(247,245,240,0.85); font-weight: 500; }
 
-        .project-item.featured .tech {
-            color: #ff7c2a;
-        }
-        
-        .experience-item h3, .project-item h3 {
-            color: #fff;
-            font-size: 1.4em;
-            margin-bottom: 4px;
-        }
+		/* ??? OTHER PROJECTS ???????????????????????????????? */
+		#projects {
+			padding: 96px 52px;
+			border-top: 1px solid var(--line);
+		}
+		.proj-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+		.proj-card { background: var(--card); padding: 32px 28px; transition: background 0.2s; }
+		.proj-card:hover { background: var(--bg-alt); }
+		.proj-num { font-family: var(--mono); font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; margin-bottom: 20px; }
+		.proj-name { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+		.proj-stack { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.04em; }
+		.proj-desc { font-size: 13px; line-height: 1.7; color: var(--ink-mid); margin-bottom: 20px; }
+		.proj-link {
+			font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
+			text-decoration: none; letter-spacing: 0.06em;
+			display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+		}
+		.proj-link:hover { color: var(--accent); gap: 10px; }
 
-        .experience-item .period {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 6px;
-        }
-        
-        .experience-item .role, .project-item .tech {
-            color: #00d4ff;
-            font-size: 0.95em;
-            margin-bottom: 12px;
-        }
-        
-        .experience-item ul, .project-item ul {
-            list-style: none;
-            margin-top: 15px;
-        }
-        
-        .experience-item li, .project-item li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 8px;
-            color: #b0b0b0;
-        }
-        
-        .experience-item li::before, .project-item li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #00d4ff;
-            font-size: 1.2em;
-        }
+		/* ??? BACKGROUND ???????????????????????????????????? */
+		#background {
+			background: var(--bg-alt); padding: 96px 52px;
+			border-top: 1px solid var(--line);
+			display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+		}
+		.exp-card {
+			border: 1px solid var(--line); background: var(--card);
+			padding: 36px; margin-bottom: 14px;
+		}
+		.exp-period { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 8px; }
+		.exp-co { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+		.exp-loc { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+		.exp-role-title { font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--ink); margin-bottom: 16px; }
+		.exp-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+		.exp-list li { font-size: 13px; line-height: 1.65; color: var(--ink-mid); padding-left: 18px; position: relative; }
+		.exp-list li::before { content: '?'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 2px; }
 
-        .project-item.featured li::before {
-            color: #ff7c2a;
-        }
-        
-        .skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .skill-category {
-            background: #1a1a1a;
-            border-radius: 8px;
-            border: 1px solid #252525;
-            transition: all 0.3s;
-            overflow: hidden;
-        }
-        
-        .skill-category:hover {
-            border-color: #00d4ff;
-        }
-        
-        .skill-category h3 {
-            color: #00d4ff;
-            font-size: 1.1em;
-            padding: 20px;
-            margin: 0;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-        
-        .skill-category h3:hover {
-            background: rgba(0, 212, 255, 0.05);
-        }
-        
-        .skill-category h3::after {
-            content: '▼';
-            font-size: 0.8em;
-            transition: transform 0.3s;
-        }
-        
-        .skill-category.collapsed h3::after {
-            transform: rotate(-90deg);
-        }
-        
-        .skill-category ul {
-            list-style: none;
-            padding: 0 20px 20px 20px;
-            max-height: 500px;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        
-        .skill-category.collapsed ul {
-            max-height: 0;
-            padding: 0 20px;
-        }
-        
-        .skill-category li {
-            color: #b0b0b0;
-            padding: 5px 0;
-            font-size: 0.95em;
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 16px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
+		.edu-card {
+			border: 1px solid var(--line); background: var(--card);
+			padding: 28px 32px; margin-bottom: 14px;
+		}
+		.edu-deg { font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 6px; }
+		.edu-school { font-size: 14px; font-weight: 500; color: var(--ink-mid); margin-bottom: 4px; }
+		.edu-years { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+		.edu-note { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
 
-        .project-link {
-            display: inline-block;
-            color: #00d4ff;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.95em;
-        }
+		.eu-card { padding: 28px 32px; background: var(--accent-lt); }
+		.eu-card-title { font-family: var(--serif); font-size: 20px; color: var(--accent); margin-bottom: 6px; }
+		.eu-card-sub { font-size: 13px; color: var(--accent); opacity: 0.75; margin-bottom: 10px; }
+		.eu-card-note { font-size: 13px; color: var(--accent); opacity: 0.7; line-height: 1.65; }
 
-        .project-link.demo {
-            color: #ff7c2a;
-        }
-        
-        .project-link:hover {
-            transform: translateX(4px);
-        }
+		/* ??? CONTACT ??????????????????????????????????????? */
+		#contact {
+			padding: 96px 52px;
+			border-top: 1px solid var(--line);
+			display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;
+		}
+		.contact-h {
+			font-family: var(--serif); font-size: clamp(34px, 4vw, 56px);
+			line-height: 1.1; letter-spacing: -0.025em;
+			color: var(--ink); margin-bottom: 20px;
+		}
+		.contact-h em { font-style: italic; color: var(--accent); }
+		.contact-sub { font-size: 15px; line-height: 1.75; color: var(--ink-mid); max-width: 380px; }
 
-        .badge {
-            display: inline-block;
-            font-size: 0.75em;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 8px;
-            background: rgba(255, 124, 42, 0.15);
-            color: #ff7c2a;
-            border: 1px solid rgba(255, 124, 42, 0.3);
-            vertical-align: middle;
-        }
-        
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .contact-links a {
-            color: #00d4ff;
-            text-decoration: none;
-            padding: 10px 20px;
-            background: #1a1a1a;
-            border-radius: 6px;
-            border: 1px solid #252525;
-            transition: all 0.3s;
-        }
-        
-        .contact-links a:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: #00d4ff;
-            transform: translateY(-2px);
-        }
-        
-        footer {
-            background: #0a0a0a;
-            padding: 30px 20px;
-            text-align: center;
-            border-top: 1px solid #252525;
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            header h1 { font-size: 2em; }
-            header .title { font-size: 1.1em; }
-            section { padding: 25px; }
-        }
-    </style>
+		.c-rows { display: flex; flex-direction: column; gap: 4px; }
+		.c-row {
+			display: flex; align-items: center; justify-content: space-between;
+			padding: 18px 22px; background: var(--card);
+			border: 1px solid var(--line); text-decoration: none;
+			color: var(--ink); transition: all 0.2s;
+		}
+		.c-row:hover { background: var(--ink); color: var(--bg); transform: translateX(4px); }
+		.c-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; margin-bottom: 2px; }
+		.c-value { font-size: 14px; }
+		.c-arrow { font-size: 16px; transition: transform 0.2s; }
+		.c-row:hover .c-arrow { transform: translateX(4px); }
+
+		/* ??? FOOTER ???????????????????????????????????????? */
+		footer {
+			padding: 24px 52px; border-top: 1px solid var(--line);
+			display: flex; justify-content: space-between; align-items: center;
+		}
+		.f-copy { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+		.f-note { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+		.f-note span { color: var(--accent); }
+
+		/* ??? REVEAL ???????????????????????????????????????? */
+		.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+		.reveal.on { opacity: 1; transform: none; }
+
+		/* ??? RESPONSIVE ???????????????????????????????????? */
+		@media (max-width: 960px) {
+			nav { padding: 16px 24px; }
+			.nav-links { gap: 18px; }
+			.nav-badge { display: none; }
+			.hero-main { grid-template-columns: 1fr; }
+			.hero-content { padding: 52px 24px 40px; border-right: none; border-bottom: 1px solid var(--line); }
+			.hero-sidebar { padding: 32px 24px; }
+			.t-cell { padding: 16px 14px; }
+			#about { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+			#featured { padding: 60px 24px; }
+			.pf-grid { grid-template-columns: 1fr; }
+			.pf-right { border-left: none; border-top: 1px solid rgba(247,245,240,0.08); }
+			#projects { padding: 60px 24px; }
+			.proj-grid { grid-template-columns: 1fr; }
+			#background { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+			#contact { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+			footer { padding: 20px 24px; flex-direction: column; gap: 6px; text-align: center; }
+		}
+	</style>
 </head>
 <body>
-<header>
-    <h1>Rengin Çelik</h1>
-    <p class="title">Simulation & Digital Twin Developer</p>
-    <p class="subtitle">Engineering background · Real-time systems · EU citizen</p>
-    <nav>
-        <a class="tab-link active" data-tab="about">About</a>
-        <a class="tab-link" data-tab="experience">Experience</a>
-        <a class="tab-link" data-tab="skills">Skills</a>
-        <a class="tab-link" data-tab="projects">Projects</a>
-        <a class="tab-link" data-tab="contact">Contact</a>
-    </nav>
-</header>
 
-<div class="container">
+<!-- NAV -->
+<nav>
+	<a href="#" class="nav-mark">RC<span>.</span></a>
+	<ul class="nav-links">
+		<li><a href="#about">About</a></li>
+		<li><a href="#featured">PipeFlow</a></li>
+		<li><a href="#projects">Projects</a></li>
+		<li><a href="#background">Background</a></li>
+		<li><a href="#contact">Contact</a></li>
+	</ul>
+	<div class="nav-badge">EU Work Authorization</div>
+</nav>
 
-    <!-- ABOUT -->
-    <section id="about" class="active">
-        <h2>About Me</h2>
-        <div class="about-highlight">
-            Most developers don't have engineering fundamentals.<br>
-            Most engineers don't write production code.<br>
-            <strong>I do both.</strong>
-        </div>
-        <p class="about-body">
-            I'm a simulation and real-time systems developer with a B.Eng. from Istanbul Technical University — 
-            fluid mechanics, thermodynamics, heat & mass transfer, process systems design. 
-            That foundation is what separates my work: I don't implement physics equations by copying formulas, 
-            I understand what they model.
-        </p>
-        <p class="about-body">
-            My main project, PipeFlow, is a browser-based real-time pipeline flow simulator built entirely from scratch — 
-            zero dependencies, no framework, no build step. It implements Darcy-Weisbach friction losses, 
-            Colebrook-White via Newton-Raphson iteration, pump H-Q curve fitting, and live operating point calculation. 
-            Everything renders in real time with SVG animation and live charts.
-        </p>
-        <p class="about-body">
-            Before simulation, I spent three years in Unity — HLSL shaders, GPU instancing, URP pipelines, 
-            Editor tooling. Real-time systems and rendering are the common thread.
-        </p>
-        <p class="about-body">
-            EU citizen (Bulgarian). Available for remote or relocation across Europe. No sponsorship required.
-        </p>
+<!-- HERO -->
+<section class="hero">
+	<div class="hero-main">
+		<div class="hero-content">
+			<p class="hero-eyebrow">Simulation & Digital Twin Developer</p>
+			<h1>Rengin<br><em>�elik</em></h1>
+			<p class="hero-role">Engineering background. Real-time systems.</p>
+			<p class="hero-bio">
+				I hold a <strong>B.Eng. from Istanbul Technical University</strong> ? fluid mechanics,
+				thermodynamics, process systems. I build software that makes complex physical systems
+				visible and interactive. My work sits at the intersection of engineering domain knowledge
+				and real-time rendering, where simulation becomes genuinely useful.
+			</p>
+			<div class="cta-row">
+				<a href="#featured" class="btn btn-fill">See PipeFlow ?</a>
+				<a href="#contact" class="btn btn-outline">Contact Me</a>
+			</div>
+		</div>
+		<div class="hero-sidebar">
+			<div class="eu-box">
+				<div class="eu-box-label">Work Authorization</div>
+				<div class="eu-box-value">EU / EEA ? Full Authorization</div>
+				<div class="eu-box-note">Bulgarian citizenship � No sponsorship required</div>
+			</div>
+			<div class="fact-row"><span class="fact-label">Base</span><span class="fact-value">Sofia / Istanbul ? Europe</span></div>
+			<div class="fact-row"><span class="fact-label">Education</span><span class="fact-value">ITU B.Eng.</span></div>
+			<div class="fact-row"><span class="fact-label">Focus</span><span class="fact-value hi">Simulation / Digital Twin</span></div>
+			<div class="fact-row"><span class="fact-label">Languages</span><span class="fact-value">Turkish � English</span></div>
+			<div class="fact-row"><span class="fact-label">Status</span><span class="fact-value hi">Open to roles</span></div>
+		</div>
+	</div>
+	<div class="hero-ticker">
+		<div class="t-cell"><div class="t-num">100ms</div><div class="t-label">Simulation tick rate</div></div>
+		<div class="t-cell"><div class="t-num">3+</div><div class="t-label">Physics equations implemented</div></div>
+		<div class="t-cell"><div class="t-num">0</div><div class="t-label">Frameworks / dependencies</div></div>
+		<div class="t-cell"><div class="t-num">ITU</div><div class="t-label">Engineering foundation</div></div>
+	</div>
+</section>
 
-        <div class="edu-item">
-            <h3>Istanbul Technical University (ITU)</h3>
-            <div class="degree">B.Eng. — Engineering: Fluid Mechanics, Thermodynamics, Process Systems</div>
-            <div class="years">2016 – 2022</div>
-            <p>Coursework: fluid mechanics, heat & mass transfer, thermodynamics, process control, numerical methods, experimental design.</p>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section id="about">
+	<div class="reveal">
+		<div class="s-intro"><span class="s-num">01</span><h2 class="s-title">About</h2><div class="s-rule"></div></div>
+		<div class="about-body">
+			<p>I studied <strong>food engineering at Istanbul Technical University</strong> ? fluid mechanics, thermodynamics, heat and mass transfer, process systems. That foundation shapes how I think about simulation software: not as abstraction, but as a faithful model of physical reality.</p>
+			<p>Over the past three years I've built real-time systems ? starting with game engines, HLSL shaders, and GPU optimisation, then applying those same skills to engineering simulation. <strong>PipeFlow</strong>, my main project, is a browser-based pipeline flow simulator built entirely in vanilla JavaScript with zero external dependencies.</p>
+			<p>I'm targeting roles in <strong>simulation software, digital twin platforms, or engineering tooling</strong> ? in Europe, where I have full work authorisation as a Bulgarian citizen.</p>
+			<div class="callout"><p>Engineering domain knowledge combined with real-time software skills is an uncommon pairing. I understand both the physics that needs to be modelled and the code required to model it accurately.</p></div>
+		</div>
+	</div>
+	<div class="reveal">
+		<div class="skill-block">
+			<div class="skill-cat">Simulation & Physics</div>
+			<div class="pills">
+				<span class="pill hi">Darcy-Weisbach</span>
+				<span class="pill hi">Colebrook-White</span>
+				<span class="pill hi">Fluid Dynamics</span>
+				<span class="pill">Thermodynamics</span>
+				<span class="pill">Numerical Methods</span>
+				<span class="pill">Newton-Raphson</span>
+				<span class="pill">Bisection Method</span>
+			</div>
+		</div>
+		<div class="skill-block">
+			<div class="skill-cat">Real-Time Systems</div>
+			<div class="pills">
+				<span class="pill hi">Vanilla JS (ES Modules)</span>
+				<span class="pill hi">SVG Rendering</span>
+				<span class="pill hi">Canvas 2D</span>
+				<span class="pill">Event-Driven Architecture</span>
+				<span class="pill">RAF Loops</span>
+				<span class="pill">Zero Dependencies</span>
+			</div>
+		</div>
+		<div class="skill-block">
+			<div class="skill-cat">Graphics & Rendering</div>
+			<div class="pills">
+				<span class="pill hi">HLSL</span>
+				<span class="pill hi">GPU Instancing</span>
+				<span class="pill">Unity URP</span>
+				<span class="pill">Shader Dev</span>
+				<span class="pill">GPU Profiling</span>
+				<span class="pill">Draw Call Optimisation</span>
+			</div>
+		</div>
+		<div class="skill-block">
+			<div class="skill-cat">Engineering Domain</div>
+			<div class="pills">
+				<span class="pill hi">Process Engineering</span>
+				<span class="pill">Pipeline Systems</span>
+				<span class="pill">Fluid Mechanics</span>
+				<span class="pill">Heat & Mass Transfer</span>
+				<span class="pill">ITU B.Eng.</span>
+			</div>
+		</div>
+		<div class="skill-block">
+			<div class="skill-cat">Tools & Languages</div>
+			<div class="pills">
+				<span class="pill">C#</span>
+				<span class="pill">JavaScript</span>
+				<span class="pill">Git</span>
+				<span class="pill">Unity Editor Scripting</span>
+				<span class="pill">Unity Profiler</span>
+			</div>
+		</div>
+	</div>
+</section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience">
-        <h2>Experience</h2>
-        
-        <div class="experience-item">
-            <h3>iBright</h3>
-            <div class="role">Unity Developer & Technical Artist</div>
-            <div class="period">August 2025 – November 2025 · Istanbul</div>
-            <ul>
-                <li>Built 2D pipeline tools using Unity Editor Scripting — Depth Ordering System, Sprite Animation Tools</li>
-                <li>Wrote custom HLSL shaders for the Livber project; resolved mobile and PC rendering issues</li>
-                <li>Profiled and optimized performance with Unity Profiler and Frame Debugger — reduced draw calls, improved FPS</li>
-                <li>Created reusable systems and pipeline tools that accelerated the team's development workflow</li>
-            </ul>
-        </div>
-    </section>
+<!-- FEATURED: PIPEFLOW -->
+<section id="featured">
+	<div class="s-intro reveal"><span class="s-num">02</span><h2 class="s-title">Featured Project</h2><div class="s-rule"></div></div>
+	<div class="pf-grid reveal">
+		<div class="pf-left">
+			<div class="pf-tag">Browser-based � Real-time � No dependencies</div>
+			<div class="pf-name">PipeFlow<br><em>Simulator</em></div>
+			<p class="pf-desc">A general-purpose pipeline flow simulator for process engineers. Build a pipeline from components ? pumps, pipes, valves, elbows, reducers ? and the physics engine calculates pressure, velocity, flow rate, and energy losses every 100ms. Results appear as live SVG animations, stacked charts, and component-level tooltips.</p>
+			<div class="pf-tech">
+				<span>Vanilla JS</span><span>ES Modules</span><span>SVG</span>
+				<span>Canvas 2D</span><span>No Framework</span><span>No Build Step</span>
+			</div>
+			<div class="pf-links">
+				<a href="https://github.com/rengincelik/pipeFlow" target="_blank" class="pf-link pf-link-gh">GitHub ?</a>
+				<a href="https://rengincelik.github.io/pipeFlow/" target="_blank" class="pf-link pf-link-live">Live Demo ?</a>
+			</div>
+		</div>
+		<div class="pf-right">
+			<div class="spec-label">Technical Implementation</div>
+			<div class="spec"><div class="spec-icon">?</div><div class="spec-text"><strong>Darcy-Weisbach</strong> for major friction losses. Colebrook-White friction factor via Newton-Raphson (50 iter, tol 1�10??).</div></div>
+			<div class="spec"><div class="spec-icon">?</div><div class="spec-text"><strong>Borda-Carnot</strong> for expander losses; contraction coefficient method for reducers ? both with Bernoulli pressure recovery.</div></div>
+			<div class="spec"><div class="spec-icon">?</div><div class="spec-text"><strong>Pump H-Q curve</strong> from 3 operating points via 2nd-degree polynomial. Operating point solved by bisection each tick.</div></div>
+			<div class="spec"><div class="spec-icon">?</div><div class="spec-text"><strong>Empirical fluid model</strong> ? density as polynomial of temperature; viscosity via Vogel equation. Water and EG50 included.</div></div>
+			<div class="spec"><div class="spec-icon">?</div><div class="spec-text"><strong>Architecture:</strong> SimulationEngine � SVGRenderer � ChartRenderer � FlowAnimator ? decoupled via EventEmitter. Zero dependencies.</div></div>
+		</div>
+	</div>
+</section>
 
-    <!-- SKILLS -->
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-grid">
+<!-- OTHER PROJECTS -->
+<section id="projects">
+	<div class="s-intro reveal"><span class="s-num">03</span><h2 class="s-title">Other Projects</h2><div class="s-rule"></div></div>
+	<div class="proj-grid reveal">
+		<div class="proj-card">
+			<div class="proj-num">03 ? 01</div>
+			<div class="proj-name">GPU Instancing Study</div>
+			<div class="proj-stack">Unity � HLSL � URP</div>
+			<p class="proj-desc">Multiple GPU instancing approaches for rendering thousands of objects in a single draw call. Covers 3D/sprite instancing, grass rendering, random spawn, and scaling systems.</p>
+			<a href="https://rengincelik.github.io/GPU_Rendering/" target="_blank" class="proj-link">View Project ?</a>
+		</div>
+		<div class="proj-card">
+			<div class="proj-num">03 ? 02</div>
+			<div class="proj-name">URP Shader Library</div>
+			<div class="proj-stack">HLSL � ShaderLab � Unity URP</div>
+			<p class="proj-desc">Production-ready custom shader collection ? silk, velvet, advanced surface effects, water surface. Built for URP with performance in mind.</p>
+			<a href="https://rengincelik.github.io/Shaders/" target="_blank" class="proj-link">View Project ?</a>
+		</div>
+		<div class="proj-card">
+			<div class="proj-num">03 ? 03</div>
+			<div class="proj-name">Mini Dev Kit</div>
+			<div class="proj-stack">Unity � C# � Editor Scripting</div>
+			<p class="proj-desc">Modular reusable toolset for Unity ? 2D/3D player movement, object movement, sprite animator, and editor utilities designed to accelerate development workflows.</p>
+			<a href="https://rengincelik.github.io/Mini-Dev-Kit/" target="_blank" class="proj-link">View Project ?</a>
+		</div>
+	</div>
+</section>
 
-            <div class="skill-category">
-                <h3>Simulation & Physics</h3>
-                <ul>
-                    <li>Darcy-Weisbach friction loss equations</li>
-                    <li>Colebrook-White — Newton-Raphson iteration</li>
-                    <li>Borda-Carnot expansion losses</li>
-                    <li>Pump H-Q curve fitting (polynomial)</li>
-                    <li>Bisection method — operating point calculation</li>
-                    <li>Bernoulli equation, fluid flow modelling</li>
-                    <li>State machines, numerical methods</li>
-                </ul>
-            </div>
+<!-- BACKGROUND -->
+<section id="background">
+	<div class="reveal">
+		<div class="s-intro"><span class="s-num">04</span><h2 class="s-title">Background</h2><div class="s-rule"></div></div>
+		<div class="exp-card">
+			<div class="exp-period">Aug 2025 ? Nov 2025</div>
+			<div class="exp-co">iBright</div>
+			<div class="exp-loc">Istanbul, Turkey</div>
+			<div class="exp-role-title">Unity Developer & Technical Artist</div>
+			<ul class="exp-list">
+				<li>Built 2D pipeline tools with Unity Editor Scripting ? Depth Ordering System, Sprite Animation Tools.</li>
+				<li>Developed custom HLSL shaders for the Livber project; resolved graphics bugs across mobile and PC.</li>
+				<li>Profiled with Unity Profiler and Frame Debugger ? reduced draw calls and improved mobile FPS.</li>
+				<li>Delivered reusable systems that reduced project setup time for the team.</li>
+			</ul>
+		</div>
+	</div>
+	<div class="reveal">
+		<div class="s-intro" style="margin-bottom: 28px;"><span class="s-num" style="color:var(--ink-soft); font-size:12px;">Education & Status</span></div>
+		<div class="edu-card">
+			<div class="edu-deg">Bachelor of Engineering</div>
+			<div class="edu-school">Istanbul Technical University (ITU)</div>
+			<div class="edu-years">2016 ? 2022</div>
+			<div class="edu-note">Food Engineering ? fluid mechanics, thermodynamics, heat and mass transfer, process systems, numerical methods. Domain knowledge that directly informs the physical models in my simulation work.</div>
+		</div>
+		<div class="eu-card">
+			<div class="eu-card-title">EU Work Authorisation</div>
+			<div class="eu-card-sub">Bulgarian Citizenship</div>
+			<div class="eu-card-note">Full authorisation to live and work anywhere in the EU/EEA. No visa or sponsorship required. Actively targeting opportunities in Central and Western Europe, open to remote or relocation.</div>
+		</div>
+	</div>
+</section>
 
-            <div class="skill-category collapsed">
-                <h3>Real-Time Systems</h3>
-                <ul>
-                    <li>Vanilla JavaScript (ES Modules)</li>
-                    <li>SVG Rendering & Animation</li>
-                    <li>Canvas 2D</li>
-                    <li>Event-Driven Architecture (EventEmitter)</li>
-                    <li>requestAnimationFrame loops</li>
-                    <li>Zero-dependency system design</li>
-                </ul>
-            </div>
-
-            <div class="skill-category collapsed">
-                <h3>Graphics & Rendering</h3>
-                <ul>
-                    <li>HLSL Shader Programming</li>
-                    <li>GPU Instancing</li>
-                    <li>Unity URP (Universal Render Pipeline)</li>
-                    <li>Shader development & visual effects</li>
-                    <li>GPU Profiling</li>
-                    <li>Unity Profiler & Frame Debugger</li>
-                    <li>Draw call optimization</li>
-                </ul>
-            </div>
-
-            <div class="skill-category collapsed">
-                <h3>Engineering Domain</h3>
-                <ul>
-                    <li>Fluid mechanics & pipeline systems</li>
-                    <li>Thermodynamics & heat transfer</li>
-                    <li>Process systems design</li>
-                    <li>B.Eng. — Istanbul Technical University (ITU)</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category collapsed">
-                <h3>Tools & Languages</h3>
-                <ul>
-                    <li>C# (Unity, Editor Scripting)</li>
-                    <li>JavaScript (Vanilla, ES Modules)</li>
-                    <li>Git & version control</li>
-                    <li>Unity Editor Scripting (Custom Inspectors, Property Drawers, Editor Windows)</li>
-                    <li>Scriptable Object Architecture</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-        <h2>Projects</h2>
-
-        <div class="project-item featured">
-            <h3>PipeFlow Simulator <span class="badge">Featured</span></h3>
-            <div class="tech">Vanilla JS · SVG · Zero Dependencies</div>
-            <p style="color:#b0b0b0; margin-bottom: 10px;">
-                Browser-based real-time pipeline flow simulator. Drag-and-drop pumps, pipes, valves, elbows and reducers — 
-                the physics engine recalculates pressure, velocity, flow rate and energy losses every 100ms. 
-                Results shown live via SVG animation, charts, and tooltips.
-            </p>
-            <ul>
-                <li>Darcy-Weisbach friction losses, Colebrook-White via Newton-Raphson (50 iter, tol 1×10⁻⁸)</li>
-                <li>Pump H-Q curve — 3-point quadratic fit; operating point via bisection each tick</li>
-                <li>Empirical fluid model — water and 50% ethylene glycol</li>
-                <li>Architecture: SimulationEngine · SVGRenderer · ChartRenderer · FlowAnimator — decoupled via EventEmitter</li>
-                <li>Zero dependencies. No framework. No build step.</li>
-            </ul>
-            <div class="project-links">
-                <a href="https://github.com/rengincelik/pipeflow" class="project-link" target="_blank">GitHub →</a>
-                <a href="https://rengincelik.github.io/pipeflow/" class="project-link demo" target="_blank">Live Demo →</a>
-            </div>
-        </div>
-
-        <div class="project-item">
-            <h3>GPU Instancing Study</h3>
-            <div class="tech">Unity · HLSL · URP</div>
-            <p style="color:#b0b0b0;">Multiple GPU instancing approaches for rendering thousands of objects in a single draw call. Covers 3D/sprite instancing, grass rendering, random spawn, and scaling systems.</p>
-            <div class="project-links">
-                <a href="https://rengincelik.github.io/GPU_Rendering/" class="project-link" target="_blank">View Project →</a>
-            </div>
-        </div>
-
-        <div class="project-item">
-            <h3>URP Shader Library</h3>
-            <div class="tech">HLSL · ShaderLab · Unity URP</div>
-            <p style="color:#b0b0b0;">Production-ready custom shader collection — silk, velvet, advanced surface, water surface effects. Built for URP with performance in mind.</p>
-            <div class="project-links">
-                <a href="https://rengincelik.github.io/Shaders/" class="project-link" target="_blank">View Project →</a>
-            </div>
-        </div>
-
-        <div class="project-item">
-            <h3>Mini Dev Kit</h3>
-            <div class="tech">Unity · C# · Editor Scripting</div>
-            <p style="color:#b0b0b0;">Modular reusable toolset for Unity — 2D/3D player movement, object movement, sprite animator, and editor utilities designed to accelerate development workflows.</p>
-            <div class="project-links">
-                <a href="https://rengincelik.github.io/Mini-Dev-Kit/" class="project-link" target="_blank">View Project →</a>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <p style="color:#b0b0b0; margin-bottom: 20px;">Open to simulation, digital twin, and real-time systems roles — remote or relocation within Europe. EU citizen, no sponsorship required.</p>
-        <p style="margin-bottom: 8px;">📞 +90 538 968 69 77</p>
-        <p style="margin-bottom: 8px;">✉️ <a href="mailto:rengin.celik97@gmail.com" style="color: #00d4ff; text-decoration: none;">rengin.celik97@gmail.com</a></p>
-        <p>🌍 Istanbul, Turkey</p>
-        
-        <div class="contact-links">
-            <a href="https://linkedin.com/in/rengincelik" target="_blank">LinkedIn</a>
-            <a href="https://github.com/rengincelik" target="_blank">GitHub</a>
-        </div>
-    </section>
-
-</div>
+<!-- CONTACT -->
+<section id="contact">
+	<div class="reveal">
+		<div class="s-intro" style="margin-bottom: 24px;"><span class="s-num">05</span></div>
+		<h2 class="contact-h">Open to<br><em>European</em><br>opportunities.</h2>
+		<p class="contact-sub">Looking for simulation software, digital twin, or engineering tooling roles. Full EU authorisation ? happy to relocate or work remotely.</p>
+	</div>
+	<div class="c-rows reveal">
+		<a href="mailto:rengin.celik97@gmail.com" class="c-row">
+			<div><div class="c-label">Email</div><div class="c-value">rengin.celik97@gmail.com</div></div>
+			<span class="c-arrow">?</span>
+		</a>
+		<a href="https://linkedin.com/in/rengincelik" target="_blank" class="c-row">
+			<div><div class="c-label">LinkedIn</div><div class="c-value">linkedin.com/in/rengincelik</div></div>
+			<span class="c-arrow">?</span>
+		</a>
+		<a href="https://github.com/rengincelik" target="_blank" class="c-row">
+			<div><div class="c-label">GitHub</div><div class="c-value">github.com/rengincelik</div></div>
+			<span class="c-arrow">?</span>
+		</a>
+		<a href="https://rengincelik.github.io/pipeFlow/" target="_blank" class="c-row">
+			<div><div class="c-label">PipeFlow ? Live Demo</div><div class="c-value">rengincelik.github.io/pipeFlow</div></div>
+			<span class="c-arrow">?</span>
+		</a>
+		<a href="tel:+905389686977" class="c-row">
+			<div><div class="c-label">Phone</div><div class="c-value">+90 538 968 69 77</div></div>
+			<span class="c-arrow">?</span>
+		</a>
+	</div>
+</section>
 
 <footer>
-    <p>© 2025 Rengin Çelik · Simulation & Digital Twin Developer</p>
+	<p class="f-copy">� 2025 Rengin �elik � Sofia, Bulgaria & Istanbul, Turkey</p>
+	<p class="f-note">Built with <span>HTML + CSS + JS</span> ? no frameworks.</p>
 </footer>
 
 <script>
-    document.querySelectorAll('.tab-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            this.classList.add('active');
-            const tabId = this.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
-    
-    document.querySelectorAll('.skill-category h3').forEach(header => {
-        header.addEventListener('click', function() {
-            this.parentElement.classList.toggle('collapsed');
-        });
-    });
+	// Scroll reveal
+	const obs = new IntersectionObserver((entries) => {
+		entries.forEach((e, i) => {
+			if (e.isIntersecting) {
+				setTimeout(() => e.target.classList.add('on'), i * 80);
+				obs.unobserve(e.target);
+			}
+		});
+	}, { threshold: 0.07 });
+	document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+	// Nav active state
+	const secs = document.querySelectorAll('section[id]');
+	const lnks = document.querySelectorAll('.nav-links a');
+	window.addEventListener('scroll', () => {
+		let cur = '';
+		secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+		lnks.forEach(l => {
+			l.style.color = l.getAttribute('href') === `#${cur}` ? 'var(--accent)' : '';
+		});
+	});
 </script>
 </body>
 </html>
