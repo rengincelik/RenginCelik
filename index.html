@@ -3,619 +3,1091 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Rengin Celik - Engineering Simulation Developer</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+	<title>Rengin Çelik — Engineering Simulation Developer</title>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 	<style>
 		:root {
-			--bg:        #F7F5F0;
-			--bg-alt:    #EFECE5;
-			--bg-dark:   #181714;
-			--ink:       #1C1B18;
-			--ink-mid:   #4A4844;
-			--ink-soft:  #7A7770;
-			--ink-dim:   #ABA9A4;
-			--accent:    #1A5C8A;
-			--accent-lt: #D0E4F0;
-			--warm:      #C47A3A;
-			--line:      #DEDAD3;
-			--card:      #FFFFFF;
-			--serif: 'Playfair Display', Georgia, serif;
-			--mono:  'IBM Plex Mono', monospace;
-			--sans:  'IBM Plex Sans', sans-serif;
+			--cream: #F5F0E8;
+			--cream-dark: #EDE8DC;
+			--cream-mid: #E8E0D0;
+			--ink: #1C1A16;
+			--ink-mid: #3D3930;
+			--ink-light: #6B6455;
+			--blue: #1A4F8A;
+			--blue-light: #2A6BC2;
+			--blue-pale: #D4E3F5;
+			--orange: #C4531A;
+			--orange-light: #E8763A;
+			--orange-pale: #FAE8DC;
+			--rule: #C8BFB0;
 		}
-		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+		
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		
 		html { scroll-behavior: smooth; }
-
+		
 		body {
-			background: var(--bg);
+			background: var(--cream);
 			color: var(--ink);
-			font-family: var(--sans);
-			font-size: 15px;
-			line-height: 1.6;
-			-webkit-font-smoothing: antialiased;
+			font-family: 'IBM Plex Sans', sans-serif;
+			font-weight: 300;
+			line-height: 1.65;
+			overflow-x: hidden;
 		}
-
-		/* ??? NAV ??????????????????????????????????????????? */
+		
+		/* ─── NAV ─── */
 		nav {
-			position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-			display: flex; justify-content: space-between; align-items: center;
-			padding: 18px 52px;
-			background: rgba(247,245,240,0.92);
-			backdrop-filter: blur(14px);
-			border-bottom: 1px solid var(--line);
+			position: fixed;
+			top: 0; left: 0; right: 0;
+			z-index: 100;
+			background: var(--cream);
+			border-bottom: 1px solid var(--rule);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 48px;
+			height: 56px;
 		}
-		.nav-mark {
-			font-family: var(--mono); font-size: 13px; font-weight: 500;
-			color: var(--ink); text-decoration: none; letter-spacing: 0.04em;
+		
+		.nav-logo {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 13px;
+			font-weight: 500;
+			color: var(--ink);
+			letter-spacing: 0.04em;
+			text-decoration: none;
 		}
-		.nav-mark span { color: var(--accent); }
-		.nav-links { display: flex; gap: 36px; list-style: none; }
+		
+		.nav-links {
+			display: flex;
+			gap: 32px;
+			list-style: none;
+		}
+		
 		.nav-links a {
-			font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
-			text-transform: uppercase; color: var(--ink-soft);
-			text-decoration: none; transition: color 0.2s;
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			font-weight: 500;
+			color: var(--ink-light);
+			text-decoration: none;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			transition: color 0.2s;
 		}
-		.nav-links a:hover { color: var(--accent); }
-		.nav-badge {
-			font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-			background: var(--accent); color: white; padding: 4px 12px;
-		}
-
-		/* ??? HERO ?????????????????????????????????????????? */
+		
+		.nav-links a:hover { color: var(--blue); }
+		
+		/* ─── HERO ─── */
 		.hero {
 			min-height: 100vh;
-			padding-top: 57px;
 			display: grid;
-			grid-template-rows: 1fr auto;
-			border-bottom: 1px solid var(--line);
+			grid-template-columns: 1fr 1fr;
+			padding-top: 56px;
 		}
-		.hero-main {
-			display: grid;
-			grid-template-columns: 1fr 340px;
-			border-bottom: 1px solid var(--line);
+		
+		.hero-left {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 80px 64px 80px 80px;
+			border-right: 1px solid var(--rule);
 		}
-		.hero-content {
-			padding: 80px 52px;
-			display: flex; flex-direction: column; justify-content: center;
-			border-right: 1px solid var(--line);
+		
+		.hero-tag {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			font-weight: 500;
+			color: var(--orange);
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			margin-bottom: 24px;
 		}
-		.hero-eyebrow {
-			font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
-			text-transform: uppercase; color: var(--accent);
-			margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+		
+		.hero-name {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: clamp(40px, 5vw, 64px);
+			font-weight: 600;
+			line-height: 1.05;
+			color: var(--ink);
+			margin-bottom: 8px;
 		}
-		.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
-		h1 {
-			font-family: var(--serif);
-			font-size: clamp(48px, 5.5vw, 76px);
-			line-height: 1.06; letter-spacing: -0.025em;
-			color: var(--ink); margin-bottom: 6px;
+		
+		.hero-title {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: clamp(18px, 2.5vw, 26px);
+			font-weight: 400;
+			font-style: italic;
+			color: var(--blue);
+			margin-bottom: 36px;
 		}
-		h1 em { font-style: italic; color: var(--accent); }
-		.hero-role {
-			font-family: var(--serif); font-size: clamp(16px, 1.8vw, 22px);
-			font-style: italic; color: var(--ink-soft); margin-bottom: 36px;
-		}
+		
 		.hero-bio {
-			font-size: 15px; line-height: 1.85; color: var(--ink-mid);
-			max-width: 520px; margin-bottom: 48px;
+			font-size: 15px;
+			color: var(--ink-mid);
+			line-height: 1.75;
+			max-width: 440px;
+			margin-bottom: 48px;
 		}
-		.hero-bio strong { color: var(--ink); font-weight: 500; }
-		.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
-		.btn {
-			display: inline-flex; align-items: center; gap: 8px;
-			font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
-			text-decoration: none; padding: 12px 24px; transition: all 0.2s;
+		
+		.hero-bio strong {
+			font-weight: 500;
+			color: var(--ink);
 		}
-		.btn-fill { background: var(--ink); color: var(--bg); }
-		.btn-fill:hover { background: var(--accent); transform: translateY(-2px); }
-		.btn-outline { border: 1px solid var(--line); color: var(--ink-mid); }
-		.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-		/* Hero sidebar */
-		.hero-sidebar { padding: 48px 32px; display: flex; flex-direction: column; }
-		.eu-box {
-			background: var(--accent); color: white;
-			padding: 22px 20px; margin-bottom: 24px;
+		
+		.hero-actions {
+			display: flex;
+			gap: 16px;
+			flex-wrap: wrap;
 		}
-		.eu-box-label {
-			font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
-			text-transform: uppercase; opacity: 0.7; margin-bottom: 8px;
+		
+		.btn-primary {
+			display: inline-block;
+			background: var(--blue);
+			color: var(--cream);
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 12px;
+			font-weight: 500;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			text-decoration: none;
+			padding: 12px 24px;
+			transition: background 0.2s, transform 0.15s;
 		}
-		.eu-box-value { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 5px; }
-		.eu-box-note { font-family: var(--mono); font-size: 10px; opacity: 0.65; }
-		.fact-row {
-			display: flex; justify-content: space-between; align-items: baseline;
-			padding: 13px 0; border-bottom: 1px solid var(--line);
+		
+		.btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+		
+		.btn-secondary {
+			display: inline-block;
+			border: 1px solid var(--rule);
+			color: var(--ink-mid);
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 12px;
+			font-weight: 500;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			text-decoration: none;
+			padding: 12px 24px;
+			transition: border-color 0.2s, color 0.2s, transform 0.15s;
 		}
-		.fact-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
-		.fact-value { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); }
-		.fact-value.hi { color: var(--accent); }
-
-		/* Hero ticker */
-		.hero-ticker { display: flex; }
-		.t-cell { flex: 1; padding: 20px 28px; border-right: 1px solid var(--line); }
-		.t-cell:last-child { border-right: none; }
-		.t-num { font-family: var(--serif); font-size: 28px; line-height: 1; color: var(--ink); margin-bottom: 5px; }
-		.t-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
-
-		/* ??? SECTION INTRO ????????????????????????????????? */
-		.s-intro { display: flex; align-items: baseline; gap: 16px; margin-bottom: 52px; }
-		.s-num { font-family: var(--mono); font-size: 11px; color: var(--warm); letter-spacing: 0.1em; flex-shrink: 0; }
-		.s-title { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.02em; color: var(--ink); }
-		.s-rule { flex: 1; height: 1px; background: var(--line); margin-bottom: 4px; }
-
-		/* ??? ABOUT ????????????????????????????????????????? */
-		#about {
-			padding: 96px 52px;
-			display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px;
-			border-top: 1px solid var(--line);
+		
+		.btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+		
+		.hero-right {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			padding: 80px;
 		}
-		.about-body p { font-size: 15px; line-height: 1.85; color: var(--ink-mid); margin-bottom: 18px; }
-		.about-body p strong { color: var(--ink); font-weight: 500; }
-		.about-body p:last-child { margin-bottom: 0; }
-		.callout {
-			border-left: 2px solid var(--accent); padding: 16px 20px;
-			background: var(--accent-lt); margin-top: 28px;
+		
+		.hero-stats {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1px;
+			background: var(--rule);
+			border: 1px solid var(--rule);
+			margin-bottom: 40px;
 		}
-		.callout p { font-size: 14px; line-height: 1.7; color: var(--accent) !important; margin-bottom: 0 !important; }
-
-		/* Skills column */
-		.skill-block { padding: 18px 0; border-top: 1px solid var(--line); }
-		.skill-block:first-child { border-top: none; padding-top: 0; }
-		.skill-cat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 10px; }
-		.pills { display: flex; flex-wrap: wrap; gap: 7px; }
-		.pill {
-			font-family: var(--mono); font-size: 11px; padding: 4px 11px;
-			border: 1px solid var(--line); color: var(--ink-mid); background: var(--bg);
+		
+		.stat-item {
+			background: var(--cream);
+			padding: 28px 24px;
 		}
-		.pill.hi { background: var(--accent-lt); border-color: transparent; color: var(--accent); font-weight: 500; }
-
-		/* ??? FEATURED ?????????????????????????????????????? */
-		#featured {
-			background: var(--bg-dark); padding: 96px 52px;
-			border-top: 1px solid var(--line);
+		
+		.stat-num {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 28px;
+			font-weight: 600;
+			color: var(--blue);
+			line-height: 1;
+			margin-bottom: 6px;
 		}
-		#featured .s-num { color: var(--warm); }
-		#featured .s-title { color: #F7F5F0; }
-		#featured .s-rule { background: rgba(247,245,240,0.12); }
-
-		.pf-grid {
-			display: grid; grid-template-columns: 1fr 1fr;
-			border: 1px solid rgba(247,245,240,0.08);
+		
+		.stat-label {
+			font-size: 12px;
+			color: var(--ink-light);
+			letter-spacing: 0.02em;
 		}
-		.pf-left { padding: 48px 44px; }
-		.pf-right {
-			padding: 48px 44px;
-			border-left: 1px solid rgba(247,245,240,0.08);
-			background: rgba(255,255,255,0.02);
+		
+		.hero-links {
+			display: flex;
+			gap: 24px;
 		}
-		.pf-tag {
-			font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
-			text-transform: uppercase; color: var(--warm); margin-bottom: 20px;
+		
+		.hero-link {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			color: var(--ink-light);
+			text-decoration: none;
+			letter-spacing: 0.06em;
+			border-bottom: 1px solid var(--rule);
+			padding-bottom: 2px;
+			transition: color 0.2s, border-color 0.2s;
 		}
-		.pf-name {
-			font-family: var(--serif); font-size: 44px; line-height: 1.05;
-			color: #F7F5F0; margin-bottom: 20px;
+		
+		.hero-link:hover { color: var(--orange); border-color: var(--orange); }
+		
+		/* ─── SECTION COMMON ─── */
+		.section {
+			padding: 96px 80px;
+			border-top: 1px solid var(--rule);
 		}
-		.pf-name em { font-style: italic; color: var(--warm); }
-		.pf-desc { font-size: 14px; line-height: 1.8; color: rgba(247,245,240,0.6); margin-bottom: 32px; }
-		.pf-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
-		.pf-tech span {
-			font-family: var(--mono); font-size: 11px; padding: 4px 11px;
-			border: 1px solid rgba(247,245,240,0.15); color: rgba(247,245,240,0.5);
+		
+		.section-header {
+			display: flex;
+			align-items: baseline;
+			gap: 24px;
+			margin-bottom: 64px;
 		}
-		.pf-links { display: flex; gap: 24px; }
-		.pf-link {
-			font-family: var(--mono); font-size: 12px; text-decoration: none;
-			letter-spacing: 0.06em; display: inline-flex; align-items: center;
-			gap: 8px; transition: gap 0.2s;
+		
+		.section-num {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			font-weight: 500;
+			color: var(--orange);
+			letter-spacing: 0.1em;
 		}
-		.pf-link:hover { gap: 14px; }
-		.pf-link-gh { color: var(--warm); }
-		.pf-link-live { color: rgba(247,245,240,0.5); border: 1px solid rgba(247,245,240,0.15); padding: 8px 16px; }
-		.pf-link-live:hover { color: white; border-color: rgba(247,245,240,0.4); }
-
-		.spec-label {
-			font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
-			text-transform: uppercase; color: rgba(247,245,240,0.3); margin-bottom: 20px;
+		
+		.section-title {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: 32px;
+			font-weight: 600;
+			color: var(--ink);
 		}
-		.spec { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(247,245,240,0.07); }
-		.spec-icon { font-family: var(--mono); font-size: 13px; color: var(--warm); min-width: 18px; margin-top: 1px; }
-		.spec-text { font-size: 13px; line-height: 1.65; color: rgba(247,245,240,0.55); }
-		.spec-text strong { color: rgba(247,245,240,0.85); font-weight: 500; }
-
-		/* ??? OTHER PROJECTS ???????????????????????????????? */
-		#projects {
-			padding: 96px 52px;
-			border-top: 1px solid var(--line);
+		
+		/* ─── PROJECTS ─── */
+		.projects-grid {
+			display: grid;
+			gap: 1px;
+			background: var(--rule);
+			border: 1px solid var(--rule);
 		}
-		.proj-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-		.proj-card { background: var(--card); padding: 32px 28px; transition: background 0.2s; }
-		.proj-card:hover { background: var(--bg-alt); }
-		.proj-num { font-family: var(--mono); font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; margin-bottom: 20px; }
-		.proj-name { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
-		.proj-stack { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.04em; }
-		.proj-desc { font-size: 13px; line-height: 1.7; color: var(--ink-mid); margin-bottom: 20px; }
-		.proj-link {
-			font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
-			text-decoration: none; letter-spacing: 0.06em;
-			display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+		
+		/* Featured project — full width */
+		.project-featured {
+			background: var(--cream);
+			display: grid;
+			grid-template-columns: 1fr 1fr;
 		}
-		.proj-link:hover { color: var(--accent); gap: 10px; }
-
-		/* ??? BACKGROUND ???????????????????????????????????? */
-		#background {
-			background: var(--bg-alt); padding: 96px 52px;
-			border-top: 1px solid var(--line);
-			display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+		
+		.project-featured-left {
+			padding: 56px 56px 56px 56px;
+			border-right: 1px solid var(--rule);
+			display: flex;
+			flex-direction: column;
 		}
-		.exp-card {
-			border: 1px solid var(--line); background: var(--card);
-			padding: 36px; margin-bottom: 14px;
+		
+		.project-kind {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 500;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			margin-bottom: 20px;
 		}
-		.exp-period { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 8px; }
-		.exp-co { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
-		.exp-loc { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
-		.exp-role-title { font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--ink); margin-bottom: 16px; }
-		.exp-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-		.exp-list li { font-size: 13px; line-height: 1.65; color: var(--ink-mid); padding-left: 18px; position: relative; }
-		.exp-list li::before { content: '?'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 2px; }
-
-		.edu-card {
-			border: 1px solid var(--line); background: var(--card);
-			padding: 28px 32px; margin-bottom: 14px;
+		
+		.project-kind.kind-sim { color: var(--blue); }
+		.project-kind.kind-gpu { color: var(--orange); }
+		.project-kind.kind-shader { color: var(--ink-light); }
+		.project-kind.kind-tool { color: var(--blue-light); }
+		
+		.project-name {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: 36px;
+			font-weight: 600;
+			line-height: 1.1;
+			color: var(--ink);
+			margin-bottom: 20px;
 		}
-		.edu-deg { font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 6px; }
-		.edu-school { font-size: 14px; font-weight: 500; color: var(--ink-mid); margin-bottom: 4px; }
-		.edu-years { font-family: var(--mono); font-size: 11px; color: var(--accent); }
-		.edu-note { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
-
-		.eu-card { padding: 28px 32px; background: var(--accent-lt); }
-		.eu-card-title { font-family: var(--serif); font-size: 20px; color: var(--accent); margin-bottom: 6px; }
-		.eu-card-sub { font-size: 13px; color: var(--accent); opacity: 0.75; margin-bottom: 10px; }
-		.eu-card-note { font-size: 13px; color: var(--accent); opacity: 0.7; line-height: 1.65; }
-
-		/* ??? CONTACT ??????????????????????????????????????? */
-		#contact {
-			padding: 96px 52px;
-			border-top: 1px solid var(--line);
-			display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;
+		
+		.project-tagline {
+			font-family: 'IBM Plex Serif', serif;
+			font-style: italic;
+			font-size: 16px;
+			color: var(--blue);
+			margin-bottom: 28px;
 		}
-		.contact-h {
-			font-family: var(--serif); font-size: clamp(34px, 4vw, 56px);
-			line-height: 1.1; letter-spacing: -0.025em;
-			color: var(--ink); margin-bottom: 20px;
+		
+		.project-desc {
+			font-size: 14px;
+			color: var(--ink-mid);
+			line-height: 1.75;
+			flex: 1;
+			margin-bottom: 32px;
 		}
-		.contact-h em { font-style: italic; color: var(--accent); }
-		.contact-sub { font-size: 15px; line-height: 1.75; color: var(--ink-mid); max-width: 380px; }
-
-		.c-rows { display: flex; flex-direction: column; gap: 4px; }
-		.c-row {
-			display: flex; align-items: center; justify-content: space-between;
-			padding: 18px 22px; background: var(--card);
-			border: 1px solid var(--line); text-decoration: none;
-			color: var(--ink); transition: all 0.2s;
+		
+		.project-desc strong { font-weight: 500; color: var(--ink); }
+		
+		.project-tech {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-bottom: 32px;
 		}
-		.c-row:hover { background: var(--ink); color: var(--bg); transform: translateX(4px); }
-		.c-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; margin-bottom: 2px; }
-		.c-value { font-size: 14px; }
-		.c-arrow { font-size: 16px; transition: transform 0.2s; }
-		.c-row:hover .c-arrow { transform: translateX(4px); }
-
-		/* ??? FOOTER ???????????????????????????????????????? */
+		
+		.tech-pill {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 500;
+			letter-spacing: 0.06em;
+			padding: 4px 10px;
+			background: var(--cream-dark);
+			color: var(--ink-mid);
+			border: 1px solid var(--rule);
+		}
+		
+		.project-links {
+			display: flex;
+			gap: 16px;
+			flex-wrap: wrap;
+		}
+		
+		.project-link {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			font-weight: 500;
+			letter-spacing: 0.06em;
+			text-decoration: none;
+			padding: 9px 18px;
+			border: 1px solid var(--rule);
+			color: var(--ink-mid);
+			transition: all 0.2s;
+		}
+		
+		.project-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+		.project-link.primary { background: var(--blue); color: var(--cream); border-color: var(--blue); }
+		.project-link.primary:hover { background: var(--blue-light); border-color: var(--blue-light); }
+		
+		.project-featured-right {
+			padding: 56px;
+			background: var(--cream-dark);
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+		}
+		
+		.spec-block {
+			border-left: 2px solid var(--blue);
+			padding: 16px 20px;
+			background: var(--cream);
+		}
+		
+		.spec-block.orange { border-left-color: var(--orange); }
+		
+		.spec-title {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 600;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--ink-light);
+			margin-bottom: 10px;
+		}
+		
+		.spec-items {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+		
+		.spec-items li {
+			font-size: 13px;
+			color: var(--ink-mid);
+			padding-left: 14px;
+			position: relative;
+		}
+		
+		.spec-items li::before {
+			content: '—';
+			position: absolute;
+			left: 0;
+			color: var(--rule);
+			font-size: 11px;
+		}
+		
+		.spec-items li strong { font-weight: 500; color: var(--ink); }
+		
+		/* Secondary projects — 3 col */
+		.projects-secondary {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1px;
+			background: var(--rule);
+		}
+		
+		.project-card {
+			background: var(--cream);
+			padding: 40px;
+			display: flex;
+			flex-direction: column;
+			transition: background 0.2s;
+		}
+		
+		.project-card:hover { background: var(--cream-dark); }
+		
+		.project-card .project-name {
+			font-size: 22px;
+			margin-bottom: 12px;
+		}
+		
+		.project-card .project-tagline {
+			font-size: 14px;
+			margin-bottom: 20px;
+		}
+		
+		.project-card .project-desc {
+			font-size: 13px;
+			margin-bottom: 24px;
+		}
+		
+		.project-card .project-tech {
+			margin-bottom: 24px;
+		}
+		
+		.project-card .project-links {
+			margin-top: auto;
+		}
+		
+		/* ─── SKILLS ─── */
+		.skills-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1px;
+			background: var(--rule);
+			border: 1px solid var(--rule);
+		}
+		
+		.skill-group {
+			background: var(--cream);
+			padding: 36px 32px;
+		}
+		
+		.skill-group-title {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 600;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			color: var(--orange);
+			margin-bottom: 20px;
+		}
+		
+		.skill-list {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+		
+		.skill-list li {
+			font-size: 13px;
+			color: var(--ink-mid);
+			padding-left: 12px;
+			position: relative;
+		}
+		
+		.skill-list li::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 8px;
+			width: 5px;
+			height: 1px;
+			background: var(--rule);
+		}
+		
+		/* ─── ABOUT ─── */
+		.about-grid {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			gap: 1px;
+			background: var(--rule);
+			border: 1px solid var(--rule);
+		}
+		
+		.about-main {
+			background: var(--cream);
+			padding: 56px;
+		}
+		
+		.about-main p {
+			font-size: 15px;
+			color: var(--ink-mid);
+			line-height: 1.8;
+			margin-bottom: 20px;
+		}
+		
+		.about-main p:last-child { margin-bottom: 0; }
+		
+		.about-main strong { font-weight: 500; color: var(--ink); }
+		
+		.about-aside {
+			background: var(--cream-dark);
+			padding: 56px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 32px;
+		}
+		
+		.aside-block { }
+		
+		.aside-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 600;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			color: var(--ink-light);
+			margin-bottom: 12px;
+		}
+		
+		.aside-value {
+			font-size: 13px;
+			color: var(--ink-mid);
+			line-height: 1.6;
+		}
+		
+		.aside-value a {
+			color: var(--blue);
+			text-decoration: none;
+		}
+		
+		.aside-value a:hover { text-decoration: underline; }
+		
+		/* ─── CONTACT ─── */
+		.contact-section {
+			background: var(--ink);
+			padding: 96px 80px;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 80px;
+		}
+		
+		.contact-left h2 {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: 40px;
+			font-weight: 600;
+			color: var(--cream);
+			line-height: 1.15;
+			margin-bottom: 24px;
+		}
+		
+		.contact-left p {
+			font-size: 15px;
+			color: #9A9186;
+			line-height: 1.75;
+			max-width: 380px;
+		}
+		
+		.contact-right {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 20px;
+		}
+		
+		.contact-item {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid #333;
+		}
+		
+		.contact-item:last-child { border-bottom: none; }
+		
+		.contact-item-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			font-weight: 500;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #666;
+		}
+		
+		.contact-item-value {
+			font-size: 14px;
+			color: var(--cream);
+		}
+		
+		.contact-item-value a {
+			color: var(--cream);
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+		
+		.contact-item-value a:hover { color: var(--orange-light); }
+		
+		/* ─── FOOTER ─── */
 		footer {
-			padding: 24px 52px; border-top: 1px solid var(--line);
-			display: flex; justify-content: space-between; align-items: center;
+			background: var(--ink);
+			border-top: 1px solid #333;
+			padding: 24px 80px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
-		.f-copy { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
-		.f-note { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
-		.f-note span { color: var(--accent); }
-
-		/* ??? REVEAL ???????????????????????????????????????? */
-		.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-		.reveal.on { opacity: 1; transform: none; }
-
-		/* ??? RESPONSIVE ???????????????????????????????????? */
-		@media (max-width: 960px) {
-			nav { padding: 16px 24px; }
-			.nav-links { gap: 18px; }
-			.nav-badge { display: none; }
-			.hero-main { grid-template-columns: 1fr; }
-			.hero-content { padding: 52px 24px 40px; border-right: none; border-bottom: 1px solid var(--line); }
-			.hero-sidebar { padding: 32px 24px; }
-			.t-cell { padding: 16px 14px; }
-			#about { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
-			#featured { padding: 60px 24px; }
-			.pf-grid { grid-template-columns: 1fr; }
-			.pf-right { border-left: none; border-top: 1px solid rgba(247,245,240,0.08); }
-			#projects { padding: 60px 24px; }
-			.proj-grid { grid-template-columns: 1fr; }
-			#background { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
-			#contact { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
-			footer { padding: 20px 24px; flex-direction: column; gap: 6px; text-align: center; }
+		
+		footer p {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 11px;
+			color: #555;
+			letter-spacing: 0.04em;
 		}
+		
+		/* ─── RESPONSIVE ─── */
+		@media (max-width: 1024px) {
+			nav { padding: 0 32px; }
+			.hero { grid-template-columns: 1fr; }
+			.hero-left { padding: 64px 32px; border-right: none; border-bottom: 1px solid var(--rule); }
+			.hero-right { padding: 48px 32px; }
+			.section { padding: 72px 32px; }
+			.project-featured { grid-template-columns: 1fr; }
+			.project-featured-right { border-top: 1px solid var(--rule); }
+			.projects-secondary { grid-template-columns: 1fr; }
+			.skills-grid { grid-template-columns: 1fr 1fr; }
+			.about-grid { grid-template-columns: 1fr; }
+			.contact-section { grid-template-columns: 1fr; gap: 48px; padding: 72px 32px; }
+			footer { padding: 24px 32px; flex-direction: column; gap: 12px; }
+		}
+		
+		@media (max-width: 640px) {
+			nav { padding: 0 20px; }
+			.nav-links { display: none; }
+			.hero-left { padding: 48px 20px; }
+			.hero-right { padding: 32px 20px; }
+			.section { padding: 56px 20px; }
+			.project-featured-left { padding: 36px 20px; }
+			.project-featured-right { padding: 36px 20px; }
+			.project-card { padding: 28px 20px; }
+			.skills-grid { grid-template-columns: 1fr; }
+			.about-main { padding: 36px 20px; }
+			.about-aside { padding: 36px 20px; }
+			.contact-section { padding: 56px 20px; }
+			footer { padding: 20px; }
+		}
+		
+		/* ─── ANIMATIONS ─── */
+		@keyframes fadeUp {
+			from { opacity: 0; transform: translateY(16px); }
+			to   { opacity: 1; transform: translateY(0); }
+		}
+		
+		.hero-tag    { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+		.hero-name   { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+		.hero-title  { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+		.hero-bio    { animation: fadeUp 0.5s ease both; animation-delay: 0.4s; }
+		.hero-actions{ animation: fadeUp 0.5s ease both; animation-delay: 0.5s; }
+		.hero-stats  { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+		.hero-links  { animation: fadeUp 0.5s ease both; animation-delay: 0.45s; }
 	</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-	<a href="#" class="nav-mark">RC<span>.</span></a>
+	<a class="nav-logo" href="#">RC_</a>
 	<ul class="nav-links">
-		<li><a href="#about">About</a></li>
-		<li><a href="#featured">PipeFlow</a></li>
 		<li><a href="#projects">Projects</a></li>
-		<li><a href="#background">Background</a></li>
+		<li><a href="#skills">Skills</a></li>
+		<li><a href="#about">About</a></li>
+		<li><a href="#experience">Experience</a></li>
 		<li><a href="#contact">Contact</a></li>
 	</ul>
-	<div class="nav-badge">EU Work Authorization</div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-	<div class="hero-main">
-		<div class="hero-content">
-			<p class="hero-eyebrow">Engineering Simulation Developer</p>
-			<h1>Rengin<br><em>Celik</em></h1>
-			<p class="hero-role">Engineering background. Real-time systems.</p>
-			<p class="hero-bio">
-				I hold a <strong>B.Sc. from Istanbul Technical University</strong> and build
-				software that makes complex physical systems visible and interactive.
-				My work sits at the intersection of fluid dynamics, real-time rendering,
-				and engineering tooling ? where simulation becomes genuinely useful.
-			</p>
-			<div class="cta-row">
-				<a href="#featured" class="btn btn-fill">See PipeFlow ?</a>
-				<a href="#contact" class="btn btn-outline">Contact Me</a>
-			</div>
-		</div>
-		<div class="hero-sidebar">
-			<div class="eu-box">
-				<div class="eu-box-label">Work Authorization</div>
-				<div class="eu-box-value">EU / EEA - Full Authorization</div>
-				<div class="eu-box-note">Bulgarian citizenship � No sponsorship required</div>
-			</div>
-			<div class="fact-row"><span class="fact-label">Base</span><span class="fact-value">Sofia / Istanbul -> Europe</span></div>
-			<div class="fact-row"><span class="fact-label">Education</span><span class="fact-value">ITU B.Sc.</span></div>
-			<div class="fact-row"><span class="fact-label">Focus</span><span class="fact-value hi">Simulation / Digital Twin</span></div>
-			<div class="fact-row"><span class="fact-label">Languages</span><span class="fact-value">Turkish | English</span></div>
-			<div class="fact-row"><span class="fact-label">Status</span><span class="fact-value hi">Open to roles</span></div>
+	<div class="hero-left">
+		<div class="hero-tag">Engineering Simulation Developer</div>
+		<h1 class="hero-name">Rengin<br>Çelik</h1>
+		<div class="hero-title">Engineering background. Real-time systems.</div>
+		<p class="hero-bio">
+			I bridge the gap between complex physical systems and real-time interactive software. From browser-based hydraulic simulators to high-performance GPU rendering, I build tools that make engineering data visible and actionable.
+		
+		</p>
+		<div class="hero-actions">
+			<a class="btn-primary" href="https://rengincelik.github.io/pipeFlow/" target="_blank">↗ Open PipeFlow</a>
+			<a class="btn-secondary" href="https://github.com/rengincelik" target="_blank">GitHub</a>
+			<a class="btn-secondary" href="https://linkedin.com/in/rengincelik" target="_blank">LinkedIn</a>
 		</div>
 	</div>
-	<div class="hero-ticker">
-		<div class="t-cell"><div class="t-num">100ms</div><div class="t-label">Simulation tick rate</div></div>
-		<div class="t-cell"><div class="t-num">3+</div><div class="t-label">Physics equations implemented</div></div>
-		<div class="t-cell"><div class="t-num">0</div><div class="t-label">Frameworks / dependencies</div></div>
-		<div class="t-cell"><div class="t-num">ITU</div><div class="t-label">Engineering foundation</div></div>
+	
+	<div class="hero-right">
+		<div class="hero-stats">
+			<div class="stat-item">
+				<div class="stat-num">Istanbul Technical University</div>
+				<div class="stat-label">B.Sc. Food Engineering<br>2016 – 2022<br></div>
+				<div class="stat-label">a curriculum built on <strong>fluid mechanics, thermodynamics, and numerical methods.</strong></div>
+			
+			</div>
+			<div class="stat-item">
+				<div class="stat-num">Work Eligibility</div>
+				<div class="stat-label">EU Citizen (Bulgaria)<br>No sponsorship required<br></div>
+			
+			</div>
+			
+			<div class="stat-item">
+				<div class="stat-num">Languages</div>
+				<div class="stat-label">Turkish — Native<br>English — Proficient</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-num">Location</div>
+				<div class="stat-label">Sofia, Bulgaria &<br>Istanbul, Turkey</div>
+				<div class="stat-label">Or relocation — open to Europe</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+	<div class="section-header">
+		<span class="section-num">01 —</span>
+		<h2 class="section-title">Projects</h2>
+	</div>
+	
+	<!-- Featured: PipeFlow -->
+	<div class="projects-grid">
+		<div class="project-featured">
+			<div class="project-featured-left">
+				<div class="project-kind kind-sim">Simulation Software</div>
+				<h3 class="project-name">PipeFlow</h3>
+				<div class="project-tagline">Browser-based pipeline hydraulics simulator for process engineers</div>
+				<p class="project-desc">
+					A real-time pipeline flow simulator that runs entirely in the browser with
+					<strong>zero external dependencies</strong> and no build step. Engineers drag and drop
+					components — pumps, pipes, valves, elbows, reducers — and the system calculates
+					pressure, velocity, flow rate, and energy losses every 100 ms.<br><br>
+					The physics model is genuine: <strong>Darcy-Weisbach</strong> for friction losses,
+					<strong>Colebrook-White</strong> solved via Newton-Raphson iteration, Borda-Carnot
+					for expansion losses, and a full pump H-Q curve resolved each tick by bisection.
+					Fluid properties (water and 50% ethylene glycol) use empirical polynomial models
+					from 0–150 °C.<br><br>
+					A <strong>parallel diagnostic engine</strong> applies 21 hydraulic rules against
+					industry thresholds (Crane TP-410, ISA 75.01), flagging BEP deviation, flash risk,
+					consecutive globe valves, near-deadhead conditions, and more — each with severity
+					level and corrective advice. This architecture establishes PipeFlow as a robust foundational step for industrial Digital Twin systems by mapping complex physical behaviors into a high-performance reactive environment.
+				
+				</p>
+				<div class="project-tech">
+					<span class="tech-pill">Vanilla JS · ES Modules</span>
+					<span class="tech-pill">SVG Rendering</span>
+					<span class="tech-pill">Canvas 2D</span>
+					<span class="tech-pill">Darcy-Weisbach</span>
+					<span class="tech-pill">Newton-Raphson</span>
+					<span class="tech-pill">State Machine</span>
+					<span class="tech-pill">Zero Dependencies</span>
+				</div>
+				<div class="project-links">
+					<a class="project-link primary" href="https://rengincelik.github.io/pipeFlow/" target="_blank">↗ Live Demo</a>
+					<a class="project-link" href="https://github.com/rengincelik/pipeFlow" target="_blank">GitHub</a>
+				</div>
+			</div>
+			<div class="project-featured-right">
+				<div class="spec-block">
+					<div class="spec-title">Physics Model</div>
+					<ul class="spec-items">
+						<li><strong>Friction loss:</strong> Darcy-Weisbach + Colebrook-White (Newton-Raphson, 50 iter, tol 1×10⁻⁸)</li>
+						<li><strong>Minor losses:</strong> K-coefficient, Crane TP-410 valve tables with linear interpolation</li>
+						<li><strong>Pump:</strong> Quadratic H-Q curve → bisection operating point, 2s startup ramp</li>
+						<li><strong>Transitions:</strong> Borda-Carnot expansion / contraction coefficient reducer</li>
+						<li><strong>Fluids:</strong> Water 0–150 °C, EG50 −30–120 °C, Vogel viscosity equation</li>
+					</ul>
+				</div>
+				<div class="spec-block">
+					<div class="spec-title">Diagnostic Engine — 21 Rules</div>
+					<ul class="spec-items">
+						<li>Flow & pressure: high/low velocity, negative pressure, flash risk</li>
+						<li>System layout: short pipe after pump, consecutive globe valves</li>
+						<li>Pump health: BEP deviation, efficiency, near-deadhead</li>
+						<li>Configuration: diameter mismatch, steep transitions</li>
+						<li>Advice: suggest larger DN, control valve, pump reselection</li>
+					</ul>
+				</div>
+				<div class="spec-block orange">
+					<div class="spec-title">Architecture</div>
+					<ul class="spec-items">
+						<li>Fully decoupled modules via custom EventEmitter</li>
+						<li>State machine: IDLE → RUNNING → ALARM</li>
+						<li>OverrideMixin: user overrides resolve over system defaults</li>
+						<li>SVG layer system + 60 fps Canvas 2D flow animation</li>
+						<li>localStorage persistence, Metric/Imperial toggle</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Secondary projects -->
+		<div class="projects-secondary">
+			
+			<!-- GPU Instancing -->
+			<div class="project-card">
+				<div class="project-kind kind-gpu">Real-Time Graphics</div>
+				<h3 class="project-name">GPU Instancing &amp;<br>Rendering Systems</h3>
+				<div class="project-tagline">100K+ objects in a single draw call</div>
+				<p class="project-desc">
+					A collection of Unity GPU rendering systems pushing the limits of real-time object counts.
+					Three progressive instancing approaches — from simple batched rendering up to
+					<strong>Compute Shader-driven indirect draw</strong> — each targeting a different instance
+					range and hardware profile.<br><br>
+					The GPU Sprite system adds dynamic memory slot allocation, thread-safe atomic counters,
+					and <strong>camera frustum + spherical culling</strong> entirely on the GPU. The grass
+					renderer generates 100K+ blades procedurally with noise-based placement and gradient
+					colour variation. Runs at 60+ fps throughout.
+				</p>
+				<div class="project-tech">
+					<span class="tech-pill">Unity URP</span>
+					<span class="tech-pill">Compute Shaders</span>
+					<span class="tech-pill">HLSL</span>
+					<span class="tech-pill">DrawMeshInstancedIndirect</span>
+					<span class="tech-pill">Frustum Culling</span>
+					<span class="tech-pill">Atomic Operations</span>
+				</div>
+				<div class="project-links">
+					<a class="project-link" href="https://github.com/rengincelik/GPU_Rendering" target="_blank">GitHub</a>
+				</div>
+			</div>
+			
+			<!-- Shader Samples -->
+			<div class="project-card">
+				<div class="project-kind kind-shader">Shader Development</div>
+				<h3 class="project-name">Unity Shader<br>Samples</h3>
+				<div class="project-tagline">Advanced material shaders &amp; procedural effects for URP</div>
+				<p class="project-desc">
+					Seven custom Unity URP shaders covering physically-based material rendering and
+					procedural environment effects. The <strong>silk shader</strong> implements anisotropic
+					GGX reflections, Fresnel, iridescence, and sheen BRDF. The <strong>velvet shader</strong>
+					adds rim lighting, subsurface scattering simulation, and procedural fuzz scatter.<br><br>
+					Water shaders provide vertex displacement, procedural wave generation, dynamic normal
+					recalculation, and depth-based colour gradients. A suite of editor gallery tools
+					automates parameter visualisation across mesh complexities.
+				</p>
+				<div class="project-tech">
+					<span class="tech-pill">HLSL</span>
+					<span class="tech-pill">Unity URP</span>
+					<span class="tech-pill">Anisotropic GGX</span>
+					<span class="tech-pill">PBR</span>
+					<span class="tech-pill">Vertex Displacement</span>
+					<span class="tech-pill">C# Editor Scripting</span>
+				</div>
+				<div class="project-links">
+					<a class="project-link" href="https://github.com/rengincelik/Shaders" target="_blank">GitHub</a>
+				</div>
+			</div>
+			
+			<!-- Mini Dev Kit -->
+			<div class="project-card">
+				<div class="project-kind kind-tool">Unity Tooling</div>
+				<h3 class="project-name">Mini Dev Kit</h3>
+				<div class="project-tagline">Modular, reusable Unity development systems</div>
+				<p class="project-desc">
+					A library of Unity packages designed for rapid integration into any project.
+					Movement frameworks for both 2D and 3D handle <strong>input bridge systems,
+					                                                      camera-relative controls, state machine architecture</strong>, and
+					ScriptableObject-driven animation pipelines — all configurable via custom
+					property drawers.<br><br>
+					The sprite database animator provides code-driven animation with a simple
+					<code>SetCategory("Run")</code> API. DOTween-based object movement covers Move,
+					Jump, Path, Rotate, and Torque. Distributed as .unitypackage files with READMEs.
+				</p>
+				<div class="project-tech">
+					<span class="tech-pill">C#</span>
+					<span class="tech-pill">Unity Engine</span>
+					<span class="tech-pill">State Machine</span>
+					<span class="tech-pill">ScriptableObjects</span>
+					<span class="tech-pill">DOTween</span>
+					<span class="tech-pill">Editor Scripting</span>
+				</div>
+				<div class="project-links">
+					<a class="project-link" href="https://github.com/rengincelik/Mini-Dev-Kit" target="_blank">GitHub</a>
+				</div>
+			</div>
+		
+		</div><!-- /projects-secondary -->
+	</div><!-- /projects-grid -->
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+	<div class="section-header">
+		<span class="section-num">02 —</span>
+		<h2 class="section-title">Technical Skills</h2>
+	</div>
+	<div class="skills-grid">
+		<div class="skill-group">
+			<div class="skill-group-title">Languages</div>
+			<ul class="skill-list">
+				<li>JavaScript (ES6+, Modules)</li>
+				<li>C# (.NET)</li>
+				<li>HLSL</li>
+				<li>HTML5 / CSS3</li>
+			</ul>
+		</div>
+		<div class="skill-group">
+			<div class="skill-group-title">Simulation & Numerics</div>
+			<ul class="skill-list">
+				<li>Darcy-Weisbach</li>
+				<li>Colebrook-White</li>
+				<li>Newton-Raphson</li>
+				<li>Bisection Method</li>
+				<li>Fluid Dynamics</li>
+				<li>Thermodynamics</li>
+				<li>State Machines</li>
+			</ul>
+		</div>
+		<div class="skill-group">
+			<div class="skill-group-title">Real-Time & Graphics</div>
+			<ul class="skill-list">
+				<li>SVG Rendering</li>
+				<li>Canvas 2D</li>
+				<li>GPU Instancing</li>
+				<li>Compute Shaders</li>
+				<li>Unity URP</li>
+				<li>Shader Development</li>
+				<li>Frustum Culling</li>
+			</ul>
+		</div>
+		<div class="skill-group">
+			<div class="skill-group-title">Tools & Workflow</div>
+			<ul class="skill-list">
+				
+				<li>Git / GitHub</li>
+				<li>WebStorm</li>
+				<li>VS Code</li>
+				<li>Unity Engine</li>
+			</ul>
+		</div>
 	</div>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
-	<div class="reveal">
-		<div class="s-intro"><span class="s-num">01</span><h2 class="s-title">About</h2><div class="s-rule"></div></div>
-		<div class="about-body">
-			<p>I studied Food Engineering at Istanbul Technical University, where I gained a solid foundation in fluid mechanics, thermodynamics, heat and mass transfer, and process systems. This background fundamentally shapes how I approach simulation software ? not merely as code or abstraction, but as a faithful digital representation of physical reality.</p>
-			
-			<p>Over the past three years, I?ve been building real-time systems, starting with game engines, HLSL shaders, and GPU optimization, before transitioning those skills into engineering simulation. My main project, <strong>PipeFlow</strong>, is a browser-based pipeline flow simulator built entirely in vanilla JavaScript with zero external dependencies.</p>
-			
-			<p>I?m currently targeting roles in simulation software, digital twin platforms, and engineering tooling across Europe. As a Bulgarian citizen, I have full work authorization in the EU.</p>
-			<div class="callout"><p>Engineering domain knowledge combined with real-time software skills is an uncommon pairing. I understand both the physics that needs to be modelled and the code required to model it accurately.</p></div>
-		</div>
+<section class="section" id="about">
+	<div class="section-header">
+		<span class="section-num">03 —</span>
+		<h2 class="section-title">About</h2>
 	</div>
-	<div class="reveal">
-		<div class="skill-block">
-			<div class="skill-cat">Simulation & Physics</div>
-			<div class="pills">
-				<span class="pill hi">Darcy-Weisbach</span>
-				<span class="pill hi">Colebrook-White</span>
-				<span class="pill hi">Fluid Dynamics</span>
-				<span class="pill">Thermodynamics</span>
-				<span class="pill">Numerical Methods</span>
-				<span class="pill">Newton-Raphson</span>
-				<span class="pill">Bisection Method</span>
-			</div>
-		</div>
-		<div class="skill-block">
-			<div class="skill-cat">Real-Time Systems</div>
-			<div class="pills">
-				<span class="pill hi">Vanilla JS (ES Modules)</span>
-				<span class="pill hi">SVG Rendering</span>
-				<span class="pill hi">Canvas 2D</span>
-				<span class="pill">Event-Driven Architecture</span>
-				<span class="pill">RAF Loops</span>
-				<span class="pill">Zero Dependencies</span>
-			</div>
-		</div>
-		<div class="skill-block">
-			<div class="skill-cat">Graphics & Rendering</div>
-			<div class="pills">
-				<span class="pill hi">HLSL</span>
-				<span class="pill hi">GPU Instancing</span>
-				<span class="pill">Unity URP</span>
-				<span class="pill">Shader Dev</span>
-				<span class="pill">GPU Profiling</span>
-				<span class="pill">Draw Call Optimisation</span>
-			</div>
-		</div>
-		<div class="skill-block">
-			<div class="skill-cat">Engineering Domain</div>
-			<div class="pills">
-				<span class="pill hi">Process Engineering</span>
-				<span class="pill">Pipeline Systems</span>
-				<span class="pill">Fluid Mechanics</span>
-				<span class="pill">Heat & Mass Transfer</span>
-			</div>
-		</div>
-		<div class="skill-block">
-			<div class="skill-cat">Tools</div>
-			<div class="pills">
-				<span class="pill">Git</span>
-				<span class="pill">Unity</span>
-				<span class="pill">WebStorm</span>
-				<span class="pill">VSCode</span>
-			</div>
-		</div>
-		<div class="skill-block">
-			<div class="skill-cat">Languages</div>
-			<div class="pills">
-				<span class="pill">C#</span>
-				<span class="pill">JavaScript</span>
-			</div>
-		</div>
+	<div class="about-main">
+		<p>
+			My path into simulation software starts with a B.Sc. in Food Engineering from
+			<strong>Istanbul Technical University</strong> — Turkey's leading technical university.
+			The curriculum is grounded in fluid mechanics, thermodynamics, heat and mass transfer,
+			process systems design, and numerical methods. These aren't electives I browsed;
+			they're the foundation of four years of engineering study.
+		</p>
+		<p>
+			I spent three years building real-time systems in Unity — GPU instancing, compute shaders,
+			HLSL materials, editor tooling — before a short professional stint at iBright as a
+			Unity Developer & Tools Engineer. That work deepened my understanding of how to
+			push rendering performance on real hardware under real constraints.
+		</p>
+		<p>
+			The pivot to engineering simulation was natural rather than deliberate. Building
+			<strong>PipeFlow</strong> — a genuine pipeline hydraulics simulator running in the browser —
+			made it clear that the combination I have is uncommon: someone who can read a
+			Crane TP-410 loss coefficient table <em>and</em> implement the interpolation cleanly in
+			JavaScript. Most simulation tools are built by software teams who rely on domain experts
+			at arm's length. I can be both.
+		</p>
+		<p>
+			I'm currently based across Sofia, Bulgaria and Istanbul, Turkey, targeting remote
+			or EU-based simulation and digital twin roles. As an EU citizen (Bulgaria),
+			I require no visa sponsorship anywhere in Europe.
+		</p>
 	</div>
-</section>
+	
+	
+	<!-- EXPERIENCE -->
+	<section class="section" id="experience">
+		<div class="section-header">
+			<span class="section-num">04 —</span>
+			<h2 class="section-title">Experience</h2>
+		</div>
+		<div style="border: 1px solid var(--rule);">
+			<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: var(--rule);">
+				<div style="background: var(--cream-dark); padding: 40px 36px;">
+					<div class="hero-info-label" style="margin-bottom: 12px;">Company</div>
+					<div style="font-family: 'IBM Plex Serif', serif; font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">iBright</div>
+					<div style="font-size: 13px; color: var(--ink-light); margin-bottom: 20px;">Istanbul, Turkey</div>
+					<div class="hero-info-label" style="margin-bottom: 6px;">Period</div>
+					<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-mid);">Aug 2025 – Nov 2025</div>
+					<div style="margin-top: 20px;">
+						<div class="hero-info-label" style="margin-bottom: 6px;">Role</div>
+						<div style="font-size: 13px; color: var(--ink-mid);">Unity Developer<br>&amp; Tools Engineer</div>
+					</div>
+				</div>
+				<div style="background: var(--cream); padding: 40px 44px; display: flex; flex-direction: column; gap: 28px;">
+					<div>
+						<div class="spec-title">Graphics &amp; GPU Rendering</div>
+						<ul class="spec-items">
+							<li><strong>High-Performance Instancing:</strong> Three progressive approaches (DrawMeshInstanced, Indirect, Compute-driven) rendering over one million objects in a single draw call</li>
+							<li><strong>GPU Optimization:</strong> Frustum and spherical culling via compute shaders with atomic operations, offloading heavy calculations from CPU</li>
+							<li><strong>Procedural Systems:</strong> GPU-driven grass rendering with Compute Shaders, procedural generation, and ProBuilder integration</li>
+						</ul>
+					</div>
+					<div>
+						<div class="spec-title">Advanced Shaders</div>
+						<ul class="spec-items">
+							<li><strong>Fabric Shaders:</strong> Physically-based silk shader (anisotropic GGX, Fresnel, iridescence, sheen BRDF); velvet shader (rim lighting, SSS, procedural fuzz scatter)</li>
+							<li><strong>Environment Shaders:</strong> Dynamic water surfaces with vertex displacement, procedural wave simulation, depth-based coloring</li>
+						</ul>
+					</div>
+					<div>
+						<div class="spec-title">Systems &amp; Tooling</div>
+						<ul class="spec-items">
+							<li><strong>Movement Framework:</strong> Modular 2D/3D input-movement system using State Machine architecture and ScriptableObject-driven animation pipelines</li>
+						</ul>
+					</div>
+					<div class="project-tech" style="margin: 0;">
+						<span class="tech-pill">Unity URP</span>
+						<span class="tech-pill">HLSL</span>
+						<span class="tech-pill">Compute Shaders</span>
+						<span class="tech-pill">C#</span>
+						<span class="tech-pill">GPU Instancing</span>
+						<span class="tech-pill">Editor Scripting</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<!-- FEATURED: PIPEFLOW -->
-<section id="featured">
-	<div class="s-intro reveal"><span class="s-num">02</span><h2 class="s-title">Featured Project</h2><div class="s-rule"></div></div>
-	<div class="pf-grid reveal">
-		<div class="pf-left">
-			<div class="pf-tag">Browser-based | Real-time | No dependencies</div>
-			<div class="pf-name">PipeFlow<br><em>Simulator</em></div>
-			<p class="pf-desc">A general-purpose pipeline flow simulator for process engineers. Build a pipeline from components ? pumps, pipes, valves, elbows, reducers ? and the physics engine calculates pressure, velocity, flow rate, and energy losses every 100ms. Results appear as live SVG animations, stacked charts, and component-level tooltips.</p>
-			<div class="pf-tech">
-				<span>Vanilla JS</span><span>ES Modules</span><span>SVG</span>
-				<span>Canvas 2D</span><span>No Framework</span><span>No Build Step</span>
-			</div>
-			<div class="pf-links">
-				<a href="https://github.com/rengincelik/pipeFlow" target="_blank" class="pf-link pf-link-gh">GitHub -></a>
-				<a href="https://rengincelik.github.io/pipeFlow/" target="_blank" class="pf-link pf-link-live">Live Demo -></a>
-			</div>
-		</div>
-		<div class="pf-right">
-			<div class="spec-label">Technical Implementation</div>
-			<div class="spec"><div class="spec-icon">*</div><div class="spec-text"><strong>Darcy-Weisbach</strong> for major friction losses. Colebrook-White friction factor via Newton-Raphson (50 iter, tol 1�10??).</div></div>
-			<div class="spec"><div class="spec-icon">*</div><div class="spec-text"><strong>Borda-Carnot</strong> for expander losses; contraction coefficient method for reducers ? both with Bernoulli pressure recovery.</div></div>
-			<div class="spec"><div class="spec-icon">*</div><div class="spec-text"><strong>Pump H-Q curve</strong> from 3 operating points via 2nd-degree polynomial. Operating point solved by bisection each tick.</div></div>
-			<div class="spec"><div class="spec-icon">*</div><div class="spec-text"><strong>Empirical fluid model</strong> - density as polynomial of temperature; viscosity via Vogel equation. Water and EG50 included.</div></div>
-			<div class="spec"><div class="spec-icon">*</div><div class="spec-text"><strong>Architecture:</strong> SimulationEngine, SVGRenderer, ChartRenderer, FlowAnimator ? decoupled via EventEmitter. Zero dependencies.</div></div>
-		</div>
-	</div>
-</section>
-
-<!-- OTHER PROJECTS -->
-<section id="projects">
-	<div class="s-intro reveal"><span class="s-num">03</span><h2 class="s-title">Other Projects</h2><div class="s-rule"></div></div>
-	<div class="proj-grid reveal">
-		<div class="proj-card">
-			<div class="proj-num">03 - 01</div>
-			<div class="proj-name">GPU Instancing Study</div>
-			<div class="proj-stack">Unity | HLSL | URP</div>
-			<p class="proj-desc">Multiple GPU instancing approaches for rendering thousands of objects in a single draw call. Covers 3D/sprite instancing, grass rendering, random spawn, and scaling systems.</p>
-			<a href="https://rengincelik.github.io/GPU_Rendering/" target="_blank" class="proj-link">View Project -></a>
-		</div>
-		<div class="proj-card">
-			<div class="proj-num">03 - 02</div>
-			<div class="proj-name">URP Shader Library</div>
-			<div class="proj-stack">HLSL | ShaderLab | Unity URP</div>
-			<p class="proj-desc">Production-ready custom shader collection ? silk, velvet, advanced surface effects, water surface. Built for URP with performance in mind.</p>
-			<a href="https://rengincelik.github.io/Shaders/" target="_blank" class="proj-link">View Project -></a>
-		</div>
-		<div class="proj-card">
-			<div class="proj-num">03 - 03</div>
-			<div class="proj-name">Mini Dev Kit</div>
-			<div class="proj-stack">Unity | C# | Editor Scripting</div>
-			<p class="proj-desc">Modular reusable toolset for Unity - 2D/3D player movement, object movement, sprite animator, and editor utilities designed to accelerate development workflows.</p>
-			<a href="https://rengincelik.github.io/Mini-Dev-Kit/" target="_blank" class="proj-link">View Project -></a>
-		</div>
-	</div>
-</section>
-
-<!-- BACKGROUND -->
-<section id="background">
-	<div class="reveal">
-		<div class="s-intro"><span class="s-num">04</span><h2 class="s-title">Background</h2><div class="s-rule"></div></div>
-		<div class="exp-card">
-			<div class="exp-period">Aug 2025 - Nov 2025</div>
-			<div class="exp-co">iBright</div>
-			<div class="exp-loc">Istanbul, Turkey</div>
-			<div class="exp-role-title">Unity Developer & Technical Artist</div>
-			<ul class="exp-list">
-				<li>Built 2D pipeline tools with Unity Editor Scripting - Depth Ordering System, Sprite Animation Tools.</li>
-				<li>Developed custom HLSL shaders for the Livber project; resolved graphics bugs across mobile and PC.</li>
-				<li>Profiled with Unity Profiler and Frame Debugger - reduced draw calls and improved mobile FPS.</li>
-				<li>Delivered reusable systems that reduced project setup time for the team.</li>
-			</ul>
-		</div>
-	</div>
-	<div class="reveal">
-		<div class="s-intro" style="margin-bottom: 28px;"><span class="s-num" style="color:var(--ink-soft); font-size:12px;">Education & Status</span></div>
-		<div class="edu-card">
-			<div class="edu-deg">Bachelor of Science</div>
-			<div class="edu-school">Istanbul Technical University (ITU)</div>
-			<div class="edu-years">2016 - 2022</div>
-			<div class="edu-note">Food Engineering | fluid mechanics, thermodynamics, heat and mass transfer, process systems, numerical methods. Domain knowledge that directly informs the physical models in my simulation work.</div>
-		</div>
-		<div class="eu-card">
-			<div class="eu-card-title">EU Work Authorisation</div>
-			<div class="eu-card-sub">Bulgarian Citizenship</div>
-			<div class="eu-card-note">Full authorisation to live and work anywhere in the EU/EEA. No visa or sponsorship required. Actively targeting opportunities in Central and Western Europe, open to remote or relocation.</div>
-		</div>
-	</div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-	<div class="reveal">
-		<div class="s-intro" style="margin-bottom: 24px;"><span class="s-num">05</span></div>
-		<h2 class="contact-h">Open to<br><em>European</em><br>opportunities.</h2>
-		<p class="contact-sub">Looking for simulation software, digital twin, or engineering tooling roles. Full EU authorisation ? happy to relocate or work remotely.</p>
+<section class="contact-section" id="contact">
+	<div class="contact-left">
+		<h2>Let's work<br>together.</h2>
+		<p>
+			I'm actively looking for simulation developer, digital twin, or engineering software roles
+			in Europe — remote or on-site. If the problem involves real physics and real-time output,
+			I want to hear about it.
+		</p>
 	</div>
-	<div class="c-rows reveal">
-		<a href="mailto:rengin.celik97@gmail.com" class="c-row">
-			<div><div class="c-label">Email</div><div class="c-value">rengin.celik97@gmail.com</div></div>
-			<span class="c-arrow">?</span>
-		</a>
-		<a href="https://linkedin.com/in/rengincelik" target="_blank" class="c-row">
-			<div><div class="c-label">LinkedIn</div><div class="c-value">linkedin.com/in/rengincelik</div></div>
-			<span class="c-arrow">?</span>
-		</a>
-		<a href="https://github.com/rengincelik" target="_blank" class="c-row">
-			<div><div class="c-label">GitHub</div><div class="c-value">github.com/rengincelik</div></div>
-			<span class="c-arrow">?</span>
-		</a>
-		<a href="https://rengincelik.github.io/pipeFlow/" target="_blank" class="c-row">
-			<div><div class="c-label">PipeFlow ? Live Demo</div><div class="c-value">rengincelik.github.io/pipeFlow</div></div>
-			<span class="c-arrow">?</span>
-		</a>
-		<a href="tel:+905389686977" class="c-row">
-			<div><div class="c-label">Phone</div><div class="c-value">+90 538 968 69 77</div></div>
-			<span class="c-arrow">?</span>
-		</a>
+	<div class="contact-right">
+		<div class="contact-item">
+			<span class="contact-item-label">Email</span>
+			<span class="contact-item-value"><a href="mailto:rengin.celik97@gmail.com">rengin.celik97@gmail.com</a></span>
+		</div>
+		<div class="contact-item">
+			<span class="contact-item-label">Phone</span>
+			<span class="contact-item-value"><a href="tel:+905389686977">+90 538 968 69 77</a></span>
+		</div>
+		<div class="contact-item">
+			<span class="contact-item-label">LinkedIn</span>
+			<span class="contact-item-value"><a href="https://linkedin.com/in/rengincelik" target="_blank">linkedin.com/in/rengincelik</a></span>
+		</div>
+		<div class="contact-item">
+			<span class="contact-item-label">GitHub</span>
+			<span class="contact-item-value"><a href="https://github.com/rengincelik" target="_blank">github.com/rengincelik</a></span>
+		</div>
 	</div>
 </section>
 
 <footer>
-	<p class="f-copy">- 2025 Rengin Celik - Sofia, Bulgaria & Istanbul, Turkey</p>
-	<p class="f-note">Built with <span>HTML + CSS + JS</span> | no frameworks.</p>
+	<p>© 2026 Rengin Çelik</p>
+	<p>Engineering Simulation Developer · Sofia &amp; Istanbul</p>
 </footer>
 
-<script>
-	// Scroll reveal
-	const obs = new IntersectionObserver((entries) => {
-		entries.forEach((e, i) => {
-			if (e.isIntersecting) {
-				setTimeout(() => e.target.classList.add('on'), i * 80);
-				obs.unobserve(e.target);
-			}
-		});
-	}, { threshold: 0.07 });
-	document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-	// Nav active state
-	const secs = document.querySelectorAll('section[id]');
-	const lnks = document.querySelectorAll('.nav-links a');
-	window.addEventListener('scroll', () => {
-		let cur = '';
-		secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
-		lnks.forEach(l => {
-			l.style.color = l.getAttribute('href') === `#${cur}` ? 'var(--accent)' : '';
-		});
-	});
-</script>
 </body>
 </html>
