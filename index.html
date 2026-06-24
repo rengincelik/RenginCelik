@@ -23,9 +23,7 @@
 		}
 		
 		* { margin: 0; padding: 0; box-sizing: border-box; }
-		
 		html { scroll-behavior: smooth; }
-		
 		body {
 			background: var(--cream);
 			color: var(--ink);
@@ -35,607 +33,202 @@
 			overflow-x: hidden;
 		}
 		
-		/* ─── NAV ─── */
 		nav {
-			position: fixed;
-			top: 0; left: 0; right: 0;
-			z-index: 100;
-			background: var(--cream);
-			border-bottom: 1px solid var(--rule);
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0 48px;
-			height: 56px;
+			position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+			background: var(--cream); border-bottom: 1px solid var(--rule);
+			display: flex; justify-content: space-between; align-items: center;
+			padding: 0 48px; height: 56px;
 		}
-		
 		.nav-logo {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 13px;
-			font-weight: 500;
-			color: var(--ink);
-			letter-spacing: 0.04em;
-			text-decoration: none;
+			font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;
+			color: var(--ink); letter-spacing: 0.04em; text-decoration: none;
 		}
-		
-		.nav-links {
-			display: flex;
-			gap: 32px;
-			list-style: none;
-		}
-		
+		.nav-links { display: flex; gap: 32px; list-style: none; }
 		.nav-links a {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			font-weight: 500;
-			color: var(--ink-light);
-			text-decoration: none;
-			letter-spacing: 0.08em;
-			text-transform: uppercase;
-			transition: color 0.2s;
+			font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+			color: var(--ink-light); text-decoration: none; letter-spacing: 0.08em;
+			text-transform: uppercase; transition: color 0.2s;
 		}
-		
 		.nav-links a:hover { color: var(--blue); }
 		
-		/* ─── HERO ─── */
 		.hero {
-			min-height: 100vh;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			padding-top: 56px;
+			min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 56px;
 		}
-		
 		.hero-left {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			padding: 80px 64px 80px 80px;
-			border-right: 1px solid var(--rule);
+			display: flex; flex-direction: column; justify-content: center;
+			padding: 80px 64px 80px 80px; border-right: 1px solid var(--rule);
 		}
-		
 		.hero-tag {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			font-weight: 500;
-			color: var(--orange);
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
-			margin-bottom: 24px;
+			font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+			color: var(--orange); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px;
 		}
-		
 		.hero-name {
-			font-family: 'IBM Plex Serif', serif;
-			font-size: clamp(40px, 5vw, 64px);
-			font-weight: 600;
-			line-height: 1.05;
-			color: var(--ink);
-			margin-bottom: 8px;
+			font-family: 'IBM Plex Serif', serif; font-size: clamp(40px, 5vw, 64px);
+			font-weight: 600; line-height: 1.05; color: var(--ink); margin-bottom: 8px;
 		}
-		
 		.hero-title {
-			font-family: 'IBM Plex Serif', serif;
-			font-size: clamp(18px, 2.5vw, 26px);
-			font-weight: 400;
-			font-style: italic;
-			color: var(--blue);
-			margin-bottom: 36px;
+			font-family: 'IBM Plex Serif', serif; font-size: clamp(18px, 2.5vw, 26px);
+			font-weight: 400; font-style: italic; color: var(--blue); margin-bottom: 36px;
 		}
-		
 		.hero-bio {
-			font-size: 15px;
-			color: var(--ink-mid);
-			line-height: 1.75;
-			max-width: 440px;
-			margin-bottom: 48px;
+			font-size: 15px; color: var(--ink-mid); line-height: 1.75;
+			max-width: 440px; margin-bottom: 48px;
 		}
-		
-		.hero-bio strong {
-			font-weight: 500;
-			color: var(--ink);
-		}
-		
-		.hero-actions {
-			display: flex;
-			gap: 16px;
-			flex-wrap: wrap;
-		}
-		
+		.hero-bio strong { font-weight: 500; color: var(--ink); }
+		.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 		.btn-primary {
-			display: inline-block;
-			background: var(--blue);
-			color: var(--cream);
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 12px;
-			font-weight: 500;
-			letter-spacing: 0.06em;
-			text-transform: uppercase;
-			text-decoration: none;
-			padding: 12px 24px;
-			transition: background 0.2s, transform 0.15s;
+			display: inline-block; background: var(--blue); color: var(--cream);
+			font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+			letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+			padding: 12px 24px; transition: background 0.2s, transform 0.15s;
 		}
-		
 		.btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
-		
 		.btn-secondary {
-			display: inline-block;
-			border: 1px solid var(--rule);
-			color: var(--ink-mid);
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 12px;
-			font-weight: 500;
-			letter-spacing: 0.06em;
-			text-transform: uppercase;
-			text-decoration: none;
-			padding: 12px 24px;
-			transition: border-color 0.2s, color 0.2s, transform 0.15s;
+			display: inline-block; border: 1px solid var(--rule); color: var(--ink-mid);
+			font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+			letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+			padding: 12px 24px; transition: border-color 0.2s, color 0.2s, transform 0.15s;
 		}
-		
 		.btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
-		
-		.hero-right {
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-end;
-			padding: 80px;
-		}
-		
+		.hero-right { display: flex; flex-direction: column; justify-content: flex-end; padding: 80px; }
 		.hero-stats {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 1px;
-			background: var(--rule);
-			border: 1px solid var(--rule);
-			margin-bottom: 40px;
+			display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+			background: var(--rule); border: 1px solid var(--rule); margin-bottom: 40px;
 		}
-		
-		.stat-item {
-			background: var(--cream);
-			padding: 28px 24px;
-		}
-		
+		.stat-item { background: var(--cream); padding: 28px 24px; }
 		.stat-num {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 28px;
-			font-weight: 600;
-			color: var(--blue);
-			line-height: 1;
-			margin-bottom: 6px;
+			font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600;
+			color: var(--blue); line-height: 1; margin-bottom: 6px;
 		}
+		.stat-label { font-size: 12px; color: var(--ink-light); letter-spacing: 0.02em; }
 		
-		.stat-label {
-			font-size: 12px;
-			color: var(--ink-light);
-			letter-spacing: 0.02em;
-		}
-		
-		.hero-links {
-			display: flex;
-			gap: 24px;
-		}
-		
-		.hero-link {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			color: var(--ink-light);
-			text-decoration: none;
-			letter-spacing: 0.06em;
-			border-bottom: 1px solid var(--rule);
-			padding-bottom: 2px;
-			transition: color 0.2s, border-color 0.2s;
-		}
-		
-		.hero-link:hover { color: var(--orange); border-color: var(--orange); }
-		
-		/* ─── SECTION COMMON ─── */
-		.section {
-			padding: 96px 80px;
-			border-top: 1px solid var(--rule);
-		}
-		
-		.section-header {
-			display: flex;
-			align-items: baseline;
-			gap: 24px;
-			margin-bottom: 64px;
-		}
-		
+		.section { padding: 96px 80px; border-top: 1px solid var(--rule); }
+		.section-header { display: flex; align-items: baseline; gap: 24px; margin-bottom: 64px; }
 		.section-num {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			font-weight: 500;
-			color: var(--orange);
-			letter-spacing: 0.1em;
+			font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+			color: var(--orange); letter-spacing: 0.1em;
 		}
+		.section-title { font-family: 'IBM Plex Serif', serif; font-size: 32px; font-weight: 600; color: var(--ink); }
 		
-		.section-title {
-			font-family: 'IBM Plex Serif', serif;
-			font-size: 32px;
-			font-weight: 600;
-			color: var(--ink);
-		}
-		
-		/* ─── PROJECTS ─── */
-		.projects-grid {
-			display: grid;
-			gap: 1px;
-			background: var(--rule);
-			border: 1px solid var(--rule);
-		}
-		
-		/* Featured project — full width */
-		.project-featured {
-			background: var(--cream);
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-		}
-		
+		.projects-grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+		.project-featured { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; }
 		.project-featured-left {
-			padding: 56px 56px 56px 56px;
-			border-right: 1px solid var(--rule);
-			display: flex;
-			flex-direction: column;
+			padding: 56px; border-right: 1px solid var(--rule); display: flex; flex-direction: column;
 		}
-		
 		.project-kind {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 500;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			margin-bottom: 20px;
+			font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+			letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px;
 		}
-		
-		.project-kind.kind-sim { color: var(--blue); }
-		.project-kind.kind-gpu { color: var(--orange); }
+		.project-kind.kind-sim    { color: var(--blue); }
+		.project-kind.kind-cfd    { color: #2A7A5A; }
+		.project-kind.kind-gpu    { color: var(--orange); }
 		.project-kind.kind-shader { color: var(--ink-light); }
-		.project-kind.kind-tool { color: var(--blue-light); }
+		.project-kind.kind-tool   { color: var(--blue-light); }
 		
 		.project-name {
-			font-family: 'IBM Plex Serif', serif;
-			font-size: 36px;
-			font-weight: 600;
-			line-height: 1.1;
-			color: var(--ink);
-			margin-bottom: 20px;
+			font-family: 'IBM Plex Serif', serif; font-size: 36px; font-weight: 600;
+			line-height: 1.1; color: var(--ink); margin-bottom: 20px;
 		}
-		
 		.project-tagline {
-			font-family: 'IBM Plex Serif', serif;
-			font-style: italic;
-			font-size: 16px;
-			color: var(--blue);
-			margin-bottom: 28px;
+			font-family: 'IBM Plex Serif', serif; font-style: italic;
+			font-size: 16px; color: var(--blue); margin-bottom: 28px;
 		}
-		
-		.project-desc {
-			font-size: 14px;
-			color: var(--ink-mid);
-			line-height: 1.75;
-			flex: 1;
-			margin-bottom: 32px;
-		}
-		
+		.project-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.75; flex: 1; margin-bottom: 32px; }
 		.project-desc strong { font-weight: 500; color: var(--ink); }
-		
-		.project-tech {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-			margin-bottom: 32px;
-		}
-		
+		.project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
 		.tech-pill {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 500;
-			letter-spacing: 0.06em;
-			padding: 4px 10px;
-			background: var(--cream-dark);
-			color: var(--ink-mid);
-			border: 1px solid var(--rule);
+			font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+			letter-spacing: 0.06em; padding: 4px 10px;
+			background: var(--cream-dark); color: var(--ink-mid); border: 1px solid var(--rule);
 		}
-		
-		.project-links {
-			display: flex;
-			gap: 16px;
-			flex-wrap: wrap;
-		}
-		
+		.project-links { display: flex; gap: 16px; flex-wrap: wrap; }
 		.project-link {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			font-weight: 500;
-			letter-spacing: 0.06em;
-			text-decoration: none;
-			padding: 9px 18px;
-			border: 1px solid var(--rule);
-			color: var(--ink-mid);
-			transition: all 0.2s;
+			font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+			letter-spacing: 0.06em; text-decoration: none; padding: 9px 18px;
+			border: 1px solid var(--rule); color: var(--ink-mid); transition: all 0.2s;
 		}
-		
 		.project-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
 		.project-link.primary { background: var(--blue); color: var(--cream); border-color: var(--blue); }
 		.project-link.primary:hover { background: var(--blue-light); border-color: var(--blue-light); }
 		
 		.project-featured-right {
-			padding: 56px;
-			background: var(--cream-dark);
-			display: flex;
-			flex-direction: column;
-			gap: 24px;
+			padding: 56px; background: var(--cream-dark); display: flex; flex-direction: column; gap: 24px;
 		}
-		
-		.spec-block {
-			border-left: 2px solid var(--blue);
-			padding: 16px 20px;
-			background: var(--cream);
-		}
-		
+		.spec-block { border-left: 2px solid var(--blue); padding: 16px 20px; background: var(--cream); }
 		.spec-block.orange { border-left-color: var(--orange); }
-		
+		.spec-block.green  { border-left-color: #2A7A5A; }
 		.spec-title {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 600;
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
-			color: var(--ink-light);
-			margin-bottom: 10px;
+			font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+			letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px;
 		}
-		
-		.spec-items {
-			list-style: none;
-			display: flex;
-			flex-direction: column;
-			gap: 6px;
-		}
-		
+		.spec-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 		.spec-items li {
-			font-size: 13px;
-			color: var(--ink-mid);
-			padding-left: 14px;
-			position: relative;
+			font-size: 13px; color: var(--ink-mid); padding-left: 14px; position: relative;
 		}
-		
-		.spec-items li::before {
-			content: '—';
-			position: absolute;
-			left: 0;
-			color: var(--rule);
-			font-size: 11px;
-		}
-		
+		.spec-items li::before { content: '—'; position: absolute; left: 0; color: var(--rule); font-size: 11px; }
 		.spec-items li strong { font-weight: 500; color: var(--ink); }
 		
-		/* Secondary projects — 3 col */
+		/* 2×2 secondary grid */
 		.projects-secondary {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 1px;
-			background: var(--rule);
+			display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule);
 		}
-		
-		.project-card {
-			background: var(--cream);
-			padding: 40px;
-			display: flex;
-			flex-direction: column;
-			transition: background 0.2s;
-		}
-		
+		.project-card { background: var(--cream); padding: 40px; display: flex; flex-direction: column; transition: background 0.2s; }
 		.project-card:hover { background: var(--cream-dark); }
+		.project-card .project-name { font-size: 22px; margin-bottom: 12px; }
+		.project-card .project-tagline { font-size: 14px; margin-bottom: 20px; }
+		.project-card .project-desc { font-size: 13px; margin-bottom: 24px; }
+		.project-card .project-tech { margin-bottom: 24px; }
+		.project-card .project-links { margin-top: auto; }
 		
-		.project-card .project-name {
-			font-size: 22px;
-			margin-bottom: 12px;
-		}
-		
-		.project-card .project-tagline {
-			font-size: 14px;
-			margin-bottom: 20px;
-		}
-		
-		.project-card .project-desc {
-			font-size: 13px;
-			margin-bottom: 24px;
-		}
-		
-		.project-card .project-tech {
-			margin-bottom: 24px;
-		}
-		
-		.project-card .project-links {
-			margin-top: auto;
-		}
-		
-		/* ─── SKILLS ─── */
 		.skills-grid {
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			gap: 1px;
-			background: var(--rule);
-			border: 1px solid var(--rule);
+			display: grid; grid-template-columns: repeat(4, 1fr);
+			gap: 1px; background: var(--rule); border: 1px solid var(--rule);
 		}
-		
-		.skill-group {
-			background: var(--cream);
-			padding: 36px 32px;
-		}
-		
+		.skill-group { background: var(--cream); padding: 36px 32px; }
 		.skill-group-title {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 600;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			color: var(--orange);
-			margin-bottom: 20px;
+			font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+			letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
 		}
-		
-		.skill-list {
-			list-style: none;
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-		}
-		
-		.skill-list li {
-			font-size: 13px;
-			color: var(--ink-mid);
-			padding-left: 12px;
-			position: relative;
-		}
-		
+		.skill-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+		.skill-list li { font-size: 13px; color: var(--ink-mid); padding-left: 12px; position: relative; }
 		.skill-list li::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 8px;
-			width: 5px;
-			height: 1px;
-			background: var(--rule);
+			content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 1px; background: var(--rule);
 		}
 		
-		/* ─── ABOUT ─── */
-		.about-grid {
-			display: grid;
-			grid-template-columns: 2fr 1fr;
-			gap: 1px;
-			background: var(--rule);
-			border: 1px solid var(--rule);
-		}
-		
-		.about-main {
-			background: var(--cream);
-			padding: 56px;
-		}
-		
-		.about-main p {
-			font-size: 15px;
-			color: var(--ink-mid);
-			line-height: 1.8;
-			margin-bottom: 20px;
-		}
-		
+		.about-main { background: var(--cream); padding: 56px; }
+		.about-main p { font-size: 15px; color: var(--ink-mid); line-height: 1.8; margin-bottom: 20px; }
 		.about-main p:last-child { margin-bottom: 0; }
-		
 		.about-main strong { font-weight: 500; color: var(--ink); }
 		
-		.about-aside {
-			background: var(--cream-dark);
-			padding: 56px 40px;
-			display: flex;
-			flex-direction: column;
-			gap: 32px;
-		}
-		
-		.aside-block { }
-		
-		.aside-label {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 600;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			color: var(--ink-light);
-			margin-bottom: 12px;
-		}
-		
-		.aside-value {
-			font-size: 13px;
-			color: var(--ink-mid);
-			line-height: 1.6;
-		}
-		
-		.aside-value a {
-			color: var(--blue);
-			text-decoration: none;
-		}
-		
-		.aside-value a:hover { text-decoration: underline; }
-		
-		/* ─── CONTACT ─── */
 		.contact-section {
-			background: var(--ink);
-			padding: 96px 80px;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 80px;
+			background: var(--ink); padding: 96px 80px;
+			display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
 		}
-		
 		.contact-left h2 {
-			font-family: 'IBM Plex Serif', serif;
-			font-size: 40px;
-			font-weight: 600;
-			color: var(--cream);
-			line-height: 1.15;
-			margin-bottom: 24px;
+			font-family: 'IBM Plex Serif', serif; font-size: 40px; font-weight: 600;
+			color: var(--cream); line-height: 1.15; margin-bottom: 24px;
 		}
-		
-		.contact-left p {
-			font-size: 15px;
-			color: #9A9186;
-			line-height: 1.75;
-			max-width: 380px;
-		}
-		
-		.contact-right {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			gap: 20px;
-		}
-		
+		.contact-left p { font-size: 15px; color: #9A9186; line-height: 1.75; max-width: 380px; }
+		.contact-right { display: flex; flex-direction: column; justify-content: center; gap: 20px; }
 		.contact-item {
-			display: flex;
-			flex-direction: column;
-			gap: 4px;
-			padding-bottom: 20px;
-			border-bottom: 1px solid #333;
+			display: flex; flex-direction: column; gap: 4px;
+			padding-bottom: 20px; border-bottom: 1px solid #333;
 		}
-		
 		.contact-item:last-child { border-bottom: none; }
-		
 		.contact-item-label {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 10px;
-			font-weight: 500;
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
-			color: #666;
+			font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+			letter-spacing: 0.12em; text-transform: uppercase; color: #666;
 		}
-		
-		.contact-item-value {
-			font-size: 14px;
-			color: var(--cream);
-		}
-		
-		.contact-item-value a {
-			color: var(--cream);
-			text-decoration: none;
-			transition: color 0.2s;
-		}
-		
+		.contact-item-value { font-size: 14px; color: var(--cream); }
+		.contact-item-value a { color: var(--cream); text-decoration: none; transition: color 0.2s; }
 		.contact-item-value a:hover { color: var(--orange-light); }
 		
-		/* ─── FOOTER ─── */
 		footer {
-			background: var(--ink);
-			border-top: 1px solid #333;
-			padding: 24px 80px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			background: var(--ink); border-top: 1px solid #333; padding: 24px 80px;
+			display: flex; justify-content: space-between; align-items: center;
 		}
+		footer p { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #555; letter-spacing: 0.04em; }
 		
-		footer p {
-			font-family: 'IBM Plex Mono', monospace;
-			font-size: 11px;
-			color: #555;
-			letter-spacing: 0.04em;
-		}
-		
-		/* ─── RESPONSIVE ─── */
 		@media (max-width: 1024px) {
 			nav { padding: 0 32px; }
 			.hero { grid-template-columns: 1fr; }
@@ -646,45 +239,37 @@
 			.project-featured-right { border-top: 1px solid var(--rule); }
 			.projects-secondary { grid-template-columns: 1fr; }
 			.skills-grid { grid-template-columns: 1fr 1fr; }
-			.about-grid { grid-template-columns: 1fr; }
 			.contact-section { grid-template-columns: 1fr; gap: 48px; padding: 72px 32px; }
 			footer { padding: 24px 32px; flex-direction: column; gap: 12px; }
 		}
-		
 		@media (max-width: 640px) {
 			nav { padding: 0 20px; }
 			.nav-links { display: none; }
 			.hero-left { padding: 48px 20px; }
 			.hero-right { padding: 32px 20px; }
 			.section { padding: 56px 20px; }
-			.project-featured-left { padding: 36px 20px; }
-			.project-featured-right { padding: 36px 20px; }
+			.project-featured-left, .project-featured-right { padding: 36px 20px; }
 			.project-card { padding: 28px 20px; }
 			.skills-grid { grid-template-columns: 1fr; }
 			.about-main { padding: 36px 20px; }
-			.about-aside { padding: 36px 20px; }
 			.contact-section { padding: 56px 20px; }
 			footer { padding: 20px; }
 		}
 		
-		/* ─── ANIMATIONS ─── */
 		@keyframes fadeUp {
 			from { opacity: 0; transform: translateY(16px); }
 			to   { opacity: 1; transform: translateY(0); }
 		}
-		
 		.hero-tag    { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
 		.hero-name   { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
 		.hero-title  { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
 		.hero-bio    { animation: fadeUp 0.5s ease both; animation-delay: 0.4s; }
 		.hero-actions{ animation: fadeUp 0.5s ease both; animation-delay: 0.5s; }
 		.hero-stats  { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
-		.hero-links  { animation: fadeUp 0.5s ease both; animation-delay: 0.45s; }
 	</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
 	<a class="nav-logo" href="#">RC_</a>
 	<ul class="nav-links">
@@ -696,7 +281,6 @@
 	</ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
 	<div class="hero-left">
 		<div class="hero-tag">Engineering Simulation Developer</div>
@@ -704,7 +288,6 @@
 		<div class="hero-title">Engineering background. Real-time systems.</div>
 		<p class="hero-bio">
 			I bridge the gap between complex physical systems and real-time interactive software. From browser-based hydraulic simulators to high-performance GPU rendering, I build tools that make engineering data visible and actionable.
-		
 		</p>
 		<div class="hero-actions">
 			<a class="btn-primary" href="https://rengincelik.github.io/pipeFlow/" target="_blank">↗ Open PipeFlow</a>
@@ -712,32 +295,27 @@
 			<a class="btn-secondary" href="https://linkedin.com/in/rengincelik" target="_blank">LinkedIn</a>
 		</div>
 	</div>
-	
 	<div class="hero-right">
 		<div class="hero-stats">
 			<div class="stat-item">
 				<div class="stat-num">Istanbul Technical University</div>
-				<div class="stat-label">B.Sc. Food Engineering<br>2016 – 2022<br></div>
+				<div class="stat-label">B.Sc. Food Engineering · 2016 – 2022</div>
 				<div class="stat-label">a curriculum built on <strong>fluid mechanics, thermodynamics, and numerical methods.</strong></div>
-			
 			</div>
 			<div class="stat-item">
 				<div class="stat-num">Work Eligibility</div>
-				<div class="stat-label">EU Citizen (Bulgaria)<br>No sponsorship required<br></div>
-			
+				<div class="stat-label">EU Citizen (Bulgaria)<br>No sponsorship required</div>
 			</div>
-			
 			<div class="stat-item">
 				<div class="stat-num">Languages</div>
 				<div class="stat-label">Turkish — Native<br>English — Proficient</div>
 			</div>
 			<div class="stat-item">
 				<div class="stat-num">Location</div>
-				<div class="stat-label">Sofia, Bulgaria &<br>Istanbul, Turkey</div>
-				<div class="stat-label">Or relocation — open to Europe</div>
+				<div class="stat-label">Sofia, Bulgaria &amp; Istanbul, Turkey</div>
+				<div class="stat-label">Open to relocation across Europe</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </section>
 
@@ -748,8 +326,9 @@
 		<h2 class="section-title">Projects</h2>
 	</div>
 	
-	<!-- Featured: PipeFlow -->
 	<div class="projects-grid">
+		
+		<!-- Featured: PipeFlow -->
 		<div class="project-featured">
 			<div class="project-featured-left">
 				<div class="project-kind kind-sim">Simulation Software</div>
@@ -768,8 +347,7 @@
 					A <strong>parallel diagnostic engine</strong> applies 21 hydraulic rules against
 					industry thresholds (Crane TP-410, ISA 75.01), flagging BEP deviation, flash risk,
 					consecutive globe valves, near-deadhead conditions, and more — each with severity
-					level and corrective advice. This architecture establishes PipeFlow as a robust foundational step for industrial Digital Twin systems by mapping complex physical behaviors into a high-performance reactive environment.
-				
+					level and corrective advice.
 				</p>
 				<div class="project-tech">
 					<span class="tech-pill">Vanilla JS · ES Modules</span>
@@ -799,7 +377,7 @@
 				<div class="spec-block">
 					<div class="spec-title">Diagnostic Engine — 21 Rules</div>
 					<ul class="spec-items">
-						<li>Flow & pressure: high/low velocity, negative pressure, flash risk</li>
+						<li>Flow &amp; pressure: high/low velocity, negative pressure, flash risk</li>
 						<li>System layout: short pipe after pump, consecutive globe valves</li>
 						<li>Pump health: BEP deviation, efficiency, near-deadhead</li>
 						<li>Configuration: diameter mismatch, steep transitions</li>
@@ -819,8 +397,37 @@
 			</div>
 		</div>
 		
-		<!-- Secondary projects -->
+		<!-- 2×2 secondary grid -->
 		<div class="projects-secondary">
+			
+			<!-- CFD Solver — NEW -->
+			<div class="project-card">
+				<div class="project-kind kind-cfd">CFD Solver</div>
+				<h3 class="project-name">2D Navier-Stokes<br>Solver</h3>
+				<div class="project-tagline">From-scratch incompressible CFD with conjugate heat transfer</div>
+				<p class="project-desc">
+					A 2D incompressible Navier-Stokes solver built in C++ with zero external framework
+					dependencies. Implements <strong>Chorin's projection method</strong> — fractional step
+					approach decoupling velocity and pressure — with Gauss-Seidel pressure iteration and
+					CFL-stable time stepping.<br><br>
+					Validated against the <strong>Ghia et al. (1982)</strong> lid-driven cavity benchmark
+					with automated L₂/L∞ error norms. Includes a conjugate heat transfer solver,
+					interactive draggable rigid bodies (Dirichlet disk, Neumann obstacle), and SDL2
+					real-time visualization with dynamic colormaps.
+				</p>
+				<div class="project-tech">
+					<span class="tech-pill">C++17</span>
+					<span class="tech-pill">Chorin Projection</span>
+					<span class="tech-pill">Gauss-Seidel</span>
+					<span class="tech-pill">Navier-Stokes</span>
+					<span class="tech-pill">SDL2</span>
+					<span class="tech-pill">Ghia Validation</span>
+					<span class="tech-pill">CMake</span>
+				</div>
+				<div class="project-links">
+					<a class="project-link" href="https://github.com/rengincelik" target="_blank">GitHub</a>
+				</div>
+			</div>
 			
 			<!-- GPU Instancing -->
 			<div class="project-card">
@@ -905,8 +512,8 @@
 				</div>
 			</div>
 		
-		</div><!-- /projects-secondary -->
-	</div><!-- /projects-grid -->
+		</div>
+	</div>
 </section>
 
 <!-- SKILLS -->
@@ -919,6 +526,7 @@
 		<div class="skill-group">
 			<div class="skill-group-title">Languages</div>
 			<ul class="skill-list">
+				<li>C++ (C++17)</li>
 				<li>JavaScript (ES6+, Modules)</li>
 				<li>C# (.NET)</li>
 				<li>HLSL</li>
@@ -928,34 +536,33 @@
 		<div class="skill-group">
 			<div class="skill-group-title">Simulation & Numerics</div>
 			<ul class="skill-list">
-				<li>Darcy-Weisbach</li>
-				<li>Colebrook-White</li>
-				<li>Newton-Raphson</li>
-				<li>Bisection Method</li>
-				<li>Fluid Dynamics</li>
-				<li>Thermodynamics</li>
-				<li>State Machines</li>
+				<li>Navier-Stokes (Chorin Projection)</li>
+				<li>Darcy-Weisbach / Colebrook-White</li>
+				<li>Gauss-Seidel iteration</li>
+				<li>Newton-Raphson / Bisection</li>
+				<li>Fluid Dynamics &amp; Thermodynamics</li>
+				<li>Conjugate Heat Transfer</li>
+				<li>CFL stability analysis</li>
 			</ul>
 		</div>
 		<div class="skill-group">
 			<div class="skill-group-title">Real-Time & Graphics</div>
 			<ul class="skill-list">
-				<li>SVG Rendering</li>
-				<li>Canvas 2D</li>
+				<li>SVG Rendering / Canvas 2D</li>
 				<li>GPU Instancing</li>
 				<li>Compute Shaders</li>
 				<li>Unity URP</li>
 				<li>Shader Development</li>
 				<li>Frustum Culling</li>
+				<li>SDL2</li>
 			</ul>
 		</div>
 		<div class="skill-group">
 			<div class="skill-group-title">Tools & Workflow</div>
 			<ul class="skill-list">
-				
 				<li>Git / GitHub</li>
-				<li>WebStorm</li>
-				<li>VS Code</li>
+				<li>CMake</li>
+				<li>WebStorm / VS Code</li>
 				<li>Unity Engine</li>
 			</ul>
 		</div>
@@ -979,7 +586,7 @@
 		<p>
 			I spent three years building real-time systems in Unity — GPU instancing, compute shaders,
 			HLSL materials, editor tooling — before a short professional stint at iBright as a
-			Unity Developer & Tools Engineer. That work deepened my understanding of how to
+			Unity Developer &amp; Tools Engineer. That work deepened my understanding of how to
 			push rendering performance on real hardware under real constraints.
 		</p>
 		<p>
@@ -997,7 +604,6 @@
 		</p>
 	</div>
 	
-	
 	<!-- EXPERIENCE -->
 	<section class="section" id="experience">
 		<div class="section-header">
@@ -1007,13 +613,13 @@
 		<div style="border: 1px solid var(--rule);">
 			<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: var(--rule);">
 				<div style="background: var(--cream-dark); padding: 40px 36px;">
-					<div class="hero-info-label" style="margin-bottom: 12px;">Company</div>
+					<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:12px;">Company</div>
 					<div style="font-family: 'IBM Plex Serif', serif; font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">iBright</div>
 					<div style="font-size: 13px; color: var(--ink-light); margin-bottom: 20px;">Istanbul, Turkey</div>
-					<div class="hero-info-label" style="margin-bottom: 6px;">Period</div>
+					<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:6px;">Period</div>
 					<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-mid);">Aug 2025 – Nov 2025</div>
 					<div style="margin-top: 20px;">
-						<div class="hero-info-label" style="margin-bottom: 6px;">Role</div>
+						<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:6px;">Role</div>
 						<div style="font-size: 13px; color: var(--ink-mid);">Unity Developer<br>&amp; Tools Engineer</div>
 					</div>
 				</div>
