@@ -401,8 +401,9 @@
 		<div class="projects-secondary">
 			
 			<!-- CFD Solver — NEW -->
+			<!-- CFD Solver -->
 			<div class="project-card">
-				<div class="project-kind kind-cfd">CFD Solver</div>
+				<div class="project-kind kind-cfd">CFD Solver · Active Development</div>
 				<h3 class="project-name">2D Navier-Stokes<br>Solver</h3>
 				<div class="project-tagline">From-scratch incompressible CFD with conjugate heat transfer</div>
 				<p class="project-desc">
@@ -411,9 +412,11 @@
 					approach decoupling velocity and pressure — with Gauss-Seidel pressure iteration and
 					CFL-stable time stepping.<br><br>
 					Validated against the <strong>Ghia et al. (1982)</strong> lid-driven cavity benchmark
-					with automated L₂/L∞ error norms. Includes a conjugate heat transfer solver,
-					interactive draggable rigid bodies (Dirichlet disk, Neumann obstacle), and SDL2
-					real-time visualization with dynamic colormaps.
+					with automated L₂/L∞ error norms at Re = 400. Includes a conjugate heat transfer
+					solver, interactive draggable rigid bodies (Dirichlet disk, Neumann obstacle), and
+					SDL2 real-time visualization with dynamic colormaps.<br><br>
+					<em>Currently validating at increasing mesh resolutions — 64×64 complete,
+					    128×128 with bilinear interpolation in progress.</em>
 				</p>
 				<div class="project-tech">
 					<span class="tech-pill">C++17</span>
@@ -428,7 +431,6 @@
 					<a class="project-link" href="https://github.com/rengincelik/cfd-simulation" target="_blank">GitHub</a>
 				</div>
 			</div>
-			
 			<!-- GPU Instancing -->
 			<div class="project-card">
 				<div class="project-kind kind-gpu">Real-Time Graphics</div>
