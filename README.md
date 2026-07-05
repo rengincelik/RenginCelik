@@ -30,7 +30,7 @@ Simulation Software Developer with a B.Sc. in Food Engineering from Istanbul Tec
 *A browser-based, real-time pipeline flow simulator built for process engineers.*
 
 *   **Architecture:** Vanilla JavaScript (ES Modules), SVG & Canvas 2D rendering.
-*   **Physics:** Darcy-Weisbach & Colebrook-White equations (Newton-Raphson iteration).
+*   **Physics:** Darcy-Weisbach & Colebrook-White equations.
 *   **Design:** Zero-dependency implementation focusing on performance and mathematical accuracy.
 
 ---
