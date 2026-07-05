@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Rengin Çelik — Engineering Simulation Developer</title>
+	<title>Rengin Çelik — Junior Software Developer</title>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 	<style>
 		:root {
@@ -283,14 +283,15 @@
 
 <section class="hero">
 	<div class="hero-left">
-		<div class="hero-tag">Engineering Simulation Developer</div>
+		<div class="hero-tag">Junior Software Developer</div>
 		<h1 class="hero-name">Rengin<br>Çelik</h1>
-		<div class="hero-title">Engineering background. Real-time systems.</div>
+		<div class="hero-title">Engineering background. Software builder.</div>
 		<p class="hero-bio">
-			I bridge the gap between complex physical systems and real-time interactive software. From browser-based hydraulic simulators to high-performance GPU rendering, I build tools that make engineering data visible and actionable.
+			I come from an engineering background and learn fastest by building. From a browser-based hydraulics simulator in vanilla JavaScript to a C++ Navier-Stokes solver and high-performance GPU rendering systems, I write software that models and visualizes how real physical systems behave.
 		</p>
 		<div class="hero-actions">
 			<a class="btn-primary" href="https://rengincelik.github.io/pipeFlow/" target="_blank">↗ Open PipeFlow</a>
+			<a class="btn-secondary" href="Rengin_Celik_Resume.pdf" download>↓ Download CV</a>
 			<a class="btn-secondary" href="https://github.com/rengincelik" target="_blank">GitHub</a>
 			<a class="btn-secondary" href="https://linkedin.com/in/rengincelik" target="_blank">LinkedIn</a>
 		</div>
@@ -340,7 +341,7 @@
 					components — pumps, pipes, valves, elbows, reducers — and the system calculates
 					pressure, velocity, flow rate, and energy losses every 100 ms.<br><br>
 					The physics model is genuine: <strong>Darcy-Weisbach</strong> for friction losses,
-					<strong>Colebrook-White</strong> solved via Newton-Raphson iteration, Borda-Carnot
+					<strong>Colebrook-White</strong> solved via fixed-point iteration, Borda-Carnot
 					for expansion losses, and a full pump H-Q curve resolved each tick by bisection.
 					Fluid properties (water and 50% ethylene glycol) use empirical polynomial models
 					from 0–150 °C.<br><br>
@@ -354,7 +355,6 @@
 					<span class="tech-pill">SVG Rendering</span>
 					<span class="tech-pill">Canvas 2D</span>
 					<span class="tech-pill">Darcy-Weisbach</span>
-					<span class="tech-pill">Newton-Raphson</span>
 					<span class="tech-pill">State Machine</span>
 					<span class="tech-pill">Zero Dependencies</span>
 				</div>
@@ -367,7 +367,7 @@
 				<div class="spec-block">
 					<div class="spec-title">Physics Model</div>
 					<ul class="spec-items">
-						<li><strong>Friction loss:</strong> Darcy-Weisbach + Colebrook-White (Newton-Raphson, 50 iter, tol 1×10⁻⁸)</li>
+						<li><strong>Friction loss:</strong> Darcy-Weisbach + Colebrook-White (Fixed-point iteration)</li>
 						<li><strong>Minor losses:</strong> K-coefficient, Crane TP-410 valve tables with linear interpolation</li>
 						<li><strong>Pump:</strong> Quadratic H-Q curve → bisection operating point, 2s startup ramp</li>
 						<li><strong>Transitions:</strong> Borda-Carnot expansion / contraction coefficient reducer</li>
@@ -400,7 +400,6 @@
 		<!-- 2×2 secondary grid -->
 		<div class="projects-secondary">
 			
-			<!-- CFD Solver — NEW -->
 			<!-- CFD Solver -->
 			<div class="project-card">
 				<div class="project-kind kind-cfd">CFD Solver · Active Development</div>
@@ -541,7 +540,7 @@
 				<li>Navier-Stokes (Chorin Projection)</li>
 				<li>Darcy-Weisbach / Colebrook-White</li>
 				<li>Gauss-Seidel iteration</li>
-				<li>Newton-Raphson / Bisection</li>
+				<li>Bisection</li>
 				<li>Fluid Dynamics &amp; Thermodynamics</li>
 				<li>Conjugate Heat Transfer</li>
 				<li>CFL stability analysis</li>
@@ -564,7 +563,7 @@
 			<ul class="skill-list">
 				<li>Git / GitHub</li>
 				<li>CMake</li>
-				<li>WebStorm / VS Code</li>
+				<li>CLion / WebStorm / VS Code</li>
 				<li>Unity Engine</li>
 			</ul>
 		</div>
@@ -579,30 +578,30 @@
 	</div>
 	<div class="about-main">
 		<p>
-			My path into simulation software starts with a B.Sc. in Food Engineering from
-			<strong>Istanbul Technical University</strong> — Turkey's leading technical university.
-			The curriculum is grounded in fluid mechanics, thermodynamics, heat and mass transfer,
-			process systems design, and numerical methods. These aren't electives I browsed;
-			they're the foundation of four years of engineering study.
+			I'm a software developer with an engineering background — a B.Sc. in Food Engineering
+			from <strong>Istanbul Technical University</strong>, grounded in fluid mechanics,
+			thermodynamics, and numerical methods.
 		</p>
 		<p>
-			I spent three years building real-time systems in Unity — GPU instancing, compute shaders,
-			HLSL materials, editor tooling — before a short professional stint at iBright as a
-			Unity Developer &amp; Tools Engineer. That work deepened my understanding of how to
-			push rendering performance on real hardware under real constraints.
+			I wanted to be an engineer for as long as I can remember. What I didn't expect was that
+			software would end up being the way I got there. Partway through my degree, sitting in
+			class, I kept catching myself thinking <em>we could just code this</em> — turn the
+			equation on the board into something that actually runs. After graduating I started
+			learning software more seriously, and once I had enough footing, I went back and
+			rebuilt what I'd learned in school as real, working projects. That's the part I want
+			to keep doing: taking a hard technical problem and solving it in code.
 		</p>
 		<p>
-			The pivot to engineering simulation was natural rather than deliberate. Building
-			<strong>PipeFlow</strong> — a genuine pipeline hydraulics simulator running in the browser —
-			made it clear that the combination I have is uncommon: someone who can read a
-			Crane TP-410 loss coefficient table <em>and</em> implement the interpolation cleanly in
-			JavaScript. Most simulation tools are built by software teams who rely on domain experts
-			at arm's length. I can be both.
+			I learn fastest by building. I implemented a shader from scratch within a week while
+			working on Unity/GPU projects at iBright. I picked up JavaScript to build PipeFlow, a
+			dependency-free browser-based hydraulics simulator, in two months. I'm currently
+			developing a <strong>2D CFD solver in C++</strong>, with a working demo in three months.
 		</p>
 		<p>
-			I'm currently based across Sofia, Bulgaria and Istanbul, Turkey, targeting remote
-			or EU-based simulation and digital twin roles. As an EU citizen (Bulgaria),
-			I require no visa sponsorship anywhere in Europe.
+			I'm looking for a junior software developer role — ideally backend, systems, or
+			tools-focused work. Based between Sofia, Bulgaria and Istanbul, Turkey. As an EU citizen (Bulgaria), I
+			require no visa sponsorship
+			anywhere in Europe.
 		</p>
 	</div>
 	
@@ -622,7 +621,7 @@
 					<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-mid);">Aug 2025 – Nov 2025</div>
 					<div style="margin-top: 20px;">
 						<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:6px;">Role</div>
-						<div style="font-size: 13px; color: var(--ink-mid);">Unity Developer<br>&amp; Tools Engineer</div>
+						<div style="font-size: 13px; color: var(--ink-mid);">Software Developer<br>(Unity / Tools)</div>
 					</div>
 				</div>
 				<div style="background: var(--cream); padding: 40px 44px; display: flex; flex-direction: column; gap: 28px;">
@@ -667,10 +666,10 @@
 	<div class="contact-left">
 		<h2>Let's work<br>together.</h2>
 		<p>
-			I'm actively looking for simulation developer, digital twin, or engineering software roles
-			in Europe — remote or on-site. If the problem involves real physics and real-time output,
-			I want to hear about it.
+			I am actively seeking a Junior Software Developer role, open to Backend, Systems, or Full-Stack work. I'm
+			most drawn to low-level, numerical, technical problems — but I code across the stack when the job calls for it.
 		</p>
+		<a class="btn-secondary" style="border-color:#444;color:var(--cream);margin-top:24px;display:inline-block;" href="Rengin_Celik_Resume.pdf" download>↓ Download CV (PDF)</a>
 	</div>
 	<div class="contact-right">
 		<div class="contact-item">
@@ -694,7 +693,7 @@
 
 <footer>
 	<p>© 2026 Rengin Çelik</p>
-	<p>Engineering Simulation Developer · Sofia &amp; Istanbul</p>
+	<p>Junior Software Developer · Sofia &amp; Istanbul</p>
 </footer>
 
 </body>
