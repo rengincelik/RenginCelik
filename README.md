@@ -1,68 +1,67 @@
-<div align="center">
+# Rengin Çelik: portfolio
 
-# Rengin Çelik
-### Simulation Developer
-*Focusing on Physics-based Simulations and Real-time Rendering*
+Vanilla JS (ES modules), plain CSS, no framework, no build step.
 
-[**Portfolio**](https://rengincelik.github.io/RenginCelik/) | [**LinkedIn**](https://linkedin.com/in/rengincelik) | [**Email**](mailto:rengin.celik97@gmail.com) | [**GitHub**](https://github.com/rengincelik)
+## Run locally
 
-**Phone:** +90 538 968 69 77  
-**Location:** Istanbul, TR & Sofia, BG
+ES modules don't load from `file://`, so use any static server from this folder:
 
----
+```sh
+python3 -m http.server 8000     # then open http://localhost:8000
+# or
+npx serve .
+```
 
-### Work Authorization
-**Bulgarian Citizenship** — Full EU/EEA work authorization.  
-*Open to relocation or remote opportunities in Europe.*
+Deploys as-is to GitHub Pages, Netlify, etc.
 
----
-</div>
+## Add a project
 
-### About Me
+Open `js/data/projects.js` and add one object to the `projects` array. Nothing else changes. The list number comes from the array position.
 
-Simulation Software Developer with a B.Sc. in Food Engineering from Istanbul Technical University — a curriculum grounded in thermodynamics, process systems, and numerical methods. Built PipeFlow, a real-time browser-based pipeline flow simulator implementing Darcy-Weisbach, Colebrook-White, and Newton-Raphson iteration in Vanilla JS with zero external dependencies. Additional background in real-time graphics, HLSL shader development, and
+```js
+{
+  id: 'my-project',               // unique slug
+  title: 'My project',
+  status: 'live',                 // 'live' | 'in-progress' | 'archive' (in-progress shows a badge)
+  layout: 'open',                 // 'open' = large feature block; 'collapsed' = row that expands to a spec card
+  summary: '…',
+  note: '…',                      // optional caveat under the summary
+  tags: ['JS', 'WebGL'],
+  media: { type: 'none' },        // or { type: 'image', src, alt }
+                                  // or { type: 'embed', src, poster, fullUrl }
+  spec: {
+    what: '…',
+    stack: ['…'],
+    decisions: ['…', '…'],
+    links: [{ label: 'Source', url: 'https://…' }],
+  },
+}
+```
 
----
+Empty fields are simply omitted. Mistakes (duplicate id, unknown layout) log a warning in the console instead of breaking the page.
 
-### Featured Project: [PipeFlow Simulator](https://github.com/rengincelik/pipeFlow)
-**[Live Demo →](https://rengincelik.github.io/pipeFlow/)**
+## Add a job
 
-*A browser-based, real-time pipeline flow simulator built for process engineers.*
+Add one object to the `experience` array in `js/data/experience.js` (newest first). Fields: `id`, `company`, `location`, `role`, `period`, `groups` (`[{ title, items }]`; an item is a string or `{ label, text }`), `tags`, `links`. Missing fields are simply omitted.
+## Where each piece of copy lives
 
-*   **Architecture:** Vanilla JavaScript (ES Modules), SVG & Canvas 2D rendering.
-*   **Physics:** Darcy-Weisbach & Colebrook-White equations.
-*   **Design:** Zero-dependency implementation focusing on performance and mathematical accuracy.
+| Copy | File |
+| --- | --- |
+| Name, nav links | `js/data/site.js` (`name`, `nav`) |
+| Hero statement + supporting line | `js/data/site.js` (`hero`) |
+| About paragraphs | `js/data/site.js` (`about`) |
+| Email, GitHub (repo + profile), LinkedIn, CV | `js/data/site.js` (`contact`) |
+| Everything about a project | `js/data/projects.js` |
+| Page title and meta description | `index.html` |
+| Structural labels (Work, About, Contact, Run it, Open full screen, spec row names) | the component that renders them, in `js/components/` |
+| Jobs (company, role, period, bullets) | js/data/experience.js |
 
----
 
-### Selected Projects
-*   **[GPU Instancing Study](https://rengincelik.github.io/GPU_Rendering/)** – Research on high-performance rendering techniques using HLSL in Unity.
-*   **[URP Shader Library](https://rengincelik.github.io/Shaders/)** – Custom HLSL shaders for advanced surfaces and environmental effects.
-*   **[Mini Dev Kit](https://rengincelik.github.io/Mini-Dev-Kit/)** – Modular Unity toolset for streamlined editor workflows and system architecture.
+Anything still written as `[ADD: …]` is a placeholder. On the page it gets a dashed accent outline, so unfilled copy is easy to spot. Placeholder links render without an `href` until you fill them in. To find them all: `grep -rn "\[ADD" .`
 
----
+## Notes
 
-### Technical Skills
-
-| Category | Competencies |
-| :--- | :--- |
-| **Simulation** | Fluid Dynamics, Thermodynamics, Numerical Methods (Newton-Raphson, Bisection) |
-| **Development** | Vanilla JavaScript (ES6+), C#, Event-Driven Architecture |
-| **Graphics** | HLSL, Unity URP, GPU Instancing, Shader Development |
-| **Engineering** | Process Engineering, Heat & Mass Transfer, Pipeline Systems |
-| **Environment** | Git, WebStorm, Unity, VSCode, Linux (Ubuntu) |
-
----
-
-### Education
-**B.Sc. Food Engineering**  
-*Istanbul Technical University (ITU), 2016 – 2022*  
-Focus on fluid mechanics, heat & mass transfer, and numerical analysis.
-
----
-
-<div align="center">
-
-*Engineering knowledge meets real-time software craftsmanship.*
-
-</div>
+- **Background slider** (`js/components/BackgroundSlider.js`): one value (0–100) sets `--bg`, `--fg`, `--muted`, `--line`, `--line-strong` and `--accent` on `:root`. The gray ramp skips a mid-gray band so every position meets WCAG AA (4.5:1) for text, muted text and the accent. This is also why the background makes one visible jump near the middle of the slider. The band is set by `GRAY_LIGHT_FLOOR` and `GRAY_DARK_CEIL`. If you change colors there, re-check contrast: `computeTheme(v)` is a pure function you can run in Node for all 101 values.
+- **Embeds** (`js/components/EmbedFrame.js`): the iframe is only created after "Run it". The default `sandbox` is `allow-scripts allow-same-origin`. Host embedded demos on a different origin than this site; for same-origin demos, override with `media.sandbox` and drop `allow-same-origin`.
+- **Fonts**: DM Sans and DM Mono load from Google Fonts in `index.html`; system fonts are the fallback.
+- `js/lib/dom.js` holds the small shared helpers (`h()` element builder, placeholder highlighting, link/tag/badge builders).

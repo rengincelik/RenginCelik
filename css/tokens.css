@@ -1,0 +1,41 @@
+/* Design tokens. Colours below are only the first-paint fallback (dark
+   charcoal): js/components/BackgroundSlider.js overwrites --bg, --fg,
+   --muted, --line, --line-strong and --accent from the slider value. */
+:root {
+  /* colour (runtime-driven) */
+  --bg: #222222;
+  --fg: #f3f3f1;
+  --muted: #9f9f9e;
+  --line: #434343;
+  --line-strong: #80807f;
+  --accent: #f5683d;
+  color-scheme: dark;
+
+  /* type */
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.2rem + 3.4vw, 4rem);
+  --text-hero: clamp(2.5rem, 1rem + 7vw, 6.5rem);
+
+  /* space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: clamp(3.5rem, 9vw, 7rem);
+
+  /* layout */
+  --max: 1120px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --num-col: 3rem;
+  --hairline: 1px solid var(--line);
+}

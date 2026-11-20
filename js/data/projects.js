@@ -1,0 +1,127 @@
+/**
+ * Projects, in display order. The Work section is rendered entirely from
+ * this array: to add a project, add an object. No HTML, CSS or JS changes.
+ * The list number (01, 02, ...) comes from the position in the array.
+ *
+ * @typedef {Object} Project
+ * @property {string}   id          Unique slug; used for the #project-<id> anchor.
+ * @property {string}   title
+ * @property {'live'|'in-progress'|'archive'} status   'in-progress' shows a badge.
+ * @property {'open'|'collapsed'} layout   open = large feature block;
+ *                                         collapsed = numbered row that expands into a spec card.
+ * @property {string}   summary     One or two sentences.
+ * @property {string}   [note]      Optional caveat shown under the summary (e.g. a disclaimer).
+ * @property {string[]} tags
+ * @property {Object}   media
+ * @property {'embed'|'image'|'none'} media.type
+ * @property {string}   [media.src]      embed: iframe URL. image: image path.
+ * @property {string}   [media.poster]   embed: poster image shown before "Run it".
+ * @property {string}   [media.fullUrl]  embed: target of "Open full screen".
+ * @property {string}   [media.alt]      image: alt text.
+ * @property {string}   [media.sandbox]  embed: override the default sandbox tokens.
+ * @property {Object}   spec
+ * @property {string}   spec.what
+ * @property {string[]} spec.stack
+ * @property {string[]} spec.decisions   Key decisions, one per item.
+ * @property {{label: string, url: string}[]} spec.links
+ */
+
+/** @type {Project[]} */
+export const projects = [
+	{
+		id: 'i-fall-suddenly',
+		title: 'I Fall Suddenly',
+		status: 'live',
+		layout: 'open',
+		summary:
+			'Bilingual Narcolepsy Awareness Platform. A bilingual (Turkish/English) web platform designed to raise awareness about narcolepsy, provide educational resources, and help users recognize potential symptoms through interactive screening tools.',
+		note: '[ADD: note that this is a screening aid, not a diagnosis]',
+		tags: ['Vanilla JS', 'i18n', 'Web Worker', 'dual theme'],
+		media: {
+			type: 'image',
+			src: '[ADD: screenshot path, e.g. assets/i-fall-suddenly.png]',
+			alt: '[ADD: screenshot description]',
+		},
+		spec: {
+			what: 'A bilingual (Turkish/English) platform with interactive Narcolepsy Type 1 (SNS) and Epworth Sleepiness Scale (ESS) assessments.',
+			stack: [
+				'HTML5',
+				'CSS3',
+				'JavaScript (ES Modules)',
+				'Cloudflare Workers & D1',
+				'GitHub Pages',
+			],
+			decisions: [
+				'Interactive SNS and ESS assessments with visual results and personalized explanations',
+				'Educational content covering symptoms, diagnosis, and treatment',
+				'Responsive design with dark/light themes',
+				'Privacy-conscious data handling and anonymous usage statistics',
+			],
+			links: [
+				{ label: 'Live site', url: 'https://rengincelik.github.io/ifallsuddenly/' },
+				{ label: 'Source', url: 'https://github.com/rengincelik/ifallsuddenly' },
+			],
+		},
+	},
+
+  {
+    id: 'pipeflow',
+    title: 'PipeFlow',
+    status: 'live',
+    layout: 'open',
+    summary:
+      'Browser-based pipeline hydraulics simulator for process engineers. A real-time pipeline flow simulator that runs entirely in the browser with zero external dependencies and no build step.',
+    tags: [
+      'Vanilla JS · ES Modules',
+      'SVG Rendering',
+      'Canvas 2D',
+      'Darcy-Weisbach',
+      'State Machine',
+      'Zero Dependencies',
+    ],
+    media: {
+      type: 'embed',
+      src: 'https://rengincelik.github.io/pipeFlow/',
+      poster: '[ADD: poster image path, e.g. assets/pipeflow-poster.png]',
+      fullUrl: 'https://rengincelik.github.io/pipeFlow/',
+    },
+    spec: {
+      what: 'Engineers drag and drop pumps, pipes, valves, elbows and reducers, and the system calculates pressure, velocity, flow rate and energy losses every 100 ms.',
+      stack: ['Vanilla JS (ES modules)', 'SVG rendering', 'Canvas 2D'],
+      decisions: [
+        'Genuine physics model: Darcy-Weisbach friction losses with Colebrook-White (fixed-point iteration), Borda-Carnot expansion losses, pump H-Q curve resolved each tick by bisection',
+        'Parallel diagnostic engine: 21 hydraulic rules against industry thresholds (Crane TP-410, ISA 75.01), each with severity level and corrective advice',
+        'Fully decoupled modules via custom EventEmitter',
+        'State machine: IDLE → RUNNING → ALARM',
+        'OverrideMixin: user overrides resolve over system defaults',
+      ],
+      links: [
+        { label: 'Live demo', url: 'https://rengincelik.github.io/pipeFlow/' },
+        { label: 'GitHub', url: 'https://github.com/rengincelik/pipeFlow' },
+      ],
+    },
+  },
+
+  {
+    id: 'navier-stokes-2d',
+    title: '2D Navier–Stokes solver',
+    status: 'in-progress',
+    layout: 'collapsed',
+    summary:
+      'From-scratch incompressible CFD with conjugate heat transfer. A 2D incompressible Navier-Stokes solver built in C++ with zero external framework dependencies.',
+    tags: ['C++', 'CFD', 'numerical methods'],
+    media: { type: 'none' },
+    spec: {
+      what: 'A 2D incompressible Navier-Stokes solver in C++ with a conjugate heat transfer solver, interactive draggable rigid bodies (Dirichlet disk, Neumann obstacle) and SDL2 real-time visualization with dynamic colormaps.',
+      stack: ['C++17', 'SDL2', 'CMake'],
+      decisions: [
+        "Chorin's projection method: fractional step approach decoupling velocity and pressure",
+        'Gauss-Seidel pressure iteration with CFL-stable time stepping',
+        'Validated against the Ghia et al. (1982) lid-driven cavity benchmark with automated L₂/L∞ error norms at Re = 400',
+        'Currently validating at increasing mesh resolutions: 64×64 complete, 128×128 with bilinear interpolation in progress',
+      ],
+      links: [{ label: 'GitHub', url: 'https://github.com/rengincelik/cfd-simulation' }],
+    },
+  },
+
+];
