@@ -6,6 +6,12 @@
     js/main.js -> data/{site,projects,experience}.js, components/{BackgroundSlider,Desktop}.js
     Desktop -> DesktopMenu, WindowManager, dom
     DesktopMenu -> dom      WindowManager -> Window, dom      Window -> dom
+    WindowManager -> Window, windowContent, dom
+    windowContent -> AboutWindow, ContactWindow, ProjectWindow, ExperienceWindow
+    ContactWindow -> Contact (ContactList), dom     ExperienceWindow -> Experience (Job), dom
+    ProjectWindow -> ProjectFeature (ProjectMedia), SpecCard, dom
+Not: yeni pencere türü = windowContent.js içindeki RENDERERS'a bir satır.
+
 
 ## Mount points (index.html id -> component <- data)
     | `#desktop` | `Desktop({site, projects, experience})` | `site`, `projects`, `experience` |

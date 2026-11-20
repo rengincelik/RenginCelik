@@ -16,26 +16,30 @@ const ROWS = [
 	{ label: 'Portfolio', key: 'portfolio', href: (v) => v, show: () => 'Download Portfolio', newTab: false },
 ];
 
+export function ContactList(contact) {
+	return h(
+		'ul',
+		{ class: 'contact__list' },
+		ROWS.map(({ label, key, href, show, newTab }) => {
+			const value = contact[key];
+			const filled = value && !isPlaceholder(value);
+			return h(
+				'li',
+				{ class: 'contact__row' },
+				h('span', { class: 'contact__label' }, label),
+				filled
+					? link(show(value), href(value), { className: 'contact__link', newTab: newTab ?? true })
+					: h('span', { class: 'contact__link' }, value || '[ADD: value]')
+			);
+		})
+	);
+}
+
 export function Contact(contact) {
-  return h(
-    'div',
-    { class: 'section__inner container' },
-    h('h2', { class: 'section__title', id: 'contact-title' }, 'Contact'),
-    h(
-      'ul',
-      { class: 'contact__list' },
-      ROWS.map(({ label, key, href, show, newTab }) => {
-        const value = contact[key];
-        const filled = value && !isPlaceholder(value);
-        return h(
-          'li',
-          { class: 'contact__row' },
-          h('span', { class: 'contact__label' }, label),
-          filled
-            ? link(show(value), href(value), { className: 'contact__link', newTab: newTab ?? true })
-            : h('span', { class: 'contact__link' }, value || '[ADD: value]')
-        );
-      })
-    )
-  );
+	return h(
+		'div',
+		{ class: 'section__inner container' },
+		h('h2', { class: 'section__title', id: 'contact-title' }, 'Contact'),
+		ContactList(contact)
+	);
 }

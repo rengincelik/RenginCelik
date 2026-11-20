@@ -3,7 +3,7 @@ import { h, tagList, linkList } from '../lib/dom.js';
 const renderItem = (item) =>
   h('li', {}, typeof item === 'string' ? item : [h('strong', {}, `${item.label}: `), item.text]);
 
-function Job(job) {
+export function Job(job) {
   return h(
     'article',
     { class: 'job', id: `job-${job.id}` },

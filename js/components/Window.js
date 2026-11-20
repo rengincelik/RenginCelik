@@ -5,9 +5,10 @@ import { h } from '../lib/dom.js';
  * It knows nothing about state, focus order or dragging (WindowManager owns
  * those) and nothing about what a window shows: `content` is any Node.
  *
+ * `type` only tags the element (data-window-type) so CSS can size it.
  * Returns { el, titlebar, closeButton } so the manager can wire interactions.
  */
-export function Window({ id, title, content, onClose }) {
+export function Window({ id, title, type, content, onClose }) {
   const titleId = `window-title-${id}`;
 
   const closeButton = h(
@@ -42,7 +43,7 @@ export function Window({ id, title, content, onClose }) {
       role: 'dialog',
       'aria-labelledby': titleId,
       tabindex: -1,
-      dataset: { windowId: id },
+      dataset: type ? { windowId: id, windowType: type } : { windowId: id },
     },
     titlebar,
     body

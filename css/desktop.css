@@ -356,6 +356,83 @@ body:has(.desktop) {
   }
 }
 
+/* ---------- window content (Phase 2) ---------- */
+
+/* Default size per window type; mobile always goes full screen. */
+.window[data-window-type='about'] {
+  width: min(34rem, calc(100% - 2rem));
+  height: min(30rem, calc(100% - 2rem));
+}
+
+.window[data-window-type='contact'] {
+  width: min(30rem, calc(100% - 2rem));
+  height: min(30rem, calc(100% - 2rem));
+}
+
+.window[data-window-type='project'] {
+  width: min(44rem, calc(100% - 2rem));
+  height: min(36rem, calc(100% - 2rem));
+}
+
+.window[data-window-type='experience'] {
+  width: min(38rem, calc(100% - 2rem));
+  height: min(32rem, calc(100% - 2rem));
+}
+
+.window__body {
+  padding: var(--space-5);
+}
+
+.win-project,
+.win-experience,
+.win-contact {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.window .about__body {
+  max-width: none;
+  font-size: var(--text-base);
+}
+
+.window .contact__row {
+  grid-template-columns: 1fr;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+}
+
+.window .contact__link {
+  font-size: var(--text-lg);
+}
+
+/* Legacy section styles key off the viewport; inside a window they must not. */
+.window .job {
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  padding-block: 0;
+  border-top: 0;
+}
+
+.window .spec__row {
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.window .spec dt {
+  padding-top: 0;
+}
+
+.window .feature__summary {
+  font-size: var(--text-base);
+}
+
+/* A click inside an iframe never reaches the page, so an inactive window's
+   first click must land on the window (to raise it), not on the demo. */
+.window:not(.is-active) iframe {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .menu-item,
   .submenu__item {

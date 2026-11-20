@@ -121,21 +121,23 @@ export function DesktopMenu({ site, projects, experience, onOpen }) {
     id: `project-${p.id}`,
     title: p.title,
     type: 'project',
+    data: p,
   }));
   const experienceEntries = experience.map((e) => ({
     id: `job-${e.id}`,
     title: e.company,
     type: 'experience',
+    data: e,
   }));
 
   const projectsGroup = groupItem('projects', 'Projects', 1, projectEntries);
   const experienceGroup = groupItem('experience', 'Experience', 2, experienceEntries);
 
   const items = [
-    [windowItem('About', 0, { id: 'about', title: 'About', type: 'about' })],
+    [windowItem('About', 0, { id: 'about', title: 'About', type: 'about', data: site.about })],
     [projectsGroup.button, projectsGroup.list],
     [experienceGroup.button, experienceGroup.list],
-    [windowItem('Contact', 3, { id: 'contact', title: 'Contact', type: 'contact' })],
+    [windowItem('Contact', 3, { id: 'contact', title: 'Contact', type: 'contact', data: site.contact })],
     [downloadItem('Download Portfolio', 4, PORTFOLIO_FILE)],
     [downloadItem('Download Resume', 5, site.contact.cv)],
   ];

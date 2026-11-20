@@ -1,5 +1,6 @@
 import { h } from '../lib/dom.js';
 import { Window } from './Window.js';
+import { renderContent } from './windowContent.js';
 
 /**
  * Owns window state and interactions: open / close, one window per id,
@@ -16,13 +17,13 @@ const CASCADE_STEP = 32;
 const CASCADE_SLOTS = 6;
 const KEEP_VISIBLE = 80; // px of a window that must stay on screen
 
-/** Phase 1 placeholder. Phase 2 swaps this for a per-`type` component. */
+/** Fallback for a window type that has no content component (or no data). */
 function placeholder(spec) {
   return h(
     'div',
     { class: 'window__placeholder' },
     h('p', {}, `${spec.title} — placeholder content.`),
-    h('p', { class: 'window__hint' }, 'Real content arrives in a later phase.')
+    h('p', { class: 'window__hint' }, 'No content component for this window yet.')
   );
 }
 
@@ -121,7 +122,7 @@ export function WindowManager({ onChange } = {}) {
 
   /**
    * Open a window, or bring it to the front if its id is already open.
-   * @param {{ id: string, title: string, type?: string, content?: Node }} spec
+   * @param {{ id: string, title: string, type?: string, data?: object, content?: Node }} spec
    */
   function open(spec) {
     if (windows.has(spec.id)) {
@@ -134,7 +135,8 @@ export function WindowManager({ onChange } = {}) {
     const shell = Window({
       id: spec.id,
       title: spec.title,
-      content: spec.content ?? placeholder(spec),
+      type: spec.type,
+      content: spec.content ?? renderContent(spec) ?? placeholder(spec),
       onClose: close,
     });
     const slot = cascade++ % CASCADE_SLOTS;
