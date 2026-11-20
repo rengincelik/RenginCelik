@@ -1,0 +1,371 @@
+/* Desktop shell + window system (Phase 1). Uses the runtime colour vars from
+   tokens.css / BackgroundSlider. Legacy page styles stay in components.css. */
+
+body:has(.desktop) {
+  overflow: hidden;
+}
+
+.desktop {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ---------- stage: identity + menu ---------- */
+
+.desktop__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 6vh, 3.5rem);
+  padding: var(--gutter);
+  outline: none;
+}
+
+.desktop__title {
+  font-size: clamp(2.25rem, 0.5rem + 9vw, 8.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+/* ---------- menu ---------- */
+
+.menu {
+  position: relative; /* anchor for the submenu tray */
+  max-width: 68rem;
+}
+
+.menu__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4) var(--space-5);
+}
+
+.menu-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: var(--text-base);
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  translate: 0 0;
+  scale: 1;
+  transition: scale 0.2s ease, border-color 0.2s, color 0.2s, background-color 0.2s;
+  animation: menu-float var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible {
+  scale: 1.08;
+  border-color: var(--accent);
+  color: var(--accent);
+  animation-play-state: paused;
+}
+
+.menu-item:active {
+  scale: 0.94;
+}
+
+.menu-item[aria-expanded='true'] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.menu-item.is-placeholder,
+.menu-item.is-placeholder:hover {
+  scale: 1;
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Click feedback: a ring that expands and fades. */
+.menu-item::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--accent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-item.is-pulse::after {
+  animation: menu-pulse 0.5s ease-out;
+}
+
+@keyframes menu-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  33% {
+    translate: var(--dx, 5px) calc(var(--dy, 7px) * -1);
+  }
+  66% {
+    translate: calc(var(--dx, 5px) * -1) calc(var(--dy, 7px) * 0.5);
+  }
+}
+
+@keyframes menu-pulse {
+  from {
+    opacity: 0.9;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 1.35;
+  }
+}
+
+/* ---------- submenu tray ---------- */
+
+.submenu {
+  position: absolute;
+  top: calc(100% + var(--space-4));
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  width: max-content;
+  max-width: min(38rem, calc(100vw - 2rem));
+  animation: submenu-in 0.18s ease-out;
+}
+
+.submenu[hidden] {
+  display: none;
+}
+
+.submenu__item {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s, color 0.2s, scale 0.15s;
+}
+
+.submenu__item:hover,
+.submenu__item:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  scale: 1.05;
+}
+
+.submenu__item:active {
+  scale: 0.95;
+}
+
+@keyframes submenu-in {
+  from {
+    opacity: 0;
+    translate: -50% -6px;
+  }
+}
+
+/* ---------- windows ---------- */
+
+.desktop__windows {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none; /* only the windows themselves take clicks */
+}
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: min(30rem, calc(100% - 2rem));
+  height: min(22rem, calc(100% - 2rem));
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.75rem;
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 0.3);
+  pointer-events: auto;
+  animation: window-in 0.16s ease-out;
+}
+
+.window.is-active {
+  border-color: var(--accent);
+}
+
+.window:focus {
+  outline: none;
+}
+
+.window__titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-bottom: var(--hairline);
+  background: color-mix(in srgb, var(--fg) 6%, var(--bg));
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.window.is-dragging {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.window.is-dragging .window__titlebar {
+  cursor: grabbing;
+}
+
+.window__title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.window__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: 0.4rem;
+  background: transparent;
+  font-size: var(--text-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.window__close:hover {
+  background: color-mix(in srgb, var(--fg) 14%, transparent);
+  color: var(--accent);
+}
+
+.window__close-label {
+  display: none;
+}
+
+.window__body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-4);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.window__hint {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+@keyframes window-in {
+  from {
+    opacity: 0;
+    scale: 0.97;
+  }
+}
+
+/* ---------- mobile: simplified menu, one full-screen window, no dragging ---------- */
+
+@media (max-width: 720px) {
+  .menu__list {
+    gap: var(--space-3);
+  }
+
+  .menu-item {
+    min-height: 2.75rem;
+    padding: 0.6rem 1.1rem;
+    font-size: var(--text-sm);
+  }
+
+  .submenu__item {
+    min-height: 2.75rem;
+  }
+
+  .window {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .window__titlebar {
+    padding: var(--space-2) var(--space-3);
+    cursor: default;
+    touch-action: auto;
+  }
+
+  .window__close {
+    min-width: 2.75rem;
+    height: 2.75rem;
+    font-size: var(--text-base);
+  }
+
+  .window__close-icon {
+    display: none;
+  }
+
+  .window__close-label {
+    display: inline;
+  }
+
+  /* back control on the left, like a navigation bar */
+  .window__titlebar {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-height: 480px) {
+  .desktop__stage {
+    gap: var(--space-4);
+  }
+
+  .desktop__title {
+    font-size: clamp(1.75rem, 8vh, 3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-item,
+  .submenu__item {
+    animation: none;
+    transition: none;
+  }
+
+  .menu-item.is-pulse::after,
+  .submenu,
+  .window {
+    animation: none;
+  }
+}

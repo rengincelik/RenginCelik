@@ -1,19 +1,14 @@
 # ARCHITECTURE (edit map)
 
 ## Load chain
-```
-index.html -> css/tokens.css, css/base.css, css/components.css, js/main.js
-js/main.js -> data/site.js, data/projects.js, components/{BackgroundSlider,Nav,Hero,ProjectList,About,Contact}.js
-```
+
+    index.html -> css/tokens.css, css/base.css, css/components.css, css/desktop.css, js/main.js
+    js/main.js -> data/{site,projects,experience}.js, components/{BackgroundSlider,Desktop}.js
+    Desktop -> DesktopMenu, WindowManager, dom
+    DesktopMenu -> dom      WindowManager -> Window, dom      Window -> dom
 
 ## Mount points (index.html id -> component <- data)
-| id | component | data |
-| --- | --- | --- |
-| `#site-header` | `Nav({name, links})` | `site.name`, `site.nav` |
-| `#hero` | `Hero(site.hero)` | `site.hero` |
-| `#work` | `ProjectList(projects)` | `projects` |
-| `#about` | `About(site.about)` | `site.about` |
-| `#contact` | `Contact(site.contact)` | `site.contact` |
+    | `#desktop` | `Desktop({site, projects, experience})` | `site`, `projects`, `experience` |
 
 Must match: `aria-labelledby` in index.html <-> h1/h2 ids `hero-title`, `work-title`, `about-title`, `contact-title`. Nav `href`s (`#work #about #contact`) <-> section ids. `#top` = `<body id>`.
 `main.js` also calls `initBackground()` first (before rendering).
@@ -94,6 +89,10 @@ Fonts `--font-sans --font-mono`; type `--text-xs/sm/base/lg/xl/2xl/hero`; space 
 | About | `.about__body` |
 | Contact | `.contact__list` `.contact__row` `.contact__label` `.contact__link` |
 | shared | `.num` `.tags` `.badge` `.link` `.link-list` `.ph` `.is-placeholder` `.container` `.visually-hidden` `.skip-link` |
+Desktop: .desktop .desktop__stage .desktop__title .desktop__windows
+Menu: .menu .menu__list .menu__item .menu-item (.is-pulse .is-placeholder) .submenu .submenu__item
+Window: .window (.is-active .is-dragging) .window__titlebar .window__title .window__close .window__body .window__placeholder
+
 
 Breakpoints: 560px (spec rows), 720px (nav, contact rows), 860px (feature columns, row grid).
 
