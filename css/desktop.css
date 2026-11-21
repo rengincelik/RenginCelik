@@ -13,6 +13,14 @@ body:has(.desktop) {
 
 /* ---------- stage: identity + menu ---------- */
 
+.desktop__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .desktop__stage {
   position: absolute;
   inset: 0;

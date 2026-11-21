@@ -385,4 +385,11 @@ js/
 - Keep window content, window shell and window management separate.
 - Keep menu positioning and visual effects independent from window state.
 - Prefer CSS changes for visual adjustments; avoid changing window management logic unless behavior itself needs to change.
-- 
+
+
+## D) ARCHITECTURE.md
+Load chain'e ekle:
+Desktop -> Background, DesktopMenu, WindowManager, dom
+Background -> backgrounds (data), backgroundShader (lib), dom
+Yeni data dosyası: js/data/backgrounds.js (intervalMs, images, cycle, windows)
+CSS class map: .desktop__bg

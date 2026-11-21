@@ -32,7 +32,7 @@ function pulse(el) {
  * Main menu: window openers, Projects / Experience submenus, downloads.
  * Titles of submenu entries come straight from the data files.
  */
-export function DesktopMenu({ site, projects, experience, onOpen }) {
+export function DesktopMenu({ site, projects, experience, onOpen, onPreview = () => {} }) {
   let openGroup = null; // { button, list }
 
   const setGroup = (group) => {
@@ -59,14 +59,30 @@ export function DesktopMenu({ site, projects, experience, onOpen }) {
     return el;
   };
 
-  const windowItem = (label, index, spec) =>
-    menuButton(label, index, {
-      onclick: (e) => {
-        setGroup(null);
-        pulse(e.currentTarget);
-        onOpen(spec);
-      },
+  /** Hover (mouse/pen) or keyboard focus previews this window's background image. */
+  const previewOnHover = (el, id) => {
+    el.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'touch') onPreview(id);
     });
+    el.addEventListener('pointerleave', () => onPreview(null));
+    el.addEventListener('focus', () => {
+      if (el.matches(':focus-visible')) onPreview(id);
+    });
+    el.addEventListener('blur', () => onPreview(null));
+    return el;
+  };
+
+  const windowItem = (label, index, spec) =>
+    previewOnHover(
+      menuButton(label, index, {
+        onclick: (e) => {
+          setGroup(null);
+          pulse(e.currentTarget);
+          onOpen(spec);
+        },
+      }),
+      spec.id
+    );
 
   const groupItem = (key, label, index, entries) => {
     const listId = `submenu-${key}`;
@@ -77,14 +93,17 @@ export function DesktopMenu({ site, projects, experience, onOpen }) {
         h(
           'li',
           {},
-          h(
-            'button',
-            {
-              class: 'submenu__item',
-              type: 'button',
-              onclick: () => onOpen(entry),
-            },
-            entry.title
+          previewOnHover(
+            h(
+              'button',
+              {
+                class: 'submenu__item',
+                type: 'button',
+                onclick: () => onOpen(entry),
+              },
+              entry.title
+            ),
+            entry.id
           )
         )
       )
