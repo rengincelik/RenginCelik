@@ -121,7 +121,15 @@ export const projects = [
     summary:
       'From-scratch incompressible CFD with conjugate heat transfer. A 2D incompressible Navier-Stokes solver built in C++ with zero external framework dependencies.',
     tags: ['C++', 'CFD', 'numerical methods'],
-    media: { type: 'none' },
+    media: {
+      type: 'embed',
+      src: 'https://rengincelik.github.io/cfd-simulation/',
+      poster: '[ADD: poster image path, e.g. assets/cfd-poster.png]',
+      fullUrl: 'https://rengincelik.github.io/cfd-simulation/',
+      // The page lays itself out (fluid mode) and keeps no state, so same-origin is
+      // left out and the sandbox is real. allow-downloads is for Export CSV.
+      sandbox: 'allow-scripts allow-downloads',
+    },
     spec: {
       what: 'A 2D incompressible Navier-Stokes solver in C++ with a conjugate heat transfer solver, interactive draggable rigid bodies (Dirichlet disk, Neumann obstacle) and SDL2 real-time visualization with dynamic colormaps.',
       stack: ['C++17', 'SDL2', 'CMake'],
@@ -131,7 +139,10 @@ export const projects = [
         'Validated against the Ghia et al. (1982) lid-driven cavity benchmark with automated L₂/L∞ error norms at Re = 400',
         'Currently validating at increasing mesh resolutions: 64×64 complete, 128×128 with bilinear interpolation in progress',
       ],
-      links: [{ label: 'GitHub', url: 'https://github.com/rengincelik/cfd-simulation' }],
+      links: [
+        { label: 'Live demo', url: 'https://rengincelik.github.io/cfd-simulation/' },
+        { label: 'GitHub', url: 'https://github.com/rengincelik/cfd-simulation' },
+      ],
     },
   },
 

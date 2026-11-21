@@ -434,6 +434,11 @@ body:has(.desktop) {
 
 /* Projects with a live embed get a bigger window (id = project-<project.id>).
    Mobile keeps the full-screen rule above. */
+.window[data-window-id='project-navier-stokes-2d'] {
+  width: min(50rem, calc(100% - 2rem));
+  height: min(40rem, calc(100% - 9rem));
+}
+
 .window[data-window-id='project-pipeflow'] {
   width: min(58rem, calc(100% - 2rem));
   /* windows open ~100px below the top, so leave room: the body scrolls if needed */
