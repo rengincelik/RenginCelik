@@ -6,7 +6,7 @@ import { h } from '../lib/dom.js';
  * those) and nothing about what a window shows: `content` is any Node.
  *
  * `type` only tags the element (data-window-type) so CSS can size it.
- * Returns { el, titlebar, closeButton } so the manager can wire interactions.
+ * Returns { el, titlebar, closeButton, resizeHandle } so the manager can wire interactions.
  */
 export function Window({ id, title, type, content, onClose }) {
   const titleId = `window-title-${id}`;
@@ -36,6 +36,12 @@ export function Window({ id, title, type, content, onClose }) {
     content
   );
 
+  const resizeHandle = h('button', {
+    class: 'window__resize',
+    type: 'button',
+    'aria-label': `Resize ${title} (arrow keys)`,
+  });
+
   const el = h(
     'div',
     {
@@ -46,8 +52,9 @@ export function Window({ id, title, type, content, onClose }) {
       dataset: type ? { windowId: id, windowType: type } : { windowId: id },
     },
     titlebar,
-    body
+    body,
+    resizeHandle
   );
 
-  return { el, titlebar, closeButton };
+  return { el, titlebar, closeButton, resizeHandle };
 }

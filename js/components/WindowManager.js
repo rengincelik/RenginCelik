@@ -7,7 +7,8 @@ import { renderContent } from './windowContent.js';
  * z-index order, dragging, viewport clamping and the one-window mobile mode.
  *
  * Record per open window:
- *   { id, title, type, position: {x, y}, zIndex, el, titlebar, opener }
+ *   { id, title, type, position: {x, y}, size: {w, h} | null, zIndex, el, titlebar, resizeHandle, opener }
+ * `size` stays null until the user resizes; the CSS default size applies until then.
  */
 
 const MOBILE_QUERY = '(max-width: 720px)';
@@ -16,6 +17,8 @@ const CASCADE_START = { x: 120, y: 100 };
 const CASCADE_STEP = 32;
 const CASCADE_SLOTS = 6;
 const KEEP_VISIBLE = 80; // px of a window that must stay on screen
+const MIN_W = 280;
+const MIN_H = 180;
 
 /** Fallback for a window type that has no content component (or no data). */
 function placeholder(spec) {
@@ -51,6 +54,11 @@ export function WindowManager({ onChange } = {}) {
 
   /** Keep the title bar reachable: never let a window leave the screen. */
   function clamp(win) {
+    if (win.size) {
+      win.size.w = Math.min(win.size.w, layer.clientWidth);
+      win.size.h = Math.min(win.size.h, layer.clientHeight);
+      applySize(win);
+    }
     const maxX = layer.clientWidth - KEEP_VISIBLE;
     const maxY = layer.clientHeight - win.titlebar.offsetHeight;
     const minX = KEEP_VISIBLE - win.el.offsetWidth;
@@ -89,6 +97,57 @@ export function WindowManager({ onChange } = {}) {
     const opener = win.opener;
     if (opener?.isConnected && opener.getClientRects().length) opener.focus();
     else if (next) focus(next.id);
+  }
+
+  function applySize(win) {
+    win.el.style.width = `${win.size.w}px`;
+    win.el.style.height = `${win.size.h}px`;
+  }
+
+  /** Set the size, within the minimum and what fits between the window's corner and the screen edge. */
+  function resizeTo(win, w, h) {
+    const maxW = Math.max(layer.clientWidth - Math.max(win.position.x, 0), MIN_W);
+    const maxH = Math.max(layer.clientHeight - Math.max(win.position.y, 0), MIN_H);
+    win.size = {
+      w: Math.round(Math.min(Math.max(w, MIN_W), maxW)),
+      h: Math.round(Math.min(Math.max(h, MIN_H), maxH)),
+    };
+    applySize(win);
+  }
+
+  function startResize(win, e) {
+    if (mobile.matches || e.button !== 0) return;
+    const { el, resizeHandle: handle } = win;
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = el.offsetWidth;
+    const startH = el.offsetHeight;
+
+    handle.setPointerCapture(e.pointerId);
+    el.classList.add('is-resizing');
+
+    const move = (ev) => resizeTo(win, startW + ev.clientX - startX, startH + ev.clientY - startY);
+    const end = () => {
+      el.classList.remove('is-resizing');
+      handle.removeEventListener('pointermove', move);
+      handle.removeEventListener('pointerup', end);
+      handle.removeEventListener('pointercancel', end);
+      handle.removeEventListener('lostpointercapture', end);
+      if (handle.hasPointerCapture?.(e.pointerId)) handle.releasePointerCapture(e.pointerId);
+    };
+    handle.addEventListener('pointermove', move);
+    handle.addEventListener('pointerup', end);
+    handle.addEventListener('pointercancel', end);
+    handle.addEventListener('lostpointercapture', end);
+  }
+
+  /** Keyboard resize: arrow keys on the handle (Shift = bigger steps). */
+  function keyResize(win, e) {
+    const step = e.shiftKey ? 48 : 16;
+    const delta = { ArrowRight: [step, 0], ArrowLeft: [-step, 0], ArrowDown: [0, step], ArrowUp: [0, -step] }[e.key];
+    if (!delta || mobile.matches) return;
+    e.preventDefault();
+    resizeTo(win, win.el.offsetWidth + delta[0], win.el.offsetHeight + delta[1]);
   }
 
   function startDrag(win, e) {
@@ -148,14 +207,18 @@ export function WindowManager({ onChange } = {}) {
         x: CASCADE_START.x + slot * CASCADE_STEP,
         y: CASCADE_START.y + slot * CASCADE_STEP,
       },
+      size: null,
       zIndex: 0,
       el: shell.el,
       titlebar: shell.titlebar,
+      resizeHandle: shell.resizeHandle,
       opener: document.activeElement,
     };
     windows.set(win.id, win);
 
     shell.titlebar.addEventListener('pointerdown', (e) => startDrag(win, e));
+    shell.resizeHandle.addEventListener('pointerdown', (e) => startResize(win, e));
+    shell.resizeHandle.addEventListener('keydown', (e) => keyResize(win, e));
     win.el.addEventListener('pointerdown', () => raise(win.id));
     win.el.addEventListener('focusin', () => raise(win.id));
     win.el.addEventListener('keydown', (e) => {
