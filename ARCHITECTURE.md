@@ -204,6 +204,15 @@ Media types:
 - `image`
 - `embed`
 
+`embed` media (rendered by `EmbedFrame.js`) has two sizing modes:
+
+- **Fluid** (default): the iframe fills a 16:9 stage (4:5 on mobile) and the demo lays itself out.
+- **Scaled**: set `media.width` and `media.height` (CSS px). The demo is rendered at that logical size and shrunk to the window with `transform: scale()`; the stage takes the same aspect ratio. Below `media.minScale` (default 0.5) "Run it" is replaced by a pointer to "Open full screen". Use this for demos that are a fixed desktop layout.
+
+`media.sandbox` overrides the sandbox tokens (e.g. add `allow-downloads` for a demo that exports files).
+
+A project with a live embed can get a larger window in `desktop.css` through `.window[data-window-id='project-<id>']`; no JavaScript change is needed.
+
 ### `js/data/experience.js`
 
 Experience entries are stored in an array.

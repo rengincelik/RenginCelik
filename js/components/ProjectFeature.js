@@ -12,6 +12,9 @@ export function ProjectMedia(project) {
       poster: media.poster,
       fullUrl: media.fullUrl,
       sandbox: media.sandbox,
+      width: media.width,
+      height: media.height,
+      minScale: media.minScale,
     });
   }
   if (media.type === 'image') {

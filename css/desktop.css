@@ -432,6 +432,14 @@ body:has(.desktop) {
   height: min(32rem, calc(100% - 2rem));
 }
 
+/* Projects with a live embed get a bigger window (id = project-<project.id>).
+   Mobile keeps the full-screen rule above. */
+.window[data-window-id='project-pipeflow'] {
+  width: min(58rem, calc(100% - 2rem));
+  /* windows open ~100px below the top, so leave room: the body scrolls if needed */
+  height: min(46rem, calc(100% - 9rem));
+}
+
 .window__body {
   padding: var(--space-5);
 }

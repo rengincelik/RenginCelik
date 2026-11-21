@@ -19,6 +19,11 @@
  * @property {string}   [media.fullUrl]  embed: target of "Open full screen".
  * @property {string}   [media.alt]      image: alt text.
  * @property {string}   [media.sandbox]  embed: override the default sandbox tokens.
+ * @property {number}   [media.width]    embed: logical width in px. With height, the demo is
+ *                                         rendered at this size and scaled to fit the window.
+ * @property {number}   [media.height]   embed: logical height in px (see width).
+ * @property {number}   [media.minScale] embed: below this scale (default 0.5) "Run it" is
+ *                                         replaced by a pointer to full screen.
  * @property {Object}   spec
  * @property {string}   spec.what
  * @property {string[]} spec.stack
@@ -84,6 +89,12 @@ export const projects = [
       src: 'https://rengincelik.github.io/pipeFlow/',
       poster: '[ADD: poster image path, e.g. assets/pipeflow-poster.png]',
       fullUrl: 'https://rengincelik.github.io/pipeFlow/',
+      // PipeFlow is a fixed desktop layout with no breakpoints: render it at
+      // this size and scale it down to the window.
+      width: 960,
+      height: 600,
+      // same-origin is required (PipeFlow uses localStorage); downloads are for Export JSON.
+      sandbox: 'allow-scripts allow-same-origin allow-downloads',
     },
     spec: {
       what: 'Engineers drag and drop pumps, pipes, valves, elbows and reducers, and the system calculates pressure, velocity, flow rate and energy losses every 100 ms.',

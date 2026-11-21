@@ -474,6 +474,48 @@
   border: 0;
 }
 
+/* Scaled embeds: the iframe is rendered at its logical size (inline width and
+   height) and shrunk to the stage with an inline transform. */
+.embed__frame--scaled {
+  inset: auto;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  transform-origin: 0 0;
+}
+
+/* Fluid embeds are laid out by the demo itself; on a narrow screen give them
+   a taller stage than 16:9. */
+@media (max-width: 720px) {
+  .embed--fluid .embed__stage {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+.embed__hint {
+  display: none;
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--text-sm);
+}
+
+/* Too small to run at a readable scale: hide "Run it", point to full screen. */
+.embed__stage.is-compact .embed__run {
+  display: none;
+}
+
+.embed__stage.is-compact .embed__hint {
+  display: block;
+}
+
 .embed__run {
   position: absolute;
   left: var(--space-4);
