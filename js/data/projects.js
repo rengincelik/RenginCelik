@@ -44,8 +44,8 @@ export const projects = [
 		tags: ['Vanilla JS', 'i18n', 'Web Worker', 'dual theme'],
 		media: {
 			type: 'image',
-			src: '[ADD: screenshot path, e.g. assets/i-fall-suddenly.png]',
-			alt: '[ADD: screenshot description]',
+			src: 'assets/i-fall-suddenly-poster.webp',
+			alt: 'The I Fall Suddenly site in English (light theme) and Turkish (dark theme), showing the screening test.',
 		},
 		spec: {
 			what: 'A bilingual (Turkish/English) platform with interactive Narcolepsy Type 1 (SNS) and Epworth Sleepiness Scale (ESS) assessments.',
@@ -87,7 +87,7 @@ export const projects = [
     media: {
       type: 'embed',
       src: 'https://rengincelik.github.io/pipeFlow/',
-      poster: '[ADD: poster image path, e.g. assets/pipeflow-poster.png]',
+      poster: 'assets/pipeflow-poster.webp',
       fullUrl: 'https://rengincelik.github.io/pipeFlow/',
       // PipeFlow is a fixed desktop layout with no breakpoints: render it at
       // this size and scale it down to the window.
@@ -124,7 +124,7 @@ export const projects = [
     media: {
       type: 'embed',
       src: 'https://rengincelik.github.io/cfd-simulation/',
-      poster: '[ADD: poster image path, e.g. assets/cfd-poster.png]',
+      poster: 'assets/cfd-poster.webp',
       fullUrl: 'https://rengincelik.github.io/cfd-simulation/',
       // The page lays itself out (fluid mode) and keeps no state, so same-origin is
       // left out and the sandbox is real. allow-downloads is for Export CSV.
