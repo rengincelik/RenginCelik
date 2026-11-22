@@ -13,6 +13,14 @@ import { h, link, picture, isPlaceholder } from '../lib/dom.js';
  */
 const DEFAULT_SANDBOX = 'allow-scripts allow-same-origin';
 
+/**
+ * How the poster says "this is a screenshot, not the running demo":
+ *  - 'blur'  the poster is blurred and dimmed, the project name is sharp
+ *  - 'label' the poster stays sharp, the name sits over it, semi-transparent
+ *  - 'none'  poster only
+ */
+const DEFAULT_VEIL = 'blur';
+
 /** Below this scale a demo is unreadable, so "Run it" becomes "open full screen". */
 const DEFAULT_MIN_SCALE = 0.5;
 
@@ -37,10 +45,11 @@ export function EmbedFrame({
   width,
   height,
   minScale = DEFAULT_MIN_SCALE,
+  veil = DEFAULT_VEIL,
 }) {
   const logical = width > 0 && height > 0 ? { w: Number(width), h: Number(height) } : null;
 
-  const root = h('div', { class: logical ? 'embed embed--scaled' : 'embed embed--fluid' });
+  const root = h('div', { class: logical ? 'embed embed--scaled' : 'embed embed--fluid', dataset: { veil } });
   const stage = h('div', { class: 'embed__stage' });
   if (logical) stage.style.aspectRatio = `${logical.w} / ${logical.h}`;
 
@@ -93,7 +102,12 @@ export function EmbedFrame({
     frame.focus();
   });
 
-  stage.append(picture(poster, '', 'embed__poster'), run, hint);
+  stage.append(
+    picture(poster, '', 'embed__poster'),
+    veil === 'none' ? null : h('div', { class: 'embed__title', 'aria-hidden': 'true' }, title),
+    run,
+    hint
+  );
 
   root.append(
     stage,

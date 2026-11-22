@@ -457,6 +457,55 @@
   background: var(--bg);
 }
 
+/* Poster veil: the screenshot must not read as a running demo. */
+.embed__title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  text-align: center;
+  font-size: clamp(1.5rem, 1rem + 3.2vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: #fff;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 0.55);
+  pointer-events: none;
+}
+
+.embed[data-veil='label'] .embed__title {
+  opacity: 0.6;
+}
+
+.embed[data-veil='label']:not(.is-running) .embed__stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.28);
+  pointer-events: none;
+}
+
+.embed[data-veil='label'] .embed__title,
+.embed[data-veil='blur'] .embed__title {
+  z-index: 1;
+}
+
+.embed[data-veil='blur'] .embed__stage {
+  overflow: hidden;
+}
+
+.embed[data-veil='blur'] .embed__poster {
+  filter: blur(9px) brightness(0.85) saturate(1.1);
+  transform: scale(1.06); /* hides the soft edge the blur leaves */
+}
+
+.embed__run,
+.embed__hint {
+  z-index: 2;
+}
+
 .embed__poster {
   position: absolute;
   inset: 0;
