@@ -33,6 +33,19 @@ body:has(.desktop) {
   outline: none;
 }
 
+.monogram {
+  display: block;
+  width: clamp(4.5rem, 1rem + 10vw, 9rem);
+  margin: 0 auto clamp(0.75rem, 2vh, 1.5rem);
+  color: var(--fg);
+}
+
+.monogram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .desktop__title {
   font-size: clamp(2.25rem, 0.5rem + 9vw, 8.5rem);
   font-weight: 500;
@@ -406,6 +419,11 @@ body:has(.desktop) {
 
   .desktop__title {
     font-size: clamp(1.75rem, 8vh, 3rem);
+  }
+
+  .monogram {
+    width: clamp(2.5rem, 10vh, 4rem);
+    margin-bottom: 0.5rem;
   }
 }
 

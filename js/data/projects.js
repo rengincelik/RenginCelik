@@ -40,7 +40,7 @@ export const projects = [
 		layout: 'open',
 		summary:
 			'Bilingual Narcolepsy Awareness Platform. A bilingual (Turkish/English) web platform designed to raise awareness about narcolepsy, provide educational resources, and help users recognize potential symptoms through interactive screening tools.',
-		note: '[ADD: note that this is a screening aid, not a diagnosis]',
+		note: 'A screening aid, not a diagnosis. The results only suggest whether it is worth talking to a sleep specialist; only a clinician can diagnose narcolepsy.',
 		tags: ['Vanilla JS', 'i18n', 'Web Worker', 'dual theme'],
 		media: {
 			type: 'image',

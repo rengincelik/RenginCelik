@@ -29,7 +29,7 @@ export const site = {
 
   contact: {
     email: 'rengin.celik97@gmail.com',
-    githubRepo: '[ADD: URL of this site’s GitHub repo]',
+    githubRepo: 'https://github.com/rengincelik/RenginCelik',
     githubProfile: 'https://github.com/rengincelik',
     linkedin: 'https://linkedin.com/in/rengincelik',
     cv: 'Rengin_Celik_Resume.pdf',

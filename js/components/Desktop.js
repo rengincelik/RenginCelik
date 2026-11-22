@@ -2,6 +2,7 @@ import { h } from '../lib/dom.js';
 import { Background } from './Background.js';
 import { DesktopMenu } from './DesktopMenu.js';
 import { WindowManager } from './WindowManager.js';
+import { Monogram } from './Monogram.js';
 
 /**
  * Fixed, non-scrolling landing screen: animated background, identity title +
@@ -30,6 +31,7 @@ export function Desktop({ site, projects, experience }) {
   });
 
   stage.append(
+    Monogram(),
     h('h1', { class: 'desktop__title' }, site.name.toLocaleUpperCase('tr-TR')),
     DesktopMenu({
       site,
