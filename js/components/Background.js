@@ -20,11 +20,16 @@ const hexToRgb = (value, fallback) => {
  * mapped to that window while it is hovered/focused. Falls back to the plain
  * page colour when WebGL2 is unavailable.
  *
- * @returns {{ el: HTMLCanvasElement, preview: (id: string|null) => void, setPaused: (p: boolean) => void }}
+ * setTitle(node) hands over the page title: its text is drawn into the shader
+ * as a dithered layer at the node's on-screen position (layout stays in CSS),
+ * and the node gets `.is-drawn` so its own text can go transparent. Without
+ * WebGL2 the node is never marked, so the plain HTML title stays visible.
+ *
+ * @returns {{ el: HTMLCanvasElement, preview: (id: string|null) => void, setPaused: (p: boolean) => void, setTitle: (node: HTMLElement) => void }}
  */
 export function Background(config = backgrounds) {
   const el = h('canvas', { class: 'desktop__bg', 'aria-hidden': 'true' });
-  const none = { el, preview() {}, setPaused() {} };
+  const none = { el, preview() {}, setPaused() {}, setTitle() {} };
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cycle = (config.cycle ?? []).filter((k) => config.images?.[k]);
@@ -96,6 +101,63 @@ export function Background(config = backgrounds) {
   }
   const used = new Set([...cycle, ...Object.values(config.windows ?? {})]);
   used.forEach((key) => config.images[key] && loadTexture(key));
+
+  /* ---------- title text mask ---------- */
+  const getDpr = () => Math.min(window.devicePixelRatio || 1, 1.5);
+  const title = { node: null, tex: gl.createTexture(), ready: false };
+  gl.bindTexture(gl.TEXTURE_2D, title.tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
+  setParams();
+
+  /** Draws the node's text (white on transparent) word by word at the exact
+   *  positions the browser laid it out, so wrapping and font match the CSS. */
+  function renderTitle() {
+    const node = title.node;
+    const text = node?.firstChild;
+    if (!text || text.nodeType !== Node.TEXT_NODE) return;
+    const r = node.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) return;
+    const dpr = getDpr();
+    const cs = getComputedStyle(node);
+    const c = document.createElement('canvas');
+    c.width = Math.ceil(r.width * dpr);
+    c.height = Math.ceil(r.height * dpr);
+    const ctx = c.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    if ('letterSpacing' in ctx) ctx.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
+    ctx.fillStyle = '#fff';
+    ctx.textBaseline = 'alphabetic';
+    const m = ctx.measureText(text.data);
+    const size = parseFloat(cs.fontSize);
+    const asc = m.fontBoundingBoxAscent ?? size * 0.8;
+    const desc = m.fontBoundingBoxDescent ?? size * 0.2;
+    const range = document.createRange();
+    for (const word of text.data.matchAll(/\S+/g)) {
+      range.setStart(text, word.index);
+      range.setEnd(text, word.index + word[0].length);
+      const w = range.getBoundingClientRect();
+      const baseline = w.top - r.top + (w.height - asc - desc) / 2 + asc;
+      ctx.fillText(word[0], w.left - r.left, baseline);
+    }
+    gl.bindTexture(gl.TEXTURE_2D, title.tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+    gl.generateMipmap(gl.TEXTURE_2D); // blurred mips give the halo around the letters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    title.ready = true;
+    node.classList.add('is-drawn');
+    requestFrame();
+  }
+
+  function setTitle(node) {
+    title.node = node;
+    new ResizeObserver(renderTitle).observe(node); // resize, media queries, zoom
+    document.fonts?.ready.then(renderTitle); // redraw once DM Sans has loaded
+  }
 
   /* ---------- theme (reads the site's colour variables) ---------- */
   let theme = { bg: [0.133, 0.133, 0.133], fg: [0.953, 0.953, 0.945], acc: [0.961, 0.408, 0.239] };
@@ -198,7 +260,7 @@ export function Background(config = backgrounds) {
 
   function frame(ms) {
     raf = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = getDpr();
     const W = Math.max(1, Math.round(el.clientWidth * dpr));
     const H = Math.max(1, Math.round(el.clientHeight * dpr));
     if (el.width !== W || el.height !== H) {
@@ -250,6 +312,16 @@ export function Background(config = backgrounds) {
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, textures[shownB].tex);
     gl.uniform1i(u('uTexB'), 1);
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_2D, title.tex);
+    gl.uniform1i(u('uName'), 2);
+    gl.uniform1f(u('uNameOn'), title.ready ? 1 : 0);
+    if (title.ready) {
+      const r = title.node.getBoundingClientRect();
+      const b = el.getBoundingClientRect();
+      gl.uniform2f(u('uCN'), (r.left - b.left + r.width / 2) * dpr, H - (r.top - b.top + r.height / 2) * dpr);
+      gl.uniform2f(u('uSN'), Math.ceil(r.width * dpr), Math.ceil(r.height * dpr));
+    }
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     if (animating() || mix < 1) requestFrame();
@@ -272,5 +344,5 @@ export function Background(config = backgrounds) {
   });
   requestFrame();
 
-  return { el, preview, setPaused };
+  return { el, preview, setPaused, setTitle };
 }

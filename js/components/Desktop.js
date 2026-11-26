@@ -30,9 +30,13 @@ export function Desktop({ site, projects, experience }) {
     if (e.target.closest('.window') && !e.relatedTarget?.closest?.('.window')) background.preview(null);
   });
 
+  // The title stays a real <h1> (screen readers, selection, layout); the
+  // background shader draws its visible, dithered version in the same spot.
+  const title = h('h1', { class: 'desktop__title' }, site.name.toLocaleUpperCase('tr-TR'));
+
   stage.append(
     Monogram(),
-    h('h1', { class: 'desktop__title' }, site.name.toLocaleUpperCase('tr-TR')),
+    title,
     DesktopMenu({
       site,
       projects,
@@ -41,6 +45,8 @@ export function Desktop({ site, projects, experience }) {
       onPreview: background.preview,
     })
   );
+
+  background.setTitle(title);
 
   return h('div', { class: 'desktop' }, background.el, stage, windows.el);
 }

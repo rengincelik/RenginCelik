@@ -54,6 +54,12 @@ body:has(.desktop) {
   text-align: center;
 }
 
+/* Background.js draws the title into the shader; the HTML text stays in place
+   (accessible, selectable) but invisible. Without WebGL this class never lands. */
+.desktop__title.is-drawn {
+  color: transparent;
+}
+
 /* ---------- menu ---------- */
 
 .menu {
