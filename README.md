@@ -1,67 +1,83 @@
-# Rengin Çelik: portfolio
+<div align="center">
 
-Vanilla JS (ES modules), plain CSS, no framework, no build step.
+# Rengin Çelik
+### Junior Software Developer
+*C++ · JavaScript · I build complete projects that solve real technical problems*
 
-## Run locally
+[**Portfolio**](https://rengincelik.github.io/RenginCelik/) | [**LinkedIn**](https://linkedin.com/in/rengincelik) | [**Email**](mailto:rengin.celik97@gmail.com) | [**GitHub**](https://github.com/rengincelik)
 
-ES modules don't load from `file://`, so use any static server from this folder:
+**Phone:** +90 538 968 69 77
+**Location:** Sofia, BG & Istanbul, TR
 
-```sh
-python3 -m http.server 8000     # then open http://localhost:8000
-# or
-npx serve .
-```
+---
 
-Deploys as-is to GitHub Pages, Netlify, etc.
+### Work Authorization
+**Bulgarian Citizenship** — Full EU/EEA work authorization.
+*Open to relocation or remote opportunities in Europe.*
 
-## Add a project
+---
+</div>
 
-Open `js/data/projects.js` and add one object to the `projects` array. Nothing else changes. The list number comes from the array position.
+### About Me
 
-```js
-{
-  id: 'my-project',               // unique slug
-  title: 'My project',
-  status: 'live',                 // 'live' | 'in-progress' | 'archive' (in-progress shows a badge)
-  layout: 'open',                 // 'open' = large feature block; 'collapsed' = row that expands to a spec card
-  summary: '…',
-  note: '…',                      // optional caveat under the summary
-  tags: ['JS', 'WebGL'],
-  media: { type: 'none' },        // or { type: 'image', src, alt }
-                                  // or { type: 'embed', src, poster, fullUrl }
-  spec: {
-    what: '…',
-    stack: ['…'],
-    decisions: ['…', '…'],
-    links: [{ label: 'Source', url: 'https://…' }],
-  },
-}
-```
+Junior software developer who builds projects end to end: C++ engines and libraries, browser apps in plain JavaScript, and small serverless APIs. I came to software from engineering (B.Sc. Food Engineering, Istanbul Technical University), which taught me to break a hard problem down before writing code. I learn fastest by building: I picked up JavaScript to build PipeFlow in two months, and I'm now writing a C++ simulation engine that runs both natively and in the browser via WebAssembly.
 
-Empty fields are simply omitted. Mistakes (duplicate id, unknown layout) log a warning in the console instead of breaking the page.
+Looking for a junior software developer role — backend, full-stack or general software development, where the job is writing code and solving the problem itself.
 
-## Add a job
+---
 
-Add one object to the `experience` array in `js/data/experience.js` (newest first). Fields: `id`, `company`, `location`, `role`, `period`, `groups` (`[{ title, items }]`; an item is a string or `{ label, text }`), `tags`, `links`. Missing fields are simply omitted.
-## Where each piece of copy lives
+### Featured Projects
 
-| Copy | File |
-| --- | --- |
-| Name, nav links | `js/data/site.js` (`name`, `nav`) |
-| Hero statement + supporting line | `js/data/site.js` (`hero`) |
-| About paragraphs | `js/data/site.js` (`about`) |
-| Email, GitHub (repo + profile), LinkedIn, CV | `js/data/site.js` (`contact`) |
-| Everything about a project | `js/data/projects.js` |
-| Page title and meta description | `index.html` |
-| Structural labels (Work, About, Contact, Run it, Open full screen, spec row names) | the component that renders them, in `js/components/` |
-| Jobs (company, role, period, bullets) | js/data/experience.js |
+**[I Fall Suddenly](https://github.com/rengincelik/ifallsuddenly)** — **[Live site →](https://rengincelik.github.io/ifallsuddenly/)**
+*Bilingual (Turkish/English) web app with interactive questionnaires and a small serverless API.*
+* **Front end:** Vanilla JS (ES modules), no framework or build step; own i18n engine with lazily loaded language modules.
+* **Back end:** Cloudflare Workers + D1 (SQLite) counter API with origin and content-type checks and per-IP rate limiting.
+* **Quality:** Scoring logic separated from the DOM and unit-tested with `node:test`; answers never leave the browser.
 
+**[PipeFlow](https://github.com/rengincelik/pipeFlow)** — **[Live demo →](https://rengincelik.github.io/pipeFlow/)**
+*Real-time simulation app in the browser: build a pipe system by drag and drop, results update every 100 ms.*
+* **Architecture:** Vanilla JS (ES modules), zero dependencies; simulation layer with no DOM access, custom EventEmitter for state changes, explicit state machine.
+* **Engine:** Iterative solvers each tick (fixed-point iteration, bisection) and a 22-rule diagnostic engine running alongside the simulation.
+* **Persistence:** JSON import/export and per-tab auto-save in localStorage.
 
-Anything still written as `[ADD: …]` is a placeholder. On the page it gets a dashed accent outline, so unfilled copy is easy to spot. Placeholder links render without an `href` until you fill them in. To find them all: `grep -rn "\[ADD" .`
+**[C++ Simulation Engine](https://github.com/rengincelik/cfd-simulation)** — **[Live demo →](https://rengincelik.github.io/cfd-simulation/)** *(in progress)*
+*From-scratch C++17 engine for 2D fluid flow and heat transfer.*
+* **Architecture:** Interface-based design with a one-way dependency flow; config-driven runs, no recompiling.
+* **Cross-platform:** The same solver code runs as native SDL2 apps and in the browser via WebAssembly (Emscripten) through a small C API.
+* **Validation:** Automated comparison against a published benchmark (Ghia et al. 1982) with L₂/L∞ error norms.
 
-## Notes
+---
 
-- **Background slider** (`js/components/BackgroundSlider.js`): one value (0–100) sets `--bg`, `--fg`, `--muted`, `--line`, `--line-strong` and `--accent` on `:root`. The gray ramp skips a mid-gray band so every position meets WCAG AA (4.5:1) for text, muted text and the accent. This is also why the background makes one visible jump near the middle of the slider. The band is set by `GRAY_LIGHT_FLOOR` and `GRAY_DARK_CEIL`. If you change colors there, re-check contrast: `computeTheme(v)` is a pure function you can run in Node for all 101 values.
-- **Embeds** (`js/components/EmbedFrame.js`): the iframe is only created after "Run it". The default `sandbox` is `allow-scripts allow-same-origin`. Host embedded demos on a different origin than this site; for same-origin demos, override with `media.sandbox` and drop `allow-same-origin`.
-- **Fonts**: DM Sans and DM Mono load from Google Fonts in `index.html`; system fonts are the fallback.
-- `js/lib/dom.js` holds the small shared helpers (`h()` element builder, placeholder highlighting, link/tag/badge builders).
+### Earlier Work
+
+* **[GPU Instancing Study](https://rengincelik.github.io/GPU_Rendering/)** – Rendering 1M+ objects per draw call with compute shaders and HLSL in Unity (iBright).
+* **[URP Shader Library](https://rengincelik.github.io/Shaders/)** – Custom HLSL shaders for surfaces and environmental effects.
+
+---
+
+### Technical Skills
+
+| Category | Competencies |
+| :--- | :--- |
+| **Languages** | C++ (C++17), JavaScript (ES6+), C#, HLSL, SQL (basic) |
+| **Web** | Vanilla JS / ES modules, HTML/CSS, Cloudflare Workers, D1, GitHub Pages |
+| **C++ tooling** | CMake, Emscripten / WebAssembly, SDL2 |
+| **Software design** | Modular, interface-based architecture, state machines, event-driven design, unit testing |
+| **Numerical methods** | Iterative solvers (Gauss–Seidel, fixed-point, bisection), finite differences |
+| **Environment** | Git, Linux (Ubuntu), CLion, WebStorm, VS Code, Unity |
+
+---
+
+### Education
+
+**B.Sc. Food Engineering**
+*Istanbul Technical University (ITU), 2016 – 2022*
+Fluid mechanics, heat & mass transfer, numerical analysis.
+
+---
+
+<div align="center">
+
+*Engineering background. Software builder.*
+
+</div>

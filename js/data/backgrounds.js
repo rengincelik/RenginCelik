@@ -12,22 +12,71 @@
  * Window ids: about, contact, project-<project.id>, job-<experience.id>
  * (the ids come from js/data/projects.js and js/data/experience.js).
  */
+
 export const backgrounds = {
   intervalMs: 7000,
+	intervalMs2: 5000,
 
-  images: {
-    'i-fall-suddenly': { src: 'i-fall-suddenly-gulen-seffaf.png' },
-    'day-timeline': { src: 'Pastel Uykulu Günün Zaman Çizelgesi.png' },
-  },
+		images: {
+			'muscle-weakness': {
+				src: 'assets/background/03-muscle-weakness.png',
+			},
+			'cataplexy-episode': {
+				src: 'assets/background/04-cataplexy-episode.png',
+			},
+			'day-timeline': {
+				src: 'assets/background/Pastel Uykulu Günün Zaman Çizelgesi.png',
+			},
+			'cfd-name-dark': {
+				src: 'assets/background/cfd-solver-name-dark.png',
+			},
+			'cfd-name-light': {
+				src: 'assets/background/cfd-solver-name-light.png',
+			},
+			'i-fall-suddenly': {
+				src: 'assets/background/i-fall-suddenly-gulen-seffaf.png',
+			},
+			'i-fall-suddenly-name-dark': {
+				src: 'assets/background/i-fall-suddenly-name-dark.png',
+			},
+			'i-fall-suddenly-name-light': {
+				src: 'assets/background/i-fall-suddenly-name-light.png',
+			},
+			'pipeflow-name-dark': {
+				src: 'assets/background/pipeflow-name-dark.png',
+			},
+			'pipeflow-name-light': {
+				src: 'assets/background/pipeflow-name-light.png',
+			},
+		},
 
-  cycle: ['i-fall-suddenly', 'day-timeline'],
+
+	cycle: [
+		'i-fall-suddenly',
+		'muscle-weakness',
+		'cataplexy-episode',
+		'day-timeline',
+	],
+
+	cycle2: [
+		'cfd-name-dark',
+		'cfd-name-light',
+		'pipeflow-name-dark',
+		'pipeflow-name-light',
+		'i-fall-suddenly-name-dark',
+		'i-fall-suddenly-name-light',
+	],
 
   windows: {
     about: 'day-timeline',
     contact: 'i-fall-suddenly',
-    'project-i-fall-suddenly': 'i-fall-suddenly',
-    // 'project-pipeflow': '...',
-    // 'project-navier-stokes-2d': '...',
+
+	  'project-i-fall-suddenly': 'i-fall-suddenly-name-dark',
+	  'project-pipeflow': 'pipeflow-name-dark',
+	  'project-navier-stokes-2d': 'cfd-name-dark',
+
     // 'job-ibright': '...',
+
   },
+
 };
