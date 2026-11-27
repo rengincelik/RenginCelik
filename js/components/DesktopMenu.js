@@ -4,7 +4,6 @@ import { h } from '../lib/dom.js';
  * Portfolio file path. Not in the repo yet: while this is empty the item
  * renders as an unfinished (disabled) button. Fill it in when the file exists.
  */
-const PORTFOLIO_FILE = '';
 
 // Per-item float settings so the objects drift independently.
 const FLOAT = [
@@ -157,7 +156,7 @@ export function DesktopMenu({ site, projects, experience, onOpen, onPreview = ()
     [projectsGroup.button, projectsGroup.list],
     [experienceGroup.button, experienceGroup.list],
     [windowItem('Contact', 3, { id: 'contact', title: 'Contact', type: 'contact', data: site.contact })],
-    [downloadItem('Download Portfolio', 4, PORTFOLIO_FILE)],
+    [downloadItem('Download Portfolio', 4, site.contact.portfolio)],
     [downloadItem('Download Resume', 5, site.contact.cv)],
   ];
 
